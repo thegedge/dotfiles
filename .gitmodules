@@ -18,4 +18,7 @@
     path = .vim/plugins/vim-nerdtree-tabs
     url = https://github.com/jistr/vim-nerdtree-tabs.git
 
+[submodule "syntastic"]
+    path = .vim/plugins/syntastic
+    url = https://github.com/scrooloose/syntastic.git
 

@@ -86,9 +86,7 @@ set viminfo='10,\"100,:20,%,n~/.vim/.viminfo
     au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif 
 
 " Enable filetype-specific indenting and plugins
-if has("autocmd")
-	filetype plugin indent on
-endif
+filetype plugin indent on
 
 "---------------------------------------------------------------------
 " Key mappings and such
