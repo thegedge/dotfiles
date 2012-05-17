@@ -158,7 +158,7 @@ set complete=.,w,b,u,t,i  " completion (key = TAB in insert mode)
 set foldmethod=indent     " folding on indentation
 set foldlevel=100         " 'disable' folding at first
 
-function! SuperCleverTab()
+function! TabCompletion()
     if strpart(getline('.'), 0, col('.') - 1) =~ '^\s*$'
         return "\<Tab>"
     else
@@ -172,7 +172,7 @@ function! SuperCleverTab()
     endif
 endfunction
 
-inoremap <Tab> <C-R>=SuperCleverTab()<cr>
+inoremap <Tab> <C-R>=TabCompletion()<cr>
 
 "---------------------------------------------------------------------
 " Session.vim configuration
@@ -181,18 +181,4 @@ let g:session_autoload='yes'
 let g:session_autosave='yes'
 let g:session_default_to_last=1
 
-"---------------------------------------------------------------------
-" Custom commands
-"---------------------------------------------------------------------
-function TestMUNCS(testCaseNum, ...)
-	let f_ext   = expand('%:t')
-	let f_noext = expand('%:t:r')
-	let f_pre   = a:0 >= 1 ? (a:1 . 's/' . a:1) : 'samples/sample'
-
-	exec ':!javac ' . f_ext .
-	\    '; java ' . f_noext . ' < ' . f_pre . a:testCaseNum . '.in'
-	\    '; cat ' . f_pre . a:testCaseNum . '.out' 
-endfunction
-
-com -nargs=+ TestMUNCS call TestMUNCS(<f-args>) 
 
