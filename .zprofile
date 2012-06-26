@@ -1,1 +1,2 @@
-source .profile
+[[ -e ${HOME}/.profile ]] && source ${HOME}/.profile
+
