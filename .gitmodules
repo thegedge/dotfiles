@@ -22,3 +22,6 @@
     path = .vim/plugins/syntastic
     url = https://github.com/scrooloose/syntastic.git
 
+[submodule "numbers.vim"]
+	path = .vim/plugins/numbers.vim
+	url = https://github.com/myusuf3/numbers.vim.git
