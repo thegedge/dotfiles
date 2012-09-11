@@ -21,7 +21,7 @@ SAVEHIST=10000
 HISTSIZE=10000
 setopt APPEND_HISTORY # don't overwrite history; append instead
 setopt INC_APPEND_HISTORY # append after each command
-setopt SHARE_HISTORY # share history between shells
+#setopt SHARE_HISTORY # share history between shells
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_REDUCE_BLANKS
