@@ -92,15 +92,14 @@ eval `${HOME}/.dotfiles/scripts/parse_environment_plist.rb`
 export SSH_ASKPASS="/usr/libexec/ssh-askpass"
 export DISPLAY=":0"
 
-if [ -d "${HOME}/scripts" ]; then
-	export PATH="${HOME}/scripts:${PATH}"
-fi
-
 #----------------------------------------------------------------------
 # For homebrew
 #----------------------------------------------------------------------
-export PATH="${HOME}/usr/local/bin:${HOME}/usr/local/sbin:${HOME}/usr/local/share/python:${PATH}"
-export MANPATH="${HOME}/usr/local/man:${MANPATH}"
+export HOMEBREW_PREFIX="${HOME}/usr/local"
+export PYTHONPATH="${HOMEBREW_PREFIX}/lib/python2.7/site-packages:${PYTHONPATH}"
+export DYLD_FALLBACK_LIBRARY_PATH="${HOMEBREW_PREFIX}/lib"
+export PATH="${HOMEBEW_PREFIX}/bin:${HOMEBRE_PREFIX}/sbin:${HOMEBREW_PREFIX}/share/python:${PATH}"
+export MANPATH="${HOMEBREW_PREFIX}/man:${MANPATH}"
 
 #----------------------------------------------------------------------
 # For virtualenv
