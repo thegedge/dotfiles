@@ -70,6 +70,7 @@ set visualbell     " no beeps
 set noerrorbells   " no beeps
 set nobackup       " no backup files (still swaps though)
 set confirm        " confirm changes before closing buffers
+set backspace=indent,eol,start
 
 " Backup and temporary file directories
 set backup
@@ -130,7 +131,7 @@ nmap <silent> <leader>Y :NERDTreeMirrorToggle<CR>
 
 let g:nerdtree_tabs_open_on_console_startup=1 " nerdtree/tab plugin always opens in console
 let NERDTreeShowHidden=1                      " always show hidden files
-let NERDTreeIgnore=['\.git$', '\.sass-cache$', '\.bundle$', '\.DS_Store$', 'tmp$', 'vendor$', 'log$', 'doc$']
+let NERDTreeIgnore=['\.git$', '\.sass-cache$', '\.bundle$', '\.DS_Store$', 'tmp$', 'vendor$', 'log$', 'doc$', '.*\.o']
 
 "---------------------------------------------------------------------
 " Filetype specifics
@@ -142,10 +143,6 @@ if has("autocmd")
 	augroup myfiletypes
 		" Clear old autocmds in group
 		autocmd!
-
-		" Auto indenting and tab widths
-		autocmd FileType ruby,eruby,yaml,haml,scss,javascript :setlocal sw=2 sts=2 ts=2 et ai
-		autocmd FileType python :setlocal sw=4 sts=4 ts=4 et ai
 	augroup END
 endif
 
