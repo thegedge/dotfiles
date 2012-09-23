@@ -1,9 +1,10 @@
 .DS_Store
 
-.vim/backups
+.vim/backups/*~
 .vim/doc
 .vim/ruby
 .vim/sessions
-.vim/tmp
+.vim/tmp/*.swp
+.vim/tmp/*.swo
 .vim/.VimballRecord
 .vim/.viminfo
