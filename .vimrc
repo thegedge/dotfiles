@@ -131,7 +131,7 @@ nmap <silent> <leader>Y :NERDTreeMirrorToggle<CR>
 
 let g:nerdtree_tabs_open_on_console_startup=1 " nerdtree/tab plugin always opens in console
 let NERDTreeShowHidden=1                      " always show hidden files
-let NERDTreeIgnore=['\.git$', '\.sass-cache$', '\.bundle$', '\.DS_Store$', 'tmp$', 'vendor$', 'log$', 'doc$', '.*\.o']
+let NERDTreeIgnore=['\.git$', '\.svn', '\.sass-cache$', '\.bundle$', '\.DS_Store$', 'tmp$', 'vendor$', 'log$', 'doc$', '\.o$', 'CMakeFiles$', 'CMakeCache.txt$', 'cmake_install.cmake$']
 
 "---------------------------------------------------------------------
 " Filetype specifics
