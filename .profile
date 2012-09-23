@@ -119,3 +119,9 @@ source /usr/local/bin/virtualenvwrapper.sh
 # For rvm
 #----------------------------------------------------------------------
 [[ -s "${HOME}/.rvm/scripts/rvm" ]] && . "${HOME}/.rvm/scripts/rvm" # Load RVM function
+
+#----------------------------------------------------------------------
+# Include any local configuration
+#----------------------------------------------------------------------
+[[ -e "${HOME}/.profile.local" ]] && . "${HOME}/.profile.local"
+

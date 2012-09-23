@@ -48,3 +48,8 @@ zstyle ':completion:*' cache-path ~/.zshcache
 source $ZSH/oh-my-zsh.sh
 unsetopt correct_all
 
+#----------------------------------------------------------------------
+# Include any local configuration
+#----------------------------------------------------------------------
+[[ -e "${HOME}/.zshrc.local" ]] && . "${HOME}/.zshrc.local"
+

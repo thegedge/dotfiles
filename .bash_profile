@@ -20,3 +20,9 @@ export LESS_TERMCAP_us=$'\E[01;32m'       # begin underline
 #----------------------------------------------------------------------
 . ${HOME}/.dotfiles/scripts/bash_completion/bash_completion
 . ${HOME}/.dotfiles/scripts/django_bash_completion
+
+#----------------------------------------------------------------------
+# Include any local configuration
+#----------------------------------------------------------------------
+[[ -e "${HOME}/.bash_profile.local" ]] && . "${HOME}/.bash_profile.local"
+
