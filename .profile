@@ -1,4 +1,3 @@
-
 #----------------------------------------------------------------------
 # Command aliases
 #----------------------------------------------------------------------
@@ -42,12 +41,12 @@ function pylist() {
 }
 
 # Apply a command (first argument) to each file given (every other argument)
-function foreach() {
+function foreachfile() {
 	cmd=$1
 	shift
 	for i in $@
 	do
-		eval `echo ${cmd} | sed s/file/$i/g`
+		eval `echo ${cmd} | sed s/__file__/$i/g`
 	done
 }
 
@@ -96,9 +95,14 @@ export DISPLAY=":0"
 # For homebrew
 #----------------------------------------------------------------------
 export HOMEBREW_PREFIX="${HOME}/usr/local"
+
+export C_INCLUDE_PATH="${HOMEBREW_PREFIX}/include"
+export CPLUS_INCLUDE_PATH="${HOMEBREW_PREFIX}/include"
+export LIBRARY_PATH="${HOMEBREW_PREFIX}/lib"
+export DYLD_FALLBACK_LIBRARY_PATH="${HOMEBREW_PREFIX}/lib:${HOMEBREW_PREFIX}"
+
 export PYTHONPATH="${HOMEBREW_PREFIX}/lib/python2.7/site-packages:${PYTHONPATH}"
-export DYLD_FALLBACK_LIBRARY_PATH="${HOMEBREW_PREFIX}/lib"
-export PATH="${HOMEBEW_PREFIX}/bin:${HOMEBRE_PREFIX}/sbin:${HOMEBREW_PREFIX}/share/python:${PATH}"
+export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:${HOMEBREW_PREFIX}/share/python:${PATH}"
 export MANPATH="${HOMEBREW_PREFIX}/man:${MANPATH}"
 
 #----------------------------------------------------------------------
@@ -115,5 +119,3 @@ source /usr/local/bin/virtualenvwrapper.sh
 # For rvm
 #----------------------------------------------------------------------
 [[ -s "${HOME}/.rvm/scripts/rvm" ]] && . "${HOME}/.rvm/scripts/rvm" # Load RVM function
-
-
