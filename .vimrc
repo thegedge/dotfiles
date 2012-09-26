@@ -172,10 +172,14 @@ endfunction
 inoremap <Tab> <C-R>=TabCompletion()<cr>
 
 "---------------------------------------------------------------------
-" Session.vim configuration
+" Other plugin config
 "---------------------------------------------------------------------
+
+" Session.vim configuration
 let g:session_autoload='yes'
 let g:session_autosave='yes'
 let g:session_default_to_last=1
 
+" Syntastic defaults to passive mode
+let g:syntastic_mode_map = {'mode': 'passive'}
 
