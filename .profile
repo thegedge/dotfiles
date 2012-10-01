@@ -40,16 +40,6 @@ function pylist() {
 	python -c "import $1; print str.join('\n', dir($1))"
 }
 
-# Apply a command (first argument) to each file given (every other argument)
-function foreachfile() {
-	cmd=$1
-	shift
-	for i in $@
-	do
-		eval `echo ${cmd} | sed s/__file__/$i/g`
-	done
-}
-
 # Total line count in files
 function lc() {
 	echo "Total # Lines: " `cat $@ 2>/dev/null | wc -l`
