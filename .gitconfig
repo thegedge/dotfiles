@@ -1,0 +1,40 @@
+[include]
+	path = ~/.gitconfig_private
+
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore
+
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+
+[diff]
+	tool = vimdiff
+
+[difftool]
+	prompt = false
+
+[alias]
+	# Short command names
+	st = status
+	ci = commit
+	co = checkout
+
+	# Aliased forms for listing things
+	tags = tag --list
+	remotes = remote
+	tracked = ls-files
+	branches = branch --list
+	conflicts = !git ls-files -u | cut -f 2 | sort -u
+
+	# Aliases for Mercurial-like commands
+	incoming = !git fetch && git clog ..origin/master
+	outgoing = !git fetch && git clog origin/master..
+	rollback = reset --hard HEAD~1
+
+	# Compact/graph log
+	clog = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+	glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+
