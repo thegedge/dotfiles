@@ -25,3 +25,6 @@
 [submodule "numbers.vim"]
 	path = .vim/plugins/numbers.vim
 	url = https://github.com/myusuf3/numbers.vim.git
+[submodule ".vim/plugins/vim-surround"]
+	path = .vim/plugins/vim-surround
+	url = git://github.com/tpope/vim-surround.git
