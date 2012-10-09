@@ -18,6 +18,8 @@ alias java16='/System/Library/Frameworks/JavaVM.framework/Versions/1.6/Commands/
 
 alias unsafe_git='env GIT_SSL_NO_VERIFY=true git'
 
+alias recursive_svnignore='foreach dir (**) [ -d $dir ] && echo "--- $dir ---" && svn propget svn:ignore $dir 2>/dev/null; end'
+
 #----------------------------------------------------------------------
 # Some custom functions
 #----------------------------------------------------------------------
