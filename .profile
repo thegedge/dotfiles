@@ -25,7 +25,7 @@ alias recursive_svnignore='foreach dir (**) [ -d $dir ] && echo "--- $dir ---" &
 #----------------------------------------------------------------------
 
 # When building an Android SDK project
-function build_android_project() {
+function build_android_project {
 	android update project -p . -s -t 1
 	if [ -e build_native.sh ]
 	then
@@ -38,24 +38,24 @@ function build_android_project() {
 }
 
 # List the contents of a module
-function pylist() {
+function pylist {
 	python -c "import $1; print str.join('\n', dir($1))"
 }
 
 # Total line count in files
-function lc() {
+function lc {
 	echo "Total # Lines: " `cat $@ 2>/dev/null | wc -l`
 }
 
 # Total line count for source files of a given type
-function lc4type() { 
+function lc4type { 
 	TYPES=`echo "$@" | sed 's/ /" -or -name "*./g'`
 	TYPES="-name \"*.${TYPES}\""
 	echo "Total # Lines: " `eval "find . ${TYPES}" | sed -e"/\.svn/d" -e"/build/d" | sed "s/\(.*\)/\"\1\"/" | xargs cat 2>/dev/null | sed '/^[ \t]*$/d' | wc -l`
 }
 
 # Total line count for files on STDIN 
-function lc4files() {
+function lc4files {
 	echo "Total # Lines: " `cat /dev/stdin | sed -e"/\.svn/d" -e"/build/d" | sed "s/\(.*\)/\"\1\"/" | xargs cat 2>/dev/null | wc -l`
 }
 
