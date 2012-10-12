@@ -4,7 +4,6 @@
 .vim/doc
 .vim/ruby
 .vim/sessions
-.vim/tmp/*.swp
-.vim/tmp/*.swo
+.vim/tmp
 .vim/.VimballRecord
 .vim/.viminfo
