@@ -1,3 +1,9 @@
+#!/bin/bash
+#----------------------------------------------------------------------
+# Include any local configuration (post profile)
+#----------------------------------------------------------------------
+[[ -e "${HOME}/.profile-pre.local" ]] && . "${HOME}/.profile-pre.local"
+
 #----------------------------------------------------------------------
 # Command aliases
 #----------------------------------------------------------------------
@@ -51,69 +57,77 @@ function lc {
 function lc4type { 
 	TYPES=`echo "$@" | sed 's/ /" -or -name "*./g'`
 	TYPES="-name \"*.${TYPES}\""
-	echo "Total # Lines: " `eval "find . ${TYPES}" | sed -e"/\.svn/d" -e"/build/d" | sed "s/\(.*\)/\"\1\"/" | xargs cat 2>/dev/null | sed '/^[ \t]*$/d' | wc -l`
+	echo 'Total # Lines: ' `eval "find . ${TYPES}" | sed -e'/\.svn/d' -e'/build/d' | sed 's/\(.*\)/\"\1\"/' | xargs cat 2>/dev/null | sed '/^[ \t]*$/d' | wc -l`
 }
 
 # Total line count for files on STDIN 
 function lc4files {
-	echo "Total # Lines: " `cat /dev/stdin | sed -e"/\.svn/d" -e"/build/d" | sed "s/\(.*\)/\"\1\"/" | xargs cat 2>/dev/null | wc -l`
+	echo 'Total # Lines: ' `cat /dev/stdin | sed -e'/\.svn/d' -e'/build/d' | sed 's/\(.*\)/\"\1\"/' | xargs cat 2>/dev/null | wc -l`
 }
-
-#----------------------------------------------------------------------
-# Basic exports
-#----------------------------------------------------------------------
-# Default editor in terminal
-export EDITOR="vim"
-
-# Options for greping
-export GREP_OPTIONS='--color=always'
-
-# Cache for pip
-export PIP_DOWNLOAD_CACHE="$HOME/.pip/cache"
-
-
-#----------------------------------------------------------------------
-# Load ~/.MacOSX/environment.plist into shell environment
-#----------------------------------------------------------------------
-eval `${HOME}/.dotfiles/scripts/parse_environment_plist.rb`
 
 #----------------------------------------------------------------------
 # Other stuff
 #----------------------------------------------------------------------
-export SSH_ASKPASS="/usr/libexec/ssh-askpass"
-export DISPLAY=":0"
+export EDITOR='vim'
+export GREP_OPTIONS='--color=always'
+export PIP_DOWNLOAD_CACHE="${HOME}/.pip/cache"
+export SSH_ASKPASS='/usr/libexec/ssh-askpass'
+export DISPLAY=':0'
+export JAVA_HOME='/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home'
 
 #----------------------------------------------------------------------
 # For homebrew
 #----------------------------------------------------------------------
-export HOMEBREW_PREFIX="${HOME}/usr/local"
+if command -v brew &>/dev/null
+then
+	export HOMEBREW_PREFIX=`brew --prefix`
 
-export C_INCLUDE_PATH="${HOMEBREW_PREFIX}/include"
-export CPLUS_INCLUDE_PATH="${HOMEBREW_PREFIX}/include"
-export LIBRARY_PATH="${HOMEBREW_PREFIX}/lib"
-export DYLD_FALLBACK_LIBRARY_PATH="${HOMEBREW_PREFIX}/lib:${HOMEBREW_PREFIX}"
+	export C_INCLUDE_PATH="${HOMEBREW_PREFIX}/include"
+	export CPLUS_INCLUDE_PATH="${HOMEBREW_PREFIX}/include"
+	export LIBRARY_PATH="${HOMEBREW_PREFIX}/lib:${LIBRARY_PATH}"
+	export DYLD_FALLBACK_LIBRARY_PATH="${HOMEBREW_PREFIX}/lib:${HOMEBREW_PREFIX}:${DYLD_FALLBACK_LIBRARY_PATH}"
 
-export PYTHONPATH="${HOMEBREW_PREFIX}/lib/python2.7/site-packages:${PYTHONPATH}"
-export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:${HOMEBREW_PREFIX}/share/python:${PATH}"
-export MANPATH="${HOMEBREW_PREFIX}/man:${MANPATH}"
+	export PYTHONPATH="${HOMEBREW_PREFIX}/lib/python2.7/site-packages:${PYTHONPATH}"
+	export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:${HOMEBREW_PREFIX}/share/python:${PATH}"
+	export MANPATH="${HOMEBREW_PREFIX}/man:${MANPATH}"
+
+	export BOOST_ROOT=`brew --prefix boost`
+fi
 
 #----------------------------------------------------------------------
 # For virtualenv
 #----------------------------------------------------------------------
-export WORKON_HOME="${HOME}/.virtualenvs"
-export VIRTUALENVWRAPPER_PYTHON="${HOME}/usr/local/bin/python2.7"
-export PIP_VIRTUALENV_BASE=$WORKON_HOME
-export PIP_RESPECT_VIRTUALENV=true
+if command -v virtualenv &>/dev/null
+then
+	export WORKON_HOME="${HOME}/.virtualenvs"
+	export VIRTUALENVWRAPPER_PYTHON="${HOME}/usr/local/bin/python2.7"
+	export PIP_VIRTUALENV_BASE="${WORKON_HOME}"
+	export PIP_RESPECT_VIRTUALENV=true
 
-source /usr/local/bin/virtualenvwrapper.sh
-
-#----------------------------------------------------------------------
-# For rvm
-#----------------------------------------------------------------------
-[[ -s "${HOME}/.rvm/scripts/rvm" ]] && . "${HOME}/.rvm/scripts/rvm" # Load RVM function
+	source virtualenvwrapper.sh
+fi
 
 #----------------------------------------------------------------------
-# Include any local configuration
+# Load rvm functionality
 #----------------------------------------------------------------------
-[[ -e "${HOME}/.profile.local" ]] && . "${HOME}/.profile.local"
+[[ -s "${HOME}/.rvm/scripts/rvm" ]] && . "${HOME}/.rvm/scripts/rvm"
+
+#----------------------------------------------------------------------
+# Include any local configuration (post profile)
+#----------------------------------------------------------------------
+[[ -e "${HOME}/.profile-post.local" ]] && . "${HOME}/.profile-post.local"
+
+#----------------------------------------------------------------------
+# If on a Mac, launchctl should be on path, so set up environment
+# variables for it
+#----------------------------------------------------------------------
+if command -v launchctl &>/dev/null
+then
+	launchctl setenv PATH "$PATH"
+	launchctl setenv C_INCLUDE_PATH "$C_INCLUDE_PATH"
+	launchctl setenv CPLUS_INCLUDE_PATH "$CPLUS_INCLUDE_PATH"
+	launchctl setenv LIBRARY_PATH "$LIBRARY_PATH"
+	launchctl setenv DYLD_FALLBACK_LIBRARY_PATH "$DYLD_FALLBACK_LIBRARY_PATH"
+	launchctl setenv BOOST_ROOT "$BOOST_ROOT"
+fi
 
