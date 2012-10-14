@@ -152,25 +152,8 @@ endif
 "---------------------------------------------------------------------
 autocmd FileType java set makeprg=javac\ $*\ %
 
-set complete=.,w,b,u,t,i  " completion (key = TAB in insert mode)
 set foldmethod=indent     " folding on indentation
 set foldlevel=100         " 'disable' folding at first
-
-function! TabCompletion()
-    if strpart(getline('.'), 0, col('.') - 1) =~ '^\s*$'
-        return "\<Tab>"
-    else
-        if &omnifunc != ''
-            return "\<C-X>\<C-O>"
-        elseif &dictionary != ''
-            return "\<C-K>"
-        else
-            return "\<C-N>"
-        endif
-    endif
-endfunction
-
-inoremap <Tab> <C-R>=TabCompletion()<cr>
 
 "---------------------------------------------------------------------
 " Other plugin config
