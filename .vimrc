@@ -40,9 +40,10 @@ set mouse=a          " enable mouse
 set pastetoggle=<F2> " F2 for paste mode
 set hidden           " buffers are hidden instead of closed
 
-" Tabs
+" Tabs, whitespace, and non-printable characters
 set showtabline=2    " always show tab line
-
+set list
+set listchars=eol:·,tab:▹\ ,trail:¤
 
 " Windows
 set winminwidth=0
