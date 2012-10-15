@@ -30,8 +30,8 @@
 	conflicts = !git ls-files -u | cut -f 2 | sort -u
 
 	# Aliases for Mercurial-like commands
-	incoming = !git fetch && git clog ..origin/master
-	outgoing = !git fetch && git clog origin/master..
+	incoming = !"__f() { git fetch ${1:-origin} && git clog ..${1:-origin}/${2:-master}; }; __f"
+	outgoing = !"__f() { git fetch ${1:-origin} && git clog ${1:-origin}/${2:-master}..; }; __f"
 	rollback = reset --hard HEAD~1
 
 	# Compact/graph log
