@@ -29,9 +29,6 @@ endif
 "---------------------------------------------------------------------
 
 set nowrap           " no line wrapping
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
 set ruler            " ruler
 set number           " line numbering
 set autoindent
@@ -39,11 +36,15 @@ set showmatch        " show matching brackets
 set mouse=a          " enable mouse
 set pastetoggle=<F2> " F2 for paste mode
 set hidden           " buffers are hidden instead of closed
+set showtabline=2    " always show tab bar at top
 
 " Tabs, whitespace, and non-printable characters
-set showtabline=2    " always show tab line
-set list
-set listchars=eol:·,tab:▹\ ,trail:¤
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set copyindent       " copy indent structure when making new lines
+set list             " show non-printable characters
+set listchars=eol:·,tab:▹\ 
 
 " Windows
 set winminwidth=0
