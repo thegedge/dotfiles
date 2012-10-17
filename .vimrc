@@ -1,7 +1,7 @@
 "---------------------------------------------------------------------
 " Gedge's .vimrc
 "---------------------------------------------------------------------
-set nocompatible
+set nocompatible " use vim defaults, not vi defaults
 
 " Map leader key to comma
 let mapleader= ","
@@ -37,11 +37,14 @@ set mouse=a          " enable mouse
 set pastetoggle=<F2> " F2 for paste mode
 set hidden           " buffers are hidden instead of closed
 set showtabline=2    " always show tab bar at top
+set magic            " how backslashes are interpreted in searches
 
 " Tabs, whitespace, and non-printable characters
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
+set smartindent
+set smarttab
 set copyindent       " copy indent structure when making new lines
 set list             " show non-printable characters
 set listchars=eol:·,tab:▹\ 
