@@ -31,3 +31,6 @@
 [submodule ".vim/plugins/supertab"]
 	path = .vim/plugins/supertab
 	url = git://github.com/ervandew/supertab.git
+[submodule ".vim/plugins/vim-repeat"]
+	path = .vim/plugins/vim-repeat
+	url = git://github.com/tpope/vim-repeat.git
