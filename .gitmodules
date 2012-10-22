@@ -34,3 +34,6 @@
 [submodule ".vim/plugins/vim-repeat"]
 	path = .vim/plugins/vim-repeat
 	url = git://github.com/tpope/vim-repeat.git
+[submodule ".vim/plugins/nerdcommenter"]
+	path = .vim/plugins/nerdcommenter
+	url = git://github.com/scrooloose/nerdcommenter.git
