@@ -73,13 +73,11 @@ set undolevels=1000
 set wildignore=*.swp,*.bak,*.pyc,*.class
 set visualbell     " no beeps
 set noerrorbells   " no beeps
-set nobackup       " no backup files (still swaps though)
 set confirm        " confirm changes before closing buffers
 set backspace=indent,eol,start
 
-" Backup and temporary file directories
-set backup
-set backupdir=~/.vim/backups
+" Backups, swaps, and temps
+set nobackup
 set directory=~/.vim/tmp
 
 " Close vim if NERDTree is only buffer left open
