@@ -142,12 +142,14 @@ nmap <leader><Left>  :wincmd h<CR>  " move cursor to window to left of current
 nmap <leader><Down>  :wincmd j<CR>  " move cursor to window below the current
 nmap <leader><Up>    :wincmd k<CR>  " move cursor to window above the current
 nmap <leader><Right> :wincmd l<CR>  " move cursor to window to right of current
-nmap <leader>+       :wincmd +<CR>  " increase window height
-nmap <leader>-       :wincmd -<CR>  " decrease window height
 nmap <leader>_       :wincmd _<CR>  " maximize window height
-nmap <leader>>       :wincmd ><CR>  " increase window width 
-nmap <leader><       :wincmd <<CR>  " decrease window width
 nmap <leader>\|      :wincmd \|<CR> " maximize window width
+
+" Tab commands with leader keys
+nmap <leader>+       :tabn<CR>  " new tab
+nmap <leader>-       :tabc<CR>  " close tab
+nmap <leader>>       :tabn<CR>  " next tab
+nmap <leader><       :tabp<CR>  " previous tab
 
 "---------------------------------------------------------------------
 " Miscellanouse key mappings and such
