@@ -28,6 +28,7 @@
 	tracked = ls-files
 	branches = branch --list
 	conflicts = !git ls-files -u | cut -f 2 | sort -u
+	submodules = submodule
 
 	# Aliases for Mercurial-like commands
 	incoming = !"__f() { git fetch ${1:-origin} && git clog ..${1:-origin}/${2:-master}; }; __f"
@@ -38,3 +39,5 @@
 	clog = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 	glog = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 
+[push]
+	default = simple
