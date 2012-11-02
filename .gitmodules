@@ -37,3 +37,6 @@
 [submodule ".vim/plugins/nerdcommenter"]
 	path = .vim/plugins/nerdcommenter
 	url = git://github.com/scrooloose/nerdcommenter.git
+[submodule ".vim/plugins/vim-matchit"]
+	path = .vim/plugins/vim-matchit
+	url = git://github.com/edsono/vim-matchit.git
