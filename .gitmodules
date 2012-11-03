@@ -43,3 +43,6 @@
 [submodule ".vim/plugins/vim-markdown"]
 	path = .vim/plugins/vim-markdown
 	url = https://github.com/tpope/vim-markdown
+[submodule ".vim/plugins/snipmate.vim"]
+	path = .vim/plugins/snipmate.vim
+	url = git://github.com/msanders/snipmate.vim.git
