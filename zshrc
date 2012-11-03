@@ -11,7 +11,7 @@ ZSH_THEME="bira"
 #----------------------------------------------------------------------
 # Plugins used by oh-my-zsh
 #----------------------------------------------------------------------
-plugins=(osx gem django brew svn mvn pip rvm virtualenvwrapper)
+plugins=(cmake osx gem django brew svn mvn pip rvm virtualenvwrapper)
 
 #----------------------------------------------------------------------
 # Command history
@@ -42,7 +42,12 @@ zstyle ':completion:*' use-cache on
 # .. and then specify the cache file to use (not added to repo: separate file for each machine)
 zstyle ':completion:*' cache-path ~/.zshcache
 
-# ----------------------------------------------------------------------
+#----------------------------------------------------------------------
+# Other options
+#----------------------------------------------------------------------
+setopt EXTENDED_GLOB
+
+#----------------------------------------------------------------------
 # Bring oh-my-zsh into the picture
 #----------------------------------------------------------------------
 source $ZSH/oh-my-zsh.sh

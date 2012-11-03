@@ -100,7 +100,7 @@ set foldmethod=indent     " folding on indentation
 set foldlevel=100         " 'disable' folding at first
 
 " Space increases fold level, if possible, otherwise behaves as normal
-nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+nnoremap <silent> <Space> @=(foldlevel('.') ? 'za' : "\<Space>")<CR>
 vnoremap <Space> zf
 
 nnoremap + zr             " + reduces fold level across buffer

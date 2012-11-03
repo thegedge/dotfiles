@@ -17,6 +17,7 @@ alias df='df -h'                        # Human readable df by default
 alias fastssh='ssh -C -c blowfish'      # ssh that uses compression
 alias fastscp='scp -C -c blowfish'      # scp that uses compression
 alias top='top -o cpu -s 1'             # top defaults to ordering by CPU usage and 1 second delay
+alias sedi="sed -i ''"                  # in-place sed
 
 alias java14='/System/Library/Frameworks/JavaVM.framework/Versions/1.4/Commands/java'
 alias java15='/System/Library/Frameworks/JavaVM.framework/Versions/1.5/Commands/java'
@@ -24,7 +25,9 @@ alias java16='/System/Library/Frameworks/JavaVM.framework/Versions/1.6/Commands/
 
 alias unsafe_git='env GIT_SSL_NO_VERIFY=true git'
 
+# Recursively display svn:ignore property
 alias recursive_svnignore='foreach dir (**) [ -d $dir ] && echo "--- $dir ---" && svn propget svn:ignore $dir 2>/dev/null; end'
+
 
 #----------------------------------------------------------------------
 # Some custom functions
@@ -55,7 +58,7 @@ function lc {
 
 # Total line count for source files of a given type
 function lc4type { 
-	TYPES=`echo "$@" | sed 's/ /" -or -name "*./g'`
+	local TYPES=`echo "$@" | sed 's/ /" -or -name "*./g'`
 	TYPES="-name \"*.${TYPES}\""
 	echo 'Total # Lines: ' `eval "find . ${TYPES}" | sed -e'/\.svn/d' -e'/build/d' | sed 's/\(.*\)/\"\1\"/' | xargs cat 2>/dev/null | sed '/^[ \t]*$/d' | wc -l`
 }
@@ -63,6 +66,28 @@ function lc4type {
 # Total line count for files on STDIN 
 function lc4files {
 	echo 'Total # Lines: ' `cat /dev/stdin | sed -e'/\.svn/d' -e'/build/d' | sed 's/\(.*\)/\"\1\"/' | xargs cat 2>/dev/null | wc -l`
+}
+
+# Use install_name_tool to modify all things with a given prefix
+function change_prefixes {
+	local FILE=$1
+	local OLD_PREFIX=$2
+	local NEW_PREFIX=$3
+
+	if [ ! command -v otool &>/dev/null -o ! command -v install_name_tool &>/dev/null ]
+	then
+		echo "test"
+	elif [ ! -e $FILE ]
+	then
+		echo "'$FILE' does not exist"
+	else
+		$(otool -L $FILE &>/dev/null | grep $OLD_PREFIX) | while read -r line
+		do
+			echo "$line"
+			local pieces=( $line )
+			install_name_tool -change "${pieces[0]}" "${NEW_PREFIX}${pieces[0]##$OLD_PREFIX}" $FILE
+		done
+	fi
 }
 
 #----------------------------------------------------------------------
