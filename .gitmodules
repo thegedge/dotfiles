@@ -1,56 +1,56 @@
 [submodule "nerdtree"]
-    path = vim/plugins/nerdtree
+    path = vim/bundle/nerdtree
     url = https://github.com/scrooloose/nerdtree.git
 
 [submodule "vim-rails"]
-    path = vim/plugins/vim-rails
+    path = vim/bundle/vim-rails
     url = git://github.com/tpope/vim-rails.git
 
 [submodule "scss-syntax.vim"]
-    path = vim/plugins/scss-syntax.vim
+    path = vim/bundle/scss-syntax.vim
     url = https://github.com/cakebaker/scss-syntax.vim.git
 
 [submodule "tabular"]
-    path = vim/plugins/tabular
+    path = vim/bundle/tabular
     url = https://github.com/godlygeek/tabular.git
 
 [submodule "vim-nerdtree-tabs"]
-    path = vim/plugins/vim-nerdtree-tabs
+    path = vim/bundle/vim-nerdtree-tabs
     url = https://github.com/jistr/vim-nerdtree-tabs.git
 
 [submodule "syntastic"]
-    path = vim/plugins/syntastic
+    path = vim/bundle/syntastic
     url = https://github.com/scrooloose/syntastic.git
 
 [submodule "numbers.vim"]
-	path = vim/plugins/numbers.vim
+	path = vim/bundle/numbers.vim
 	url = https://github.com/myusuf3/numbers.vim.git
 
 [submodule "vim-surround"]
-	path = vim/plugins/vim-surround
+	path = vim/bundle/vim-surround
 	url = git://github.com/tpope/vim-surround.git
 
 [submodule "supertab"]
-	path = vim/plugins/supertab
+	path = vim/bundle/supertab
 	url = git://github.com/ervandew/supertab.git
 
 [submodule "vim-repeat"]
-	path = vim/plugins/vim-repeat
+	path = vim/bundle/vim-repeat
 	url = git://github.com/tpope/vim-repeat.git
 
 [submodule "nerdcommenter"]
-	path = vim/plugins/nerdcommenter
+	path = vim/bundle/nerdcommenter
 	url = git://github.com/scrooloose/nerdcommenter.git
 
 [submodule "vim-matchit"]
-	path = vim/plugins/vim-matchit
+	path = vim/bundle/vim-matchit
 	url = git://github.com/edsono/vim-matchit.git
 
 [submodule "vim-markdown"]
-	path = vim/plugins/vim-markdown
+	path = vim/bundle/vim-markdown
 	url = https://github.com/tpope/vim-markdown
 
 [submodule "snipmate.vim"]
-	path = vim/plugins/snipmate.vim
+	path = vim/bundle/snipmate.vim
 	url = git://github.com/msanders/snipmate.vim.git
 

@@ -7,7 +7,7 @@ set nocompatible " use vim defaults, not vi defaults
 let mapleader= ","
 
 " Load plugins
-call pathogen#infect('plugins')
+call pathogen#infect()
 
 "---------------------------------------------------------------------
 " Syntax coloring
