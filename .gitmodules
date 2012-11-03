@@ -40,3 +40,6 @@
 [submodule ".vim/plugins/vim-matchit"]
 	path = .vim/plugins/vim-matchit
 	url = git://github.com/edsono/vim-matchit.git
+[submodule ".vim/plugins/vim-markdown"]
+	path = .vim/plugins/vim-markdown
+	url = https://github.com/tpope/vim-markdown
