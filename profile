@@ -81,11 +81,10 @@ function change_prefixes {
 	then
 		echo "'$FILE' does not exist"
 	else
-		$(otool -L $FILE &>/dev/null | grep $OLD_PREFIX) | while read -r line
+		otool -L "$FILE" 2>/dev/null | grep --colour=never "$OLD_PREFIX" | while read -r line
 		do
-			echo "$line"
-			local pieces=( $line )
-			install_name_tool -change "${pieces[0]}" "${NEW_PREFIX}${pieces[0]##$OLD_PREFIX}" $FILE
+			local piece="$(echo $line | cut -f1 -d\ )"
+			install_name_tool -change "$piece" "${NEW_PREFIX}${piece#$OLD_PREFIX}" $FILE
 		done
 	fi
 }
