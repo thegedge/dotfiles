@@ -137,19 +137,23 @@ endif
 set winminwidth=0   " Windows can have zero width
 set winminheight=0  " Windows can have zero height
 
-" Window commands with leader key
-nmap <leader><Left>  :wincmd h<CR>  " move cursor to window to left of current
-nmap <leader><Down>  :wincmd j<CR>  " move cursor to window below the current
-nmap <leader><Up>    :wincmd k<CR>  " move cursor to window above the current
-nmap <leader><Right> :wincmd l<CR>  " move cursor to window to right of current
-nmap <leader>_       :wincmd _<CR>  " maximize window height
-nmap <leader>\|      :wincmd \|<CR> " maximize window width
+" Window switching commands with leader+arrow keys
+nmap <leader><Left>  :wincmd h<CR>
+nmap <leader><Down>  :wincmd j<CR>
+nmap <leader><Up>    :wincmd k<CR>
+nmap <leader><Right> :wincmd l<CR>
+
+" Maximize window height
+nmap <leader>_       :wincmd _<CR>
+
+" Maximize window width
+nmap <leader>\|      :wincmd \|<CR>
 
 " Tab commands with leader keys
-nmap <leader>+       :tabn<CR>  " new tab
-nmap <leader>-       :tabc<CR>  " close tab
-nmap <leader>>       :tabn<CR>  " next tab
-nmap <leader><       :tabp<CR>  " previous tab
+nmap <leader>+       :tabn<CR>
+nmap <leader>-       :tabc<CR>
+nmap <leader>>       :tabn<CR>
+nmap <leader><       :tabp<CR>
 
 "---------------------------------------------------------------------
 " Miscellanouse key mappings and such
