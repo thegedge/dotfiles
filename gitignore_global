@@ -5,6 +5,7 @@
 *.exe
 *.o
 *.so
+*.pyc
 
 # Archives 
 *.7z

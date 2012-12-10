@@ -61,7 +61,7 @@ set copyindent       " copy indent structure when making new lines
 set backspace=indent,eol,start
 
 " Non-printable characters
-set list             " show non-printable characters
+set nolist           " don't show non-printable characters
 set listchars=eol:·,tab:▹\ 
 
 " Dictionary for CTRL+P and CTRL+N auto-completion
@@ -111,7 +111,7 @@ nnoremap - zm             " - increases fold level across buffer
 "---------------------------------------------------------------------
 let g:nerdtree_tabs_open_on_console_startup=1 " nerdtree/tab plugin always opens in console
 let NERDTreeShowHidden=1                      " always show hidden files
-let NERDTreeIgnore=['\.git$', '\.svn', '\.sass-cache$', '\.bundle$', '\.DS_Store$', 'tmp$', 'vendor$', 'log$', 'doc$', '\.o$', 'CMakeFiles$', 'CMakeCache.txt$', '\.cmake$']
+let NERDTreeIgnore=['\.git$', '\.svn', '\.sass-cache$', '\.bundle$', '\.DS_Store$', 'tmp$', 'vendor$', '\.log$', 'doc$', '\.o$', 'CMakeFiles$', 'CMakeCache.txt$', '\.cmake$']
 
 " CTRL+Y To toggle NERDTree
 nmap <silent> <C-Y>     :NERDTreeMirrorToggle<CR>
