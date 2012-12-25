@@ -39,5 +39,8 @@
 	clog = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 	glog = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 
+	# Stash untracked changes and ignore staged files
+	stashu = stash --include-untracked --keep-index
+
 [push]
 	default = simple
