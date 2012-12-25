@@ -58,7 +58,8 @@ function lc {
 
 # Total line count for source files of a given type
 function lc4type { 
-	local TYPES=`echo "$@" | sed 's/ /" -or -name "*./g'`
+	local TYPES
+	TYPES=$(echo "$@" | sed 's/ /" -or -name "*./g')
 	TYPES="-name \"*.${TYPES}\""
 	echo 'Total # Lines: ' `eval "find . ${TYPES}" | sed -e'/\.svn/d' -e'/build/d' | sed 's/\(.*\)/\"\1\"/' | xargs cat 2>/dev/null | sed '/^[ \t]*$/d' | wc -l`
 }
@@ -89,6 +90,19 @@ function change_prefixes {
 	fi
 }
 
+# Recursively download a webpage
+function recursive_download_webpage {
+	wget --recursive \
+	     --no-clobber \
+	     --page-requisites \
+	     --html-extension \
+	     --convert-links \
+	     --restrict-file-names=windows \
+	     --domains ${2-:''} \
+	     --no-parent \
+	     $1
+}
+
 #----------------------------------------------------------------------
 # Other stuff
 #----------------------------------------------------------------------
@@ -104,7 +118,7 @@ export JAVA_HOME='/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Ho
 #----------------------------------------------------------------------
 if command -v brew &>/dev/null
 then
-	export HOMEBREW_PREFIX=`brew --prefix`
+	export HOMEBREW_PREFIX="$(brew --prefix)"
 
 	export C_INCLUDE_PATH="${HOMEBREW_PREFIX}/include"
 	export CPLUS_INCLUDE_PATH="${HOMEBREW_PREFIX}/include"
@@ -115,7 +129,7 @@ then
 	export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:${HOMEBREW_PREFIX}/share/python:${PATH}"
 	export MANPATH="${HOMEBREW_PREFIX}/man:${MANPATH}"
 
-	export BOOST_ROOT=`brew --prefix boost`
+	export BOOST_ROOT="$(brew --prefix boost)"
 fi
 
 #----------------------------------------------------------------------
