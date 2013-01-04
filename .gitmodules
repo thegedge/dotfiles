@@ -1,30 +1,26 @@
 [submodule "nerdtree"]
     path = vim/bundle/nerdtree
-    url = https://github.com/scrooloose/nerdtree.git
-
-[submodule "vim-rails"]
-    path = vim/bundle/vim-rails
-    url = git://github.com/tpope/vim-rails.git
+    url = git://github.com/scrooloose/nerdtree.git
 
 [submodule "scss-syntax.vim"]
     path = vim/bundle/scss-syntax.vim
-    url = https://github.com/cakebaker/scss-syntax.vim.git
+    url = git://github.com/cakebaker/scss-syntax.vim.git
 
 [submodule "tabular"]
     path = vim/bundle/tabular
-    url = https://github.com/godlygeek/tabular.git
+    url = git://github.com/godlygeek/tabular.git
 
 [submodule "vim-nerdtree-tabs"]
     path = vim/bundle/vim-nerdtree-tabs
-    url = https://github.com/jistr/vim-nerdtree-tabs.git
+    url = git://github.com/jistr/vim-nerdtree-tabs.git
 
 [submodule "syntastic"]
     path = vim/bundle/syntastic
-    url = https://github.com/scrooloose/syntastic.git
+    url = git://github.com/scrooloose/syntastic.git
 
 [submodule "numbers.vim"]
 	path = vim/bundle/numbers.vim
-	url = https://github.com/myusuf3/numbers.vim.git
+	url = git://github.com/myusuf3/numbers.vim.git
 
 [submodule "vim-surround"]
 	path = vim/bundle/vim-surround
@@ -48,9 +44,13 @@
 
 [submodule "vim-markdown"]
 	path = vim/bundle/vim-markdown
-	url = https://github.com/tpope/vim-markdown
+	url = git://github.com/tpope/vim-markdown
 
 [submodule "snipmate.vim"]
 	path = vim/bundle/snipmate.vim
 	url = git://github.com/msanders/snipmate.vim.git
+
+[submodule "vim-fugitive"]
+	path = vim/bundle/vim-fugitive
+	url = git://github.com/tpope/vim-fugitive.git
 
