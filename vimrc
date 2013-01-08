@@ -62,7 +62,10 @@ set backspace=indent,eol,start
 
 " Non-printable characters
 set nolist           " don't show non-printable characters
-set listchars=eol:·,tab:▹\ 
+let &listchars="eol:\u00B7,tab:\u25B9\ "
+
+" Fill characters
+let &fillchars="vert:\u2577,fold:\u254C"
 
 " Dictionary for CTRL+P and CTRL+N auto-completion
 set dictionary=~/.ispell_english,/usr/share/dict/words
@@ -77,26 +80,29 @@ set directory=~/.vim/tmp,/var/tmp,/tmp
 set viminfo='10,\"100,:20,%,n~/.vim/.viminfo
     au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif 
 
-" Set up the status line
+"---------------------------------------------------------------------
+" Status Line
+"--------------------------------------------------------------------
 function FugitiveLine()
 	let l:has_fugitive = (exists('g:loaded_fugitive') && g:loaded_fugitive == 1)
-	return (l:has_fugitive ? ' ⑂ ' . fugitive#head() : '')
+	return (l:has_fugitive ? " \u2442 " . fugitive#head() : '')
 endfunction
 
-set statusline=
-set statusline+=%2*\ \ %t\ \                                      " tail of the filename
-set statusline+=%1*\ \ %{strlen(&fenc)?&fenc:'none'}              " file encoding
-set statusline+=\ ·\ %{&fileformat}                               " file format
-set statusline+=\ ·\ %{&filetype}                                 " file type
-set statusline+=%h                                                " help file flag
-set statusline+=%m                                                " modified flag
-set statusline+=%r                                                " read only flag
-set statusline+=\ \ 
-set statusline+=%0*%{FugitiveLine()}                              " git branch
-set statusline+=%=                                                " left/right separator
-set statusline+=%4*\ l\ %1*%5l/%-5L\                              " cursor line/total lines
-set statusline+=%5*\ c\ %2*%3c-%-3v\                              " cursor column/cursor virtual column
-set statusline+=%3*\ \ %P\ \                                      " percent through file
+let &statusline=""
+let &statusline.="%2*\ \ %t\ \ "                                    " tail of the filename
+let &statusline.="%1*\ \ %{strlen(&fenc)?&fenc:'none'} "            " file encoding
+let &statusline.="\ \u00B7\ %{&ff}"                                 " file format
+let &statusline.="\ \u00B7\ %{strlen(&ft)?&ft:'<unknown>'}"         " file type
+let &statusline.="%h"                                               " help file flag
+let &statusline.="%m"                                               " modified flag
+let &statusline.="%r"                                               " read only flag
+let &statusline.="\ \ "
+let &statusline.="%0*%{FugitiveLine()}"                             " git branch
+let &statusline.="%="                                               " left/right separator
+let &statusline.="U+%04B\ "                                         " char under cursor 
+let &statusline.="%4*\ l\ %1*%5l/%-5L\ "                            " cursor line/total lines
+let &statusline.="%5*\ c\ %2*%3c-%-3v\ "                            " cursor column/cursor virtual column
+let &statusline.="%3*\ \ %P\ \ "                                    " percent through file
 
 hi User1 term=bold,reverse cterm=bold,reverse ctermfg=235 ctermbg=253
 hi User2 term=bold,reverse cterm=bold,reverse ctermfg=234 ctermbg=253
