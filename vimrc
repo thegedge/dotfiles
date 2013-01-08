@@ -94,8 +94,8 @@ set statusline+=%r                                                " read only fl
 set statusline+=\ \ 
 set statusline+=%0*%{FugitiveLine()}                              " git branch
 set statusline+=%=                                                " left/right separator
-set statusline+=%4*\ ➠\ %1*%5l/%-5L\                              " cursor line/total lines
-set statusline+=%5*\ ⬇\ %2*%3c-%-3v\                              " cursor column/cursor virtual column
+set statusline+=%4*\ l\ %1*%5l/%-5L\                              " cursor line/total lines
+set statusline+=%5*\ c\ %2*%3c-%-3v\                              " cursor column/cursor virtual column
 set statusline+=%3*\ \ %P\ \                                      " percent through file
 
 hi User1 term=bold,reverse cterm=bold,reverse ctermfg=235 ctermbg=253
