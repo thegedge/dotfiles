@@ -88,6 +88,14 @@ function FugitiveLine()
 	return (l:has_fugitive ? " \u2442 " . fugitive#head() : '')
 endfunction
 
+function CharDescription()
+	let c = matchstr(getline('.')[col('.') - 1:-1], '.')
+	let nr = (c ==# "\n" ? 0 : char2nr(c))
+	let out  = characterize#description(nr, '<unknown>')
+	let out .= ' ' . printf('U+%04X', nr)
+	return out
+endfunction
+
 let &statusline=""
 let &statusline.="%2*\ \ %t\ \ "                                    " tail of the filename
 let &statusline.="%1*\ \ %{strlen(&fenc)?&fenc:'none'} "            " file encoding
@@ -99,7 +107,7 @@ let &statusline.="%r"                                               " read only 
 let &statusline.="\ \ "
 let &statusline.="%0*%{FugitiveLine()}"                             " git branch
 let &statusline.="%="                                               " left/right separator
-let &statusline.="U+%04B\ "                                         " char under cursor 
+let &statusline.="%{CharDescription()}\ "                           " char under cursor 
 let &statusline.="%4*\ l\ %1*%5l/%-5L\ "                            " cursor line/total lines
 let &statusline.="%5*\ c\ %2*%3c-%-3v\ "                            " cursor column/cursor virtual column
 let &statusline.="%3*\ \ %P\ \ "                                    " percent through file
