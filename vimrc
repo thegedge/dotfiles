@@ -85,7 +85,7 @@ set viminfo='10,\"100,:20,%,n~/.vim/.viminfo
 "--------------------------------------------------------------------
 function FugitiveLine()
 	let l:has_fugitive = (exists('g:loaded_fugitive') && g:loaded_fugitive == 1)
-	return (l:has_fugitive ? " \u2442 " . fugitive#head() : '')
+	return (l:has_fugitive ? " \u2442 " . fugitive#head() . ' ' : '')
 endfunction
 
 function CharDescription()
@@ -97,8 +97,8 @@ function CharDescription()
 endfunction
 
 let &statusline=""
-let &statusline.="%2*\ \ %t\ \ "                                    " tail of the filename
-let &statusline.="%1*\ \ %{strlen(&fenc)?&fenc:'none'} "            " file encoding
+"let &statusline.="%2*\ \ %t\ \ "                                    " tail of the filename
+let &statusline.="%1*\ \ %{strlen(&fenc)?&fenc:'none'}"             " file encoding
 let &statusline.="\ \u00B7\ %{&ff}"                                 " file format
 let &statusline.="\ \u00B7\ %{strlen(&ft)?&ft:'<unknown>'}"         " file type
 let &statusline.="%h"                                               " help file flag
