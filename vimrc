@@ -95,8 +95,14 @@ endfunction
 function CharDescription()
 	let c = matchstr(getline('.')[col('.') - 1:-1], '.')
 	let nr = (c ==# "\n" ? 0 : char2nr(c))
-	let out  = characterize#description(nr, '<unknown>')
-	let out .= ' ' . printf('U+%04X', nr)
+
+	let out = '<' . characterize#description(nr, 'unknown')
+	let entity = characterize#html_entity(nr)
+	if !empty(entity)
+		let out .= ', ' . entity
+	endif
+	let out .= '> ' . printf('U+%04X', nr)
+
 	return out
 endfunction
 
