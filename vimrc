@@ -84,8 +84,12 @@ set viminfo='10,\"100,:20,%,n~/.vim/.viminfo
 " Status Line
 "--------------------------------------------------------------------
 function FugitiveLine()
-	let l:has_fugitive = (exists('g:loaded_fugitive') && g:loaded_fugitive == 1)
-	return (l:has_fugitive ? " \u2442 " . fugitive#head() . ' ' : '')
+	let has_fugitive = (exists('g:loaded_fugitive') && g:loaded_fugitive == 1)
+	let out = (l:has_fugitive ? fugitive#head() : '')
+	if !empty(out)
+		let out = " \u2442 " . out . ' '
+	endif
+	return out
 endfunction
 
 function CharDescription()
