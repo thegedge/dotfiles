@@ -80,6 +80,16 @@ set directory=~/.vim/tmp,/var/tmp,/tmp
 set viminfo='10,\"100,:20,%,n~/.vim/.viminfo
     au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif 
 
+" Set title in terminal window
+set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:p:h\")})%)%(\ %a%)
+if &term == "screen"
+	set t_ts=k
+	set t_fs=\
+endif
+if &term == "screen" || &term =~? "^xterm"
+	set title
+endif
+
 "---------------------------------------------------------------------
 " Status Line
 "--------------------------------------------------------------------
