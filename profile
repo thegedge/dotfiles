@@ -28,7 +28,6 @@ alias unsafe_git='env GIT_SSL_NO_VERIFY=true git'
 # Recursively display svn:ignore property
 alias recursive_svnignore='foreach dir (**) [ -d $dir ] && echo "--- $dir ---" && svn propget svn:ignore $dir 2>/dev/null; end'
 
-
 #----------------------------------------------------------------------
 # Some custom functions
 #----------------------------------------------------------------------
@@ -101,6 +100,26 @@ function recursive_download_webpage {
 	     --domains ${2-:''} \
 	     --no-parent \
 	     $1
+}
+
+# Generates a PNG for a given LaTeX math formula
+function texify {
+	local fname=${3:-formula.png}
+#	curl 'http://chart.apis.google.com/chart' \
+#	         --silent \
+#	         --data-urlencode 'cht=tx' \
+#	         --data-urlencode 'chs=600' \
+#	         --data-urlencode 'chf=bg,s,FFFFFF00' \
+#	         --data-urlencode "chl=$1" \
+#	         -o "${fname%.png}.png"
+
+#	local url=$(python -c 'import urllib,sys;print urllib.quote(sys.argv[1])' "$1")
+#	url="http://www.sciweavers.org/tex2img.php?bc=Transparent&fc=Black&im=png&fs=72&ff=modern&edit=0&eq=$url"
+#	curl $url --silent -v -o "${fname%.png}.png"
+
+	local url=$(python -c 'import urllib,sys;print urllib.quote(sys.argv[1])' "$2")
+	url="http://latex.codecogs.com/png.latex?\\dpi\{${1:-150}\}&$url"
+	curl "$url" --silent -o "${fname%.png}.png"
 }
 
 #----------------------------------------------------------------------
