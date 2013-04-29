@@ -6,8 +6,45 @@ set nocompatible " use vim defaults, not vi defaults
 " Map leader key to comma
 let mapleader= ","
 
-" Load plugins
-call pathogen#infect()
+"---------------------------------------------------------------------
+" Plugins
+"---------------------------------------------------------------------
+filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+
+" NERD commenting plugin
+Bundle 'scrooloose/nerdcommenter'    
+" NERDTree (file browser)
+Bundle 'scrooloose/nerdtree'         
+" Relative nunmbering in gutter
+Bundle 'myusuf3/numbers.vim'         
+" SCSS syntax highlighting
+Bundle 'cakebaker/scss-syntax.vim'   
+" Snippets
+Bundle 'msanders/snipmate.vim'       
+" magical tabbing
+Bundle 'ervandew/supertab'           
+" Lots of syntax plugins
+Bundle 'scrooloose/syntastic'        
+" Table-based manipulations
+Bundle 'godlygeek/tabular'           
+" Additional character info
+Bundle 'tpope/vim-characterize'      
+" Git support
+Bundle 'tpope/vim-fugitive'          
+" Markdown syntax
+Bundle 'tpope/vim-markdown'          
+" Extended support for %
+Bundle 'edsono/vim-matchit'          
+" Improved tab names for NERDTree
+Bundle 'jistr/vim-nerdtree-tabs'     
+" Repeat plugin commands with .
+Bundle 'tpope/vim-repeat'            
+" Manipulate surroundings
+Bundle 'tpope/vim-surround'          
 
 "---------------------------------------------------------------------
 " Syntax coloring
