@@ -131,10 +131,10 @@ endif
 " Status Line
 "--------------------------------------------------------------------
 function FugitiveLine()
+	let out = ''
 	let has_fugitive = (exists('g:loaded_fugitive') && g:loaded_fugitive == 1)
-	let out = (l:has_fugitive ? fugitive#head() : '')
-	if !empty(out)
-		let out = " \u2442 " . out . ' '
+	if l:has_fugitive
+		let out = " \u2442 " . fugitive#head() . ' '
 	endif
 	return out
 endfunction
@@ -143,12 +143,17 @@ function CharDescription()
 	let c = matchstr(getline('.')[col('.') - 1:-1], '.')
 	let nr = (c ==# "\n" ? 0 : char2nr(c))
 
-	let out = '<' . characterize#description(nr, 'unknown')
-	let entity = characterize#html_entity(nr)
-	if !empty(entity)
-		let out .= ', ' . entity
+	let has_characterize = (exists('g:loaded_characterize') && g:loaded_characterize == 1)
+	if l:has_characterize
+		let out = '<' . characterize#description(nr, 'unknown')
+		let entity = characterize#html_entity(nr)
+		if !empty(entity)
+			let out .= ', ' . entity
+		endif
+		let out .= '> ' . printf('U+%04X', nr)
+	else
+		let out = printf('U+%04X', nr)
 	endif
-	let out .= '> ' . printf('U+%04X', nr)
 
 	return out
 endfunction
