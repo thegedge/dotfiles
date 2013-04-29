@@ -28,6 +28,9 @@ alias unsafe_git='env GIT_SSL_NO_VERIFY=true git'
 # Recursively display svn:ignore property
 alias recursive_svnignore='foreach dir (**) [ -d $dir ] && echo "--- $dir ---" && svn propget svn:ignore $dir 2>/dev/null; end'
 
+# Upgrade all Pip packages
+alias pipupgrade="pip freeze --local | grep -v '^-e' | cut -d = -f 1  | xargs pip install -U"
+
 #----------------------------------------------------------------------
 # Some custom functions
 #----------------------------------------------------------------------
