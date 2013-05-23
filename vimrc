@@ -16,35 +16,35 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " NERD commenting plugin
-Bundle 'scrooloose/nerdcommenter'    
+Bundle 'scrooloose/nerdcommenter'
 " NERDTree (file browser)
-Bundle 'scrooloose/nerdtree'         
+Bundle 'scrooloose/nerdtree'
 " Relative nunmbering in gutter
-Bundle 'myusuf3/numbers.vim'         
+Bundle 'myusuf3/numbers.vim'
 " SCSS syntax highlighting
-Bundle 'cakebaker/scss-syntax.vim'   
+Bundle 'cakebaker/scss-syntax.vim'
 " Snippets
-Bundle 'msanders/snipmate.vim'       
+Bundle 'msanders/snipmate.vim'
 " magical tabbing
-Bundle 'ervandew/supertab'           
+"Bundle 'ervandew/supertab'
 " Lots of syntax plugins
-Bundle 'scrooloose/syntastic'        
+Bundle 'scrooloose/syntastic'
 " Table-based manipulations
-Bundle 'godlygeek/tabular'           
+Bundle 'godlygeek/tabular'
 " Additional character info
-Bundle 'tpope/vim-characterize'      
+Bundle 'tpope/vim-characterize'
 " Git support
-Bundle 'tpope/vim-fugitive'          
+Bundle 'tpope/vim-fugitive'
 " Markdown syntax
-Bundle 'tpope/vim-markdown'          
+Bundle 'tpope/vim-markdown'
 " Extended support for %
-Bundle 'edsono/vim-matchit'          
+Bundle 'edsono/vim-matchit'
 " Improved tab names for NERDTree
-Bundle 'jistr/vim-nerdtree-tabs'     
+Bundle 'jistr/vim-nerdtree-tabs'
 " Repeat plugin commands with .
-Bundle 'tpope/vim-repeat'            
+Bundle 'tpope/vim-repeat'
 " Manipulate surroundings
-Bundle 'tpope/vim-surround'          
+Bundle 'tpope/vim-surround'
 
 "---------------------------------------------------------------------
 " Syntax coloring
@@ -130,7 +130,7 @@ endif
 "---------------------------------------------------------------------
 " Status Line
 "--------------------------------------------------------------------
-function FugitiveLine()
+function! FugitiveLine()
 	let out = ''
 	let has_fugitive = (exists('g:loaded_fugitive') && g:loaded_fugitive == 1)
 	if l:has_fugitive
@@ -139,7 +139,7 @@ function FugitiveLine()
 	return out
 endfunction
 
-function CharDescription()
+function! CharDescription()
 	let c = matchstr(getline('.')[col('.') - 1:-1], '.')
 	let nr = (c ==# "\n" ? 0 : char2nr(c))
 
@@ -231,6 +231,10 @@ if has("autocmd")
 	augroup myfiletypes
 		" Clear old autocmds in group
 		autocmd!
+
+		" Various filetypes will get a colored column
+		hi ColorColumn term=bold, cterm=bold, ctermbg=235
+		set colorcolumn=100
 	augroup END
 endif
 
