@@ -1,30 +1,20 @@
 "
 " Buffer deletion functions
 "
-function DeleteBuffers(buffers)
-	echo a:buffers
+function! s:GetHiddenBuffers()
+    let l:tpbl=[]
+    call map(range(1, tabpagenr('$')), 'extend(l:tpbl, tabpagebuflist(v:val))')
+    return filter(range(1, bufnr('$')), 'bufexists(v:val) && index(l:tpbl, v:val)==-1')
+endfunction
+
+function! s:DeleteBuffers(buffers)
 	for bnum in a:buffers
-		if bufname(bnum) =~? 'NERD_tree'
-			NERDTreeClose
-		else
+		if bufexists(bnum) && bufname(bnum) !~? 'NERD_tree'
 			execute 'bdelete' bnum
 		endif
 	endfor
-	redraw!	
 endfunction
 
-function DeleteAllBuffersOutsideCurrentTab()
-	let l:buffers = range(1, bufnr('$'))
-	let l:exclude = tabpagebuflist(tabpagenr())
-	call DeleteBuffers(filter(l:buffers, 'bufloaded(v:val) && index(l:exclude, v:val) < 0'))
-endfunction
-
-function DeleteAllBuffersButCurrent()
-	let l:buffers = range(1, bufnr('$'))
-	call DeleteBuffers(filter(l:buffers, 'bufloaded(v:val) && v:val != bufnr("%")'))
-endfunction
-
-command! DeleteAllBuffers call DeleteBuffers(range(1, bufnr('$')))
-command! DeleteAllButCurrent call DeleteAllBuffersButCurrent()
-command! DeleteAllButCurrentTab call DeleteAllBuffersOutsideCurrentTab()
+command! DeleteAllBuffers call s:DeleteBuffers(range(1, bufnr('$')))
+command! DeleteHiddenBuffers call s:DeleteBuffers(s:GetHiddenBuffers())
 

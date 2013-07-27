@@ -1,6 +1,11 @@
 .DS_Store
+*.tmp
+
+node_modules
 
 vim/backups/*~
+vim/bundle/*
+!vim/bundle/vundle
 vim/doc
 vim/ruby
 vim/sessions

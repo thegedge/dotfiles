@@ -24,7 +24,10 @@ Bundle 'myusuf3/numbers.vim'
 " SCSS syntax highlighting
 Bundle 'cakebaker/scss-syntax.vim'
 " Snippets
-Bundle 'msanders/snipmate.vim'
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle 'garbas/vim-snipmate'
+Bundle 'honza/vim-snippets'
 " magical tabbing
 "Bundle 'ervandew/supertab'
 " Lots of syntax plugins
@@ -45,6 +48,10 @@ Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'tpope/vim-repeat'
 " Manipulate surroundings
 Bundle 'tpope/vim-surround'
+" Indentation guides (color columns)
+Bundle 'nathanaelkane/vim-indent-guides'
+" A bunch of color schemes
+Bundle 'flazz/vim-colorschemes'
 
 "---------------------------------------------------------------------
 " Syntax coloring
@@ -53,8 +60,10 @@ Bundle 'tpope/vim-surround'
 if &t_Co >= 256 || has("gui_running")
 	colorscheme molokai 
 	set cursorline
+	set background=dark
 elseif &t_Co > 1
 	colorscheme desert
+	set background=dark
 endif
 
 if &t_Co > 1
@@ -76,13 +85,13 @@ set mouse=a          " enable mouse
 set pastetoggle=<F2> " F2 for paste mode
 set hidden           " buffers are hidden instead of closed
 set showtabline=2    " always show tab bar at top
-set laststatus=2    " always show status line
-set history=1000    " remember more commands
-set autowrite       " write on make/shell commands
-set undolevels=1000 " max number of changes to remember
-set visualbell      " no beeps
-set noerrorbells    " no beeps
-set confirm         " confirm changes before closing buffers
+set laststatus=2     " always show status line
+set history=1000     " remember more commands
+set autowrite        " write on make/shell commands
+set undolevels=1000  " max number of changes to remember
+set visualbell       " no beeps
+set noerrorbells     " no beeps
+set confirm          " confirm changes before closing buffers
 
 " Files to ignore when expanding wildcards
 set wildignore=*.swp,*.bak,*.pyc,*.class,*.o
@@ -235,6 +244,10 @@ if has("autocmd")
 		" Various filetypes will get a colored column
 		hi ColorColumn term=bold, cterm=bold, ctermbg=235
 		set colorcolumn=100
+
+		" Indenting guide
+		hi IndentGuidesOdd  ctermbg=233
+		hi IndentGuidesEven ctermbg=234
 	augroup END
 endif
 
@@ -293,3 +306,9 @@ let g:session_default_to_last=1
 " Syntastic defaults to passive mode
 let g:syntastic_mode_map = {'mode': 'passive'}
 
+" Indent guides
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_guide_size = 1
+let g:indent_guides_space_guides = 1
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
