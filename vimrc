@@ -15,59 +15,59 @@ call vundle#rc()
 
 Bundle 'gmarik/vundle'
 
-" NERD commenting plugin
-Bundle 'scrooloose/nerdcommenter'
-" NERDTree (file browser)
-Bundle 'scrooloose/nerdtree'
-" Relative nunmbering in gutter
-Bundle 'myusuf3/numbers.vim'
-" SCSS syntax highlighting
-Bundle 'cakebaker/scss-syntax.vim'
 " Snippets
-Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 Bundle 'garbas/vim-snipmate'
+Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle 'honza/vim-snippets'
-" magical tabbing
-"Bundle 'ervandew/supertab'
-" Lots of syntax plugins
+
+" Coloring
+Bundle 'flazz/vim-colorschemes'
+Bundle 'nathanaelkane/vim-indent-guides'
+
+" NERD plugins
+Bundle 'jistr/vim-nerdtree-tabs'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/nerdtree'
+
+" Plugins for syntax
+Bundle 'cakebaker/scss-syntax.vim'
+Bundle 'peterhoeg/vim-qml'
 Bundle 'scrooloose/syntastic'
+Bundle 'tpope/vim-markdown'
+
+" Magical tabbing
+Bundle 'ervandew/supertab'
 " Table-based manipulations
 Bundle 'godlygeek/tabular'
-" Additional character info
+" Relative numbering in gutter
+Bundle 'myusuf3/numbers.vim'
+" Text object for function arguments (a, and i,)
+Bundle 'PeterRincker/vim-argumentative'
+" Additional character info (e.g., html entity, unicode name)
 Bundle 'tpope/vim-characterize'
 " Git support
 Bundle 'tpope/vim-fugitive'
-" Markdown syntax
-Bundle 'tpope/vim-markdown'
-" Extended support for %
-Bundle 'edsono/vim-matchit'
-" Improved tab names for NERDTree
-Bundle 'jistr/vim-nerdtree-tabs'
 " Repeat plugin commands with .
 Bundle 'tpope/vim-repeat'
 " Manipulate surroundings
 Bundle 'tpope/vim-surround'
-" Indentation guides (color columns)
-Bundle 'nathanaelkane/vim-indent-guides'
-" A bunch of color schemes
-Bundle 'flazz/vim-colorschemes'
 
 "---------------------------------------------------------------------
 " Syntax coloring
 "---------------------------------------------------------------------
 
 if &t_Co >= 256 || has("gui_running")
-	colorscheme molokai 
-	set cursorline
-	set background=dark
+    colorscheme molokai
+    set cursorline
+    set background=dark
 elseif &t_Co > 1
-	colorscheme desert
-	set background=dark
+    colorscheme desert
+    set background=dark
 endif
 
 if &t_Co > 1
-	syntax enable
+    syntax enable
 endif
 
 " Enable filetype-specific indenting and plugins
@@ -79,7 +79,6 @@ filetype plugin indent on
 set nowrap           " no line wrapping
 set ruler            " ruler
 set number           " line numbering
-set autoindent       " automatic indentation
 set showmatch        " show matching brackets
 set mouse=a          " enable mouse
 set pastetoggle=<F2> " F2 for paste mode
@@ -93,6 +92,11 @@ set visualbell       " no beeps
 set noerrorbells     " no beeps
 set confirm          " confirm changes before closing buffers
 
+set autoindent       " automatic indentation
+
+" Autocompletion when typing commands shows options above instead of inline
+set wildmenu
+
 " Files to ignore when expanding wildcards
 set wildignore=*.swp,*.bak,*.pyc,*.class,*.o
 
@@ -102,7 +106,7 @@ set tabstop=4        " number of spaces a <Tab> character equals
 set softtabstop=4    " number of spaces a <Tab> character equals (insert mode)
 set shiftwidth=4     " number of spaces to use for indenting
 set smartindent      " smart autoindent on new lines
-set smarttab         " smart <Tab> behaviour at start of line 
+set smarttab         " smart <Tab> behaviour at start of line
 set copyindent       " copy indent structure when making new lines
 set backspace=indent,eol,start
 
@@ -124,64 +128,63 @@ set directory=~/.vim/tmp,/var/tmp,/tmp
 
 " Remember cursor position for files
 set viminfo='10,\"100,:20,%,n~/.vim/.viminfo
-    au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif 
 
 " Set title in terminal window
 set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:p:h\")})%)%(\ %a%)
 if &term == "screen"
-	set t_ts=k
-	set t_fs=\
+    set t_ts=k
+    set t_fs=\
 endif
 if &term == "screen" || &term =~? "^xterm"
-	set title
+    set title
 endif
 
 "---------------------------------------------------------------------
 " Status Line
 "--------------------------------------------------------------------
 function! FugitiveLine()
-	let out = ''
-	let has_fugitive = (exists('g:loaded_fugitive') && g:loaded_fugitive == 1)
-	if l:has_fugitive
-		let out = " \u2442 " . fugitive#head() . ' '
-	endif
-	return out
+    let out = ''
+    let has_fugitive = (exists('g:loaded_fugitive') && g:loaded_fugitive == 1)
+    if l:has_fugitive
+        let out = " \u2442 " . fugitive#head() . ' '
+    endif
+    return out
 endfunction
 
 function! CharDescription()
-	let c = matchstr(getline('.')[col('.') - 1:-1], '.')
-	let nr = (c ==# "\n" ? 0 : char2nr(c))
+    let c = matchstr(getline('.')[col('.') - 1:-1], '.')
+    let nr = (c ==# "\n" ? 0 : char2nr(c))
 
-	let has_characterize = (exists('g:loaded_characterize') && g:loaded_characterize == 1)
-	if l:has_characterize
-		let out = '<' . characterize#description(nr, 'unknown')
-		let entity = characterize#html_entity(nr)
-		if !empty(entity)
-			let out .= ', ' . entity
-		endif
-		let out .= '> ' . printf('U+%04X', nr)
-	else
-		let out = printf('U+%04X', nr)
-	endif
+    let has_characterize = (exists('g:loaded_characterize') && g:loaded_characterize == 1)
+    if l:has_characterize
+        let out = '<' . characterize#description(nr, 'unknown')
+        let entity = characterize#html_entity(nr)
+        if !empty(entity)
+            let out .= ', ' . entity
+        endif
+        let out .= '> ' . printf('U+%04X', nr)
+    else
+        let out = printf('U+%04X', nr)
+    endif
 
-	return out
+    return out
 endfunction
 
 let &statusline=""
-"let &statusline.="%2*\ \ %t\ \ "                                    " tail of the filename
-let &statusline.="%1*\ \ %{strlen(&fenc)?&fenc:'none'}"             " file encoding
-let &statusline.="\ \u00B7\ %{&ff}"                                 " file format
-let &statusline.="\ \u00B7\ %{strlen(&ft)?&ft:'<unknown>'}"         " file type
-let &statusline.="%h"                                               " help file flag
-let &statusline.="%m"                                               " modified flag
-let &statusline.="%r"                                               " read only flag
+"let &statusline.="%2*\ \ %t\ \ "                             " tail of the filename
+let &statusline.="%1*\ \ %{strlen(&fenc)?&fenc:'none'}"      " file encoding
+let &statusline.="\ \u00B7\ %{&ff}"                          " file format
+let &statusline.="\ \u00B7\ %{strlen(&ft)?&ft:'<unknown>'}"  " file type
+let &statusline.="%h"                                        " help file flag
+let &statusline.="%m"                                        " modified flag
+let &statusline.="%r"                                        " read only flag
 let &statusline.="\ \ "
-let &statusline.="%0*%{FugitiveLine()}"                             " git branch
-let &statusline.="%="                                               " left/right separator
-let &statusline.="%{CharDescription()}\ "                           " char under cursor 
-let &statusline.="%4*\ l\ %1*%5l/%-5L\ "                            " cursor line/total lines
-let &statusline.="%5*\ c\ %2*%3c-%-3v\ "                            " cursor column/cursor virtual column
-let &statusline.="%3*\ \ %P\ \ "                                    " percent through file
+let &statusline.="%0*%{FugitiveLine()}"                      " git branch
+let &statusline.="%="                                        " left/right separator
+let &statusline.="%{CharDescription()}\ "                    " char under cursor
+let &statusline.="%4*\ l\ %1*%5l/%-5L\ "                     " cursor line/total lines
+let &statusline.="%5*\ c\ %2*%3c-%-3v\ "                     " cursor column/virtual column
+let &statusline.="%3*\ \ %P\ \ "                             " percent through file
 
 hi User1 term=bold,reverse cterm=bold,reverse ctermfg=235 ctermbg=253
 hi User2 term=bold,reverse cterm=bold,reverse ctermfg=234 ctermbg=253
@@ -196,7 +199,7 @@ set incsearch      " show matches as typing
 set ignorecase     " ignore case when searching
 set smartcase      " ignore case only if search pattern completely lowercase
 set hlsearch       " highlight search terms
-set magic            " how backslashes are interpreted in searches
+set magic          " how backslashes are interpreted in searches
 
 " Remove highlight from searches (normal mode)
 nmap <silent> <leader>/ :nohlsearch<CR>
@@ -223,32 +226,69 @@ nnoremap - zm             " - increases fold level across buffer
 "---------------------------------------------------------------------
 let g:nerdtree_tabs_open_on_console_startup=1 " nerdtree/tab plugin always opens in console
 let NERDTreeShowHidden=1                      " always show hidden files
-let NERDTreeIgnore=['\.git$', '\.svn', '\.sass-cache$', '\.bundle$', '\.DS_Store$', 'tmp$', 'vendor$', '\.log$', 'doc$', '\.o$', 'CMakeFiles$', 'CMakeCache.txt$', '\.cmake$']
+let NERDTreeIgnore=[
+    \ '\.git$', '\.svn', '\.sass-cache$', '\.bundle$', '\.DS_Store$', 'tmp$',
+    \ 'vendor$', '\.log$', 'doc$', '\.o$', 'CMakeFiles$', 'CMakeCache.txt$',
+    \ '\.pyc', '\.cmake$']
 
 " CTRL+Y To toggle NERDTree
 nmap <silent> <C-Y>     :NERDTreeMirrorToggle<CR>
 
 " Close vim if NERDTree is only buffer left open
 if has("autocmd")
-	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 endif
 
 "---------------------------------------------------------------------
 " Filetype specifics
 "---------------------------------------------------------------------
 if has("autocmd")
-	augroup myfiletypes
-		" Clear old autocmds in group
-		autocmd!
+    function! RestoreCursor()
+        if line("'\"") <= line("$")
+            normal! g`"
+            return 1
+        endif
+    endfunction
 
-		" Various filetypes will get a colored column
-		hi ColorColumn term=bold, cterm=bold, ctermbg=235
-		set colorcolumn=100
+    augroup restore_cursor
+        autocmd!
+        au BufReadPost * call RestoreCursor()
+    augroup END
 
-		" Indenting guide
-		hi IndentGuidesOdd  ctermbg=233
-		hi IndentGuidesEven ctermbg=234
-	augroup END
+    augroup python_source
+        autocmd!
+        au BufNewFile,BufRead *.py set et ts=4 sts=4 sw=4
+    augroup END
+
+    " TODO specify :set options by using a dictionary mapping here
+    let s:sources = ['c', 'cpp', 'css', 'html', 'java', 'javascript',
+    \                'python', 'ruby', 'vim']
+
+    function! SourceFileAutoCommands()
+        if index(s:sources, &ft) != -1
+            " Highlight extra whitespace at the end of a line
+            hi ExtraWhitespace ctermbg=red guibg=red
+            match ExtraWhitespace /\s\+$/
+
+            " Color column at 80 characters for soft limit, 100+ for hard limit
+            let columns = '80,'.join(range(100, 1000), ',')
+            execute 'set colorcolumn=' . columns
+            hi ColorColumn term=bold, cterm=bold, ctermbg=235
+
+            " Indent guides
+            hi IndentGuidesOdd  ctermbg=233
+            hi IndentGuidesEven ctermbg=234
+
+            " Improve source code indenting
+            set cindent
+            set cino=(0 " new line will be adjacent to opening parenthesis
+        endif
+    endfunction
+
+    augroup all_source
+        autocmd!
+        au BufNewFile,BufRead * call SourceFileAutoCommands()
+    augroup END
 endif
 
 "---------------------------------------------------------------------
