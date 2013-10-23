@@ -142,9 +142,9 @@ if command -v brew &>/dev/null
 then
 	export HOMEBREW_PREFIX="$(brew --prefix)"
 
-	export C_INCLUDE_PATH="${HOMEBREW_PREFIX}/include"
-	export CPLUS_INCLUDE_PATH="${HOMEBREW_PREFIX}/include"
-	export LIBRARY_PATH="${HOMEBREW_PREFIX}/lib:${LIBRARY_PATH}"
+	#export C_INCLUDE_PATH="${HOMEBREW_PREFIX}/include"
+	#export CPLUS_INCLUDE_PATH="${HOMEBREW_PREFIX}/include"
+	#export LIBRARY_PATH="${HOMEBREW_PREFIX}/lib:${LIBRARY_PATH}"
 	export DYLD_FALLBACK_LIBRARY_PATH="${HOMEBREW_PREFIX}/lib:${HOMEBREW_PREFIX}:${DYLD_FALLBACK_LIBRARY_PATH}"
 
 	export PYTHONPATH="${HOMEBREW_PREFIX}/lib/python2.7/site-packages:${PYTHONPATH}"
@@ -152,6 +152,7 @@ then
 	export MANPATH="${HOMEBREW_PREFIX}/man:${MANPATH}"
 
 	export BOOST_ROOT="$(brew --prefix boost)"
+	export ANDROID_HOME="$(brew --prefix android-sdk)"
 fi
 
 #----------------------------------------------------------------------
