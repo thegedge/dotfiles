@@ -161,7 +161,7 @@ fi
 if command -v virtualenv &>/dev/null
 then
 	export WORKON_HOME="${HOME}/.virtualenvs"
-	export VIRTUALENVWRAPPER_PYTHON="${HOME}/usr/local/bin/python2.7"
+	export VIRTUALENVWRAPPER_PYTHON="$(which python2.7)"
 	export PIP_VIRTUALENV_BASE="${WORKON_HOME}"
 	export PIP_RESPECT_VIRTUALENV=true
 
