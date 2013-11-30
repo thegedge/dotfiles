@@ -37,7 +37,9 @@ Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-markdown'
 
 " Magical tabbing
-Bundle 'ervandew/supertab'
+"Bundle 'ervandew/supertab'
+" Auto completion that works :)
+Bundle 'Valloric/YouCompleteMe'
 " Table-based manipulations
 Bundle 'godlygeek/tabular'
 " Relative numbering in gutter
@@ -352,3 +354,6 @@ let g:indent_guides_guide_size = 1
 let g:indent_guides_space_guides = 1
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
+
+" YouCompleteMe configuration
+let g:ycm_extra_conf_globlist = ['~/*']

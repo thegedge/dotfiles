@@ -147,7 +147,6 @@ then
 	#export LIBRARY_PATH="${HOMEBREW_PREFIX}/lib:${LIBRARY_PATH}"
 	export DYLD_FALLBACK_LIBRARY_PATH="${HOMEBREW_PREFIX}/lib:${HOMEBREW_PREFIX}:${DYLD_FALLBACK_LIBRARY_PATH}"
 
-	export PYTHONPATH="${HOMEBREW_PREFIX}/lib/python2.7/site-packages:${PYTHONPATH}"
 	export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:${HOMEBREW_PREFIX}/share/python:${PATH}"
 	export MANPATH="${HOMEBREW_PREFIX}/man:${MANPATH}"
 
@@ -184,11 +183,11 @@ fi
 #----------------------------------------------------------------------
 if command -v launchctl &>/dev/null
 then
-	launchctl setenv PATH "$PATH"
-	launchctl setenv C_INCLUDE_PATH "$C_INCLUDE_PATH"
-	launchctl setenv CPLUS_INCLUDE_PATH "$CPLUS_INCLUDE_PATH"
-	launchctl setenv LIBRARY_PATH "$LIBRARY_PATH"
-	launchctl setenv DYLD_FALLBACK_LIBRARY_PATH "$DYLD_FALLBACK_LIBRARY_PATH"
-	launchctl setenv BOOST_ROOT "$BOOST_ROOT"
+	launchctl setenv PATH "$PATH" 2>/dev/null
+	launchctl setenv C_INCLUDE_PATH "$C_INCLUDE_PATH" 2>/dev/null
+	launchctl setenv CPLUS_INCLUDE_PATH "$CPLUS_INCLUDE_PATH" 2>/dev/null
+	launchctl setenv LIBRARY_PATH "$LIBRARY_PATH" 2>/dev/null
+	launchctl setenv DYLD_FALLBACK_LIBRARY_PATH "$DYLD_FALLBACK_LIBRARY_PATH" 2>/dev/null
+	launchctl setenv BOOST_ROOT "$BOOST_ROOT" 2>/dev/null
 fi
 
