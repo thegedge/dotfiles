@@ -25,21 +25,16 @@ Bundle 'honza/vim-snippets'
 Bundle 'flazz/vim-colorschemes'
 Bundle 'nathanaelkane/vim-indent-guides'
 
-" NERD plugins
-Bundle 'jistr/vim-nerdtree-tabs'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/nerdtree'
-
 " Plugins for syntax
 Bundle 'cakebaker/scss-syntax.vim'
 Bundle 'peterhoeg/vim-qml'
 Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-markdown'
 
+" Code/markup commenting shortcuts
+Bundle 'scrooloose/nerdcommenter'
 " Magical tabbing
-"Bundle 'ervandew/supertab'
-" Auto completion that works :)
-Bundle 'Valloric/YouCompleteMe'
+Bundle 'ervandew/supertab'
 " Table-based manipulations
 Bundle 'godlygeek/tabular'
 " Relative numbering in gutter
@@ -123,6 +118,9 @@ let &fillchars="vert:\u2577,fold:\u254C"
 set dictionary=~/.ispell_english,/usr/share/dict/words
 set complete=.,w,k
 set keywordprg=dict
+
+" So find looks in the current directory tree
+set path+=./**
 
 " Backups, swaps, and temps
 set nobackup
@@ -231,7 +229,8 @@ let NERDTreeShowHidden=1                      " always show hidden files
 let NERDTreeIgnore=[
     \ '\.git$', '\.svn', '\.sass-cache$', '\.bundle$', '\.DS_Store$', 'tmp$',
     \ 'vendor$', '\.log$', 'doc$', '\.o$', 'CMakeFiles$', 'CMakeCache.txt$',
-    \ '\.pyc', '\.cmake$']
+    \ '\.pyc', '\.cmake$', '\.webassets-cache$',
+\ ]
 
 " CTRL+Y To toggle NERDTree
 nmap <silent> <C-Y>     :NERDTreeMirrorToggle<CR>
@@ -260,6 +259,14 @@ if has("autocmd")
     augroup python_source
         autocmd!
         au BufNewFile,BufRead *.py set et ts=4 sts=4 sw=4
+    augroup END
+
+    augroup web_source
+        autocmd!
+        au BufNewFile,BufRead *.html set et ts=2 sts=2 sw=2
+        au BufNewFile,BufRead *.js set et ts=2 sts=2 sw=2
+        au BufNewFile,BufRead *.css set et ts=4 sts=4 sw=4
+        au BufNewFile,BufRead *.scss set et ts=4 sts=4 sw=4
     augroup END
 
     " TODO specify :set options by using a dictionary mapping here
@@ -332,6 +339,9 @@ vnoremap Q gq
 " Tab toggles hidden characters (normal mode)
 nnoremap <Tab> :set list!<CR>
 
+" Reloads a file
+nnoremap <C-E> :edit<CR>
+
 " Remapping for next/previous file (normal mode)
 nnoremap <C-N> :next<CR>
 nnoremap <C-P> :prev<CR>
@@ -356,4 +366,5 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
 
 " YouCompleteMe configuration
+let g:ycm_auto_trigger = 0
 let g:ycm_extra_conf_globlist = ['~/*']
