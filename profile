@@ -125,6 +125,12 @@ function texify {
 	curl "$url" --silent -o "${fname%.png}.png"
 }
 
+function new_angular {
+	git clone --depth=1 https://github.com/angular/angular-seed.git $1 \
+		&& rm -rf ${1:-angular-seed}/.git \
+		&& pushd ${1:-angular-seed}
+}
+
 #----------------------------------------------------------------------
 # Other stuff
 #----------------------------------------------------------------------
