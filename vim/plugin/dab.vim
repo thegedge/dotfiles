@@ -10,11 +10,11 @@ endfunction
 function! s:DeleteBuffers(buffers)
 	for bnum in a:buffers
 		if bufexists(bnum) && bufname(bnum) !~? 'NERD_tree'
-			execute 'bdelete' bnum
+			execute 'bwipeout' bnum
 		endif
 	endfor
 endfunction
 
-command! DeleteAllBuffers call s:DeleteBuffers(range(1, bufnr('$')))
-command! DeleteHiddenBuffers call s:DeleteBuffers(s:GetHiddenBuffers())
+command! -nargs=0 DeleteAllBuffers call s:DeleteBuffers(range(1, bufnr('$')))
+command! -nargs=0 DeleteHiddenBuffers call s:DeleteBuffers(s:GetHiddenBuffers())
 
