@@ -33,3 +33,7 @@ ehthumbs.db
 Thumbs.db
 Repo
 * (Autosaved).txt
+
+# qmake project user files
+*.pro.user*
+*.pri.user*
