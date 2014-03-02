@@ -42,5 +42,8 @@
 	# Stash untracked changes and ignore staged files
 	stashu = stash --include-untracked --keep-index
 
+	# List all tracked files (master branch only)
+	tracked = ls-tree -r master --name-only
+
 [push]
 	default = simple
