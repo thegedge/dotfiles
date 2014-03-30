@@ -37,3 +37,4 @@ Repo
 # qmake project user files
 *.pro.user*
 *.pri.user*
+*.qbs.user*

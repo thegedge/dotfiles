@@ -12,6 +12,7 @@
 
 [diff]
 	tool = vimdiff
+	renames = copies
 
 [difftool]
 	prompt = false
@@ -40,10 +41,13 @@
 	glog = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 
 	# Stash untracked changes and ignore staged files
-	stashu = stash --include-untracked --keep-index
+	stashu = stash save --include-untracked --keep-index
 
 	# List all tracked files (master branch only)
 	tracked = ls-tree -r master --name-only
+
+	# Amend commit with everything
+	amend = commit --all --amend --no-edit
 
 [push]
 	default = simple
