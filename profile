@@ -23,11 +23,6 @@ alias java14='/System/Library/Frameworks/JavaVM.framework/Versions/1.4/Commands/
 alias java15='/System/Library/Frameworks/JavaVM.framework/Versions/1.5/Commands/java'
 alias java16='/System/Library/Frameworks/JavaVM.framework/Versions/1.6/Commands/java'
 
-alias unsafe_git='env GIT_SSL_NO_VERIFY=true git'
-
-# Recursively display svn:ignore property
-alias recursive_svnignore='foreach dir (**) [ -d $dir ] && echo "--- $dir ---" && svn propget svn:ignore $dir 2>/dev/null; end'
-
 # Upgrade all Pip packages
 alias pipupgrade="pip freeze --local | grep -v '^-e' | cut -d = -f 1  | xargs pip install -U"
 
@@ -35,27 +30,30 @@ alias pipupgrade="pip freeze --local | grep -v '^-e' | cut -d = -f 1  | xargs pi
 # Some custom functions
 #----------------------------------------------------------------------
 
-# When building an Android SDK project
-function build_android_project {
-	android update project -p . -s -t 1
-	if [ -e build_native.sh ]
-	then
-		./build_native.sh
-	else
-		ndk-build
-	fi
-	ant debug
-	if [ -e bin/$1-debug.apk ] ; then adb install -r bin/$1-debug.apk; fi
-}
-
 # List the contents of a module
 function pylist {
 	python -c "import $1; print str.join('\n', dir($1))"
 }
 
-# Total line count in files
-function lc {
-	echo "Total # Lines: " `cat $@ 2>/dev/null | wc -l`
+# Filters lines that we typically don't want to count
+function _count_lines {
+	if command -v cloc &>/dev/null
+	then
+		echo 'test'
+		sed -e'/\.svn/d' -e'/\.git/d' -e'/build/d' /dev/stdin \
+			| sed 's/\(.*\)/\"\1\"/' \
+			| xargs cloc 2>/dev/null \
+			| grep 'SUM' \
+			| tr -s ' ' \
+			| cut -d ' ' -f 5
+	else
+		sed -e'/\.svn/d' -e'/\.git/d' -e'/build/d' /dev/stdin \
+			| sed 's/\(.*\)/\"\1\"/' \
+			| xargs cat 2>/dev/null \
+			| sed '/^[ \t]*$/d' \
+			| sed -E '/^[ \t]*\/\//d' \
+			| wc -l
+	fi
 }
 
 # Total line count for source files of a given type
@@ -63,12 +61,7 @@ function lc4type {
 	local TYPES
 	TYPES=$(echo "$@" | sed 's/ /" -or -name "*./g')
 	TYPES="-name \"*.${TYPES}\""
-	echo 'Total # Lines: ' `eval "find . ${TYPES}" | sed -e'/\.svn/d' -e'/build/d' | sed 's/\(.*\)/\"\1\"/' | xargs cat 2>/dev/null | sed '/^[ \t]*$/d' | wc -l`
-}
-
-# Total line count for files on STDIN 
-function lc4files {
-	echo 'Total # Lines: ' `cat /dev/stdin | sed -e'/\.svn/d' -e'/build/d' | sed 's/\(.*\)/\"\1\"/' | xargs cat 2>/dev/null | wc -l`
+	echo 'Total # Lines: ' $(eval "find . $TYPES" | _count_lines)
 }
 
 # Use install_name_tool to modify all things with a given prefix
@@ -108,20 +101,8 @@ function recursive_download_webpage {
 # Generates a PNG for a given LaTeX math formula
 function texify {
 	local fname=${3:-formula.png}
-#	curl 'http://chart.apis.google.com/chart' \
-#	         --silent \
-#	         --data-urlencode 'cht=tx' \
-#	         --data-urlencode 'chs=600' \
-#	         --data-urlencode 'chf=bg,s,FFFFFF00' \
-#	         --data-urlencode "chl=$1" \
-#	         -o "${fname%.png}.png"
-
-#	local url=$(python -c 'import urllib,sys;print urllib.quote(sys.argv[1])' "$1")
-#	url="http://www.sciweavers.org/tex2img.php?bc=Transparent&fc=Black&im=png&fs=72&ff=modern&edit=0&eq=$url"
-#	curl $url --silent -v -o "${fname%.png}.png"
-
-	local url=$(python -c 'import urllib,sys;print urllib.quote(sys.argv[1])' "$2")
-	url="http://latex.codecogs.com/png.latex?\\dpi\{${1:-150}\}&$url"
+	local url=$(python -c 'import urllib,sys;print urllib.quote(sys.argv[1])' "$1")
+	url="http://latex.codecogs.com/png.latex?\\dpi\{${2:-150}\}&$url"
 	curl "$url" --silent -o "${fname%.png}.png"
 }
 
@@ -138,7 +119,6 @@ export EDITOR='vim'
 export GREP_OPTIONS='--color=always'
 export PIP_DOWNLOAD_CACHE="${HOME}/.pip/cache"
 export SSH_ASKPASS='/usr/libexec/ssh-askpass'
-export DISPLAY=':0'
 export JAVA_HOME='/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home'
 
 #----------------------------------------------------------------------
