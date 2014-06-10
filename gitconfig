@@ -24,12 +24,14 @@
 	co = checkout
 
 	# Aliased forms for listing things
-	tags = tag --list
-	remotes = remote
-	tracked = ls-files
 	branches = branch --list
 	conflicts = !git ls-files -u | cut -f 2 | sort -u
+	numstat = diff --numstat
+	remotes = remote
+	stat = diff --stat
 	submodules = submodule
+	tags = tag --list
+	tracked = ls-files
 
 	# Aliases for Mercurial-like commands
 	incoming = !"__f() { git fetch ${1:-origin} && git clog ..${1:-origin}/${2:-master}; }; __f"
