@@ -28,6 +28,7 @@ Bundle 'cakebaker/scss-syntax.vim'
 Bundle 'peterhoeg/vim-qml'
 Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-markdown'
+Bundle 'vim-scripts/gcov.vim'
 
 " Code/markup commenting shortcuts
 Bundle 'scrooloose/nerdcommenter'
@@ -250,6 +251,11 @@ if has("autocmd")
     augroup restore_cursor
         autocmd!
         au BufReadPost * call RestoreCursor()
+    augroup END
+
+    augroup gcov_files
+        autocmd!
+        au BufNewFile,BufRead *.gcov set ft=gcov
     augroup END
 
     augroup python_source
