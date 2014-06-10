@@ -11,5 +11,6 @@ vim/ruby
 vim/sessions
 vim/tmp
 vim/view
+vim/.netrwhist
 vim/.VimballRecord
 vim/.viminfo
