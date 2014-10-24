@@ -8,46 +8,51 @@ let mapleader=" "  " space bar for leader
 " Plugins
 "---------------------------------------------------------------------
 filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
 " Snippets
-Bundle "tomtom/tlib_vim"
-Bundle 'garbas/vim-snipmate'
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle 'honza/vim-snippets'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'honza/vim-snippets'
 
 " Coloring
-Bundle 'flazz/vim-colorschemes'
-Bundle 'nathanaelkane/vim-indent-guides'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'duythinht/vim-coffee'
+Plugin 'nathanaelkane/vim-indent-guides'
 
 " Plugins for syntax
-Bundle 'cakebaker/scss-syntax.vim'
-Bundle 'peterhoeg/vim-qml'
-Bundle 'scrooloose/syntastic'
-Bundle 'tpope/vim-markdown'
-Bundle 'vim-scripts/gcov.vim'
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'peterhoeg/vim-qml'
+Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-markdown'
+Plugin 'vim-scripts/gcov.vim'
+Plugin 'vim-scripts/swig-syntax'
+Plugin 'wting/rust.vim'
 
 " Code/markup commenting shortcuts
-Bundle 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdcommenter'
 " Magical tabbing
-Bundle 'ervandew/supertab'
+Plugin 'ervandew/supertab'
 " Table-based manipulations
-Bundle 'godlygeek/tabular'
+Plugin 'godlygeek/tabular'
 " Relative numbering in gutter
-Bundle 'myusuf3/numbers.vim'
+Plugin 'myusuf3/numbers.vim'
 " Text object for function arguments (a, and i,)
-Bundle 'PeterRincker/vim-argumentative'
+Plugin 'PeterRincker/vim-argumentative'
 " Additional character info (e.g., html entity, unicode name)
-Bundle 'tpope/vim-characterize'
+Plugin 'tpope/vim-characterize'
 " Git support
-Bundle 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive'
 " Repeat plugin commands with .
-Bundle 'tpope/vim-repeat'
+Plugin 'tpope/vim-repeat'
 " Manipulate surroundings
-Bundle 'tpope/vim-surround'
+Plugin 'tpope/vim-surround'
+
+call vundle#end()
 
 "---------------------------------------------------------------------
 " Syntax coloring
@@ -55,7 +60,6 @@ Bundle 'tpope/vim-surround'
 
 if &t_Co >= 256 || has("gui_running")
     colorscheme molokai
-    set cursorline
     set background=dark
 elseif &t_Co > 1
     colorscheme desert
@@ -258,9 +262,38 @@ if has("autocmd")
         au BufNewFile,BufRead *.gcov set ft=gcov
     augroup END
 
+    augroup swig_source
+        autocmd!
+        au BufNewFile,BufRead *.i set et ts=2 sts=2 sw=2 ft=swig
+        au BufNewFile,BufRead *.swg set et ts=2 sts=2 sw=2 ft=swig
+        au BufNewFile,BufRead *.swig set et ts=2 sts=2 sw=2 ft=swig
+    augroup END
+
+    augroup haskell_source
+        autocmd!
+        au BufNewFile,BufRead *.hs set et ts=2 sts=2 sw=2
+    augroup EN
+
+    augroup rust_source
+        autocmd!
+        au BufNewFile,BufRead *.rs set et ts=2 sts=2 sw=2
+    augroup EN
+
     augroup python_source
         autocmd!
         au BufNewFile,BufRead *.py set et ts=4 sts=4 sw=4
+    augroup END
+
+    augroup markdown_source
+        autocmd!
+        au BufNewFile,BufRead *.md set et ts=2 sts=2 sw=4 spell
+    augroup END
+
+    augroup cpp_source
+        autocmd!
+        au BufNewFile,BufRead *.cc set mps+=<:>
+        au BufNewFile,BufRead *.cpp set mps+=<:>
+        au BufNewFile,BufRead *.hpp set mps+=<:>
     augroup END
 
     augroup web_source
