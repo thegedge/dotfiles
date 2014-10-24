@@ -39,13 +39,9 @@ function pylist {
 function _count_lines {
 	if command -v cloc &>/dev/null
 	then
-		echo 'test'
 		sed -e'/\.svn/d' -e'/\.git/d' -e'/build/d' /dev/stdin \
 			| sed 's/\(.*\)/\"\1\"/' \
-			| xargs cloc 2>/dev/null \
-			| grep 'SUM' \
-			| tr -s ' ' \
-			| cut -d ' ' -f 5
+			| xargs cloc 2>/dev/null
 	else
 		sed -e'/\.svn/d' -e'/\.git/d' -e'/build/d' /dev/stdin \
 			| sed 's/\(.*\)/\"\1\"/' \
@@ -61,7 +57,7 @@ function lc4type {
 	local TYPES
 	TYPES=$(echo "$@" | sed 's/ /" -or -name "*./g')
 	TYPES="-name \"*.${TYPES}\""
-	echo 'Total # Lines: ' $(eval "find . $TYPES" | _count_lines)
+	eval "find . $TYPES" | _count_lines
 }
 
 # Use install_name_tool to modify all things with a given prefix
@@ -152,6 +148,11 @@ then
 
 	source virtualenvwrapper.sh
 fi
+
+#----------------------------------------------------------------------
+# Load cabal (Haskell) functionality
+#----------------------------------------------------------------------
+[[ -e "${HOME}/.cabal/bin" ]] && export PATH="${HOME}/.cabal/bin:${PATH}"
 
 #----------------------------------------------------------------------
 # Load rvm functionality
