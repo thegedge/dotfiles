@@ -9,6 +9,7 @@ vim/bundle/*
 vim/doc
 vim/ruby
 vim/sessions
+vim/spell
 vim/tmp
 vim/view
 vim/.netrwhist
