@@ -4,6 +4,10 @@
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore_global
+	autocrlf = false
+
+[branch]
+	autosetuprebase = always
 
 [color]
 	diff = auto
@@ -20,8 +24,10 @@
 [alias]
 	# Short command names
 	st = status
-	ci = commit
 	co = checkout
+	continue = rebase --continue
+	abort = rebase --abort
+	thisweek = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' @{1.week.ago}..
 
 	# Aliased forms for listing things
 	branches = branch --list
@@ -39,8 +45,8 @@
 	rollback = reset --hard HEAD~1
 
 	# Compact/graph log
-	clog = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
-	glog = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	clog = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
+	glog = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 
 	# Stash untracked changes and ignore staged files
 	stashu = stash save --include-untracked --keep-index
