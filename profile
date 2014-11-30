@@ -24,7 +24,15 @@ alias java15='/System/Library/Frameworks/JavaVM.framework/Versions/1.5/Commands/
 alias java16='/System/Library/Frameworks/JavaVM.framework/Versions/1.6/Commands/java'
 
 # Upgrade all Pip packages
-alias pipupgrade="pip freeze --local | grep -v '^-e' | cut -d = -f 1  | xargs pip install -U"
+alias pipupgrade="pip freeze --local | grep -v '^-e' | cut -d = -f 1 | sed '/vboxapi/d' | xargs pip install -U"
+
+# Use LibClang with Python
+alias clangpy="LD_LIBRARY_PATH=$(brew --prefix llvm)/lib/ PYTHONPATH=$(brew --prefix llvm)/lib/python2.7/site-packages python"
+
+# Syntax highlighting with less
+function hilite {
+	less -f -x2 <(type pygmentize &>/dev/null && pygmentize -f terminal "$1" || cat "$1")
+}
 
 #----------------------------------------------------------------------
 # Some custom functions
@@ -129,7 +137,7 @@ then
 	#export LIBRARY_PATH="${HOMEBREW_PREFIX}/lib:${LIBRARY_PATH}"
 	export DYLD_FALLBACK_LIBRARY_PATH="${HOMEBREW_PREFIX}/lib:${HOMEBREW_PREFIX}:${DYLD_FALLBACK_LIBRARY_PATH}"
 
-	export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:${HOMEBREW_PREFIX}/share/python:${PATH}"
+	export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:${PATH}"
 	export MANPATH="${HOMEBREW_PREFIX}/man:${MANPATH}"
 
 	export BOOST_ROOT="$(brew --prefix boost)"
