@@ -30,6 +30,7 @@
 	thisweek = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' @{1.week.ago}..
 
 	# Aliased forms for listing things
+	aliases = !git config --get-regex 'alias.*' | gawk 'match($0, /alias.(\\w+)\\s+(.*)/, m) { printf \"%-15s %s\\n\", m[1], m[2] }' | grep '^\\w\\+'
 	branches = branch --list
 	conflicts = !git ls-files -u | cut -f 2 | sort -u
 	numstat = diff --numstat
