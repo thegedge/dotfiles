@@ -40,8 +40,6 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'ervandew/supertab'
 " Table-based manipulations
 Plugin 'godlygeek/tabular'
-" Relative numbering in gutter
-Plugin 'myusuf3/numbers.vim'
 " Text object for function arguments (a, and i,)
 Plugin 'PeterRincker/vim-argumentative'
 " Additional character info (e.g., html entity, unicode name)
