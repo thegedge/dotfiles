@@ -11,7 +11,7 @@ ZSH_THEME="bira"
 #----------------------------------------------------------------------
 # Plugins used by oh-my-zsh
 #----------------------------------------------------------------------
-plugins=(cmake osx gem django brew svn mvn pip rvm virtualenvwrapper)
+plugins=(cmake osx gem django brew svn mvn pip rvm)
 
 #----------------------------------------------------------------------
 # Command history

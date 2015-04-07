@@ -80,7 +80,7 @@ set nowrap           " no line wrapping
 set ruler            " ruler
 set number           " line numbering
 set showmatch        " show matching brackets
-set mouse=a          " enable mouse
+set mouse=           " disable mouse
 set pastetoggle=<F2> " F2 for paste mode
 set hidden           " buffers are hidden instead of closed
 set showtabline=2    " always show tab bar at top
@@ -284,6 +284,12 @@ if has("autocmd")
         au BufNewFile,BufRead *.py set et ts=4 sts=4 sw=4
     augroup END
 
+    augroup ruby_source
+        autocmd!
+        au BufNewFile,BufRead *.rb set et ts=2 sts=2 sw=2
+        au BufNewFile,BufRead *.rake set et ts=2 sts=2 sw=2
+    augroup END
+
     augroup markdown_source
         autocmd!
         au BufNewFile,BufRead *.md set et ts=2 sts=2 sw=4 spell
@@ -384,6 +390,9 @@ nnoremap <C-P> :prev<CR>
 "---------------------------------------------------------------------
 " Other plugin config
 "---------------------------------------------------------------------
+
+" netrw preview in vertical splits
+let g:netrw_preview = 1
 
 " Session.vim configuration
 let g:session_autoload='yes'

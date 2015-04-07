@@ -26,9 +26,6 @@ alias java16='/System/Library/Frameworks/JavaVM.framework/Versions/1.6/Commands/
 # Upgrade all Pip packages
 alias pipupgrade="pip freeze --local | grep -v '^-e' | cut -d = -f 1 | sed '/vboxapi/d' | xargs pip install -U"
 
-# Use LibClang with Python
-alias clangpy="LD_LIBRARY_PATH=$(brew --prefix llvm)/lib/ PYTHONPATH=$(brew --prefix llvm)/lib/python2.7/site-packages python"
-
 # Syntax highlighting with less
 function hilite {
 	less -f -x2 <(type pygmentize &>/dev/null && pygmentize -f terminal "$1" || cat "$1")
@@ -130,6 +127,9 @@ export JAVA_HOME='/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Ho
 #----------------------------------------------------------------------
 if command -v brew &>/dev/null
 then
+	# Use LibClang with Python
+	alias clangpy="LD_LIBRARY_PATH=$(brew --prefix llvm)/lib/ PYTHONPATH=$(brew --prefix llvm)/lib/python2.7/site-packages python"
+
 	export HOMEBREW_PREFIX="$(brew --prefix)"
 
 	#export C_INCLUDE_PATH="${HOMEBREW_PREFIX}/include"
