@@ -26,6 +26,9 @@ alias java16='/System/Library/Frameworks/JavaVM.framework/Versions/1.6/Commands/
 # Upgrade all Pip packages
 alias pipupgrade="pip freeze --local | grep -v '^-e' | cut -d = -f 1 | sed '/vboxapi/d' | xargs pip install -U"
 
+# Update my dotfiles
+alias updot="git -C $HOME/dotfiles pull --rebase"
+
 # Syntax highlighting with less
 function hilite {
 	less -f -x2 <(type pygmentize &>/dev/null && pygmentize -f terminal "$1" || cat "$1")
