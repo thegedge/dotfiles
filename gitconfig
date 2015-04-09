@@ -27,6 +27,7 @@
 	co = checkout
 	continue = rebase --continue
 	abort = rebase --abort
+	head = rev-parse HEAD
 	thisweek = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' @{1.week.ago}..
 
 	# Aliased forms for listing things
