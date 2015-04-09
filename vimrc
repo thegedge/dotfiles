@@ -32,6 +32,7 @@ Plugin 'tpope/vim-markdown'
 Plugin 'vim-scripts/gcov.vim'
 Plugin 'vim-scripts/swig-syntax'
 Plugin 'wting/rust.vim'
+Plugin 'fatih/vim-go'
 
 " Code/markup commenting shortcuts
 Plugin 'scrooloose/nerdcommenter'
