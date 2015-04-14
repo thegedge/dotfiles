@@ -11,7 +11,7 @@ ZSH_THEME="bira"
 #----------------------------------------------------------------------
 # Plugins used by oh-my-zsh
 #----------------------------------------------------------------------
-plugins=(cmake osx gem django brew svn mvn pip rvm)
+plugins=(brew cmake django docker gem mvn osx pip rbenv svn)
 
 #----------------------------------------------------------------------
 # Command history
@@ -57,4 +57,3 @@ unsetopt correct_all
 # Include any local configuration
 #----------------------------------------------------------------------
 [[ -e "${HOME}/.zshrc.local" ]] && . "${HOME}/.zshrc.local"
-
