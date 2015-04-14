@@ -166,9 +166,9 @@ fi
 [[ -e "${HOME}/.cabal/bin" ]] && export PATH="${HOME}/.cabal/bin:${PATH}"
 
 #----------------------------------------------------------------------
-# Load rvm functionality
+# Ruby setup
 #----------------------------------------------------------------------
-[[ -s "${HOME}/.rvm/scripts/rvm" ]] && . "${HOME}/.rvm/scripts/rvm"
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 #----------------------------------------------------------------------
 # Include any local configuration (post profile)
@@ -188,4 +188,3 @@ then
 	launchctl setenv DYLD_FALLBACK_LIBRARY_PATH "$DYLD_FALLBACK_LIBRARY_PATH" 2>/dev/null
 	launchctl setenv BOOST_ROOT "$BOOST_ROOT" 2>/dev/null
 fi
-
