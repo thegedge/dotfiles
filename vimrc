@@ -392,6 +392,7 @@ nnoremap <C-P> :prev<CR>
 
 " netrw preview in vertical splits
 let g:netrw_preview = 1
+let g:netrw_winsize = 15
 
 " Session.vim configuration
 let g:session_autoload='yes'
