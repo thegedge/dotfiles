@@ -17,6 +17,7 @@ done
 
 # Install oh-my-zsh (zsh plugins and such)
 [ ! -e "$HOME/.oh-my-zsh" ] && curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+[ -e "$HOME/.zshrc.pre-oh-my-zsh" ] && mv $HOME/.zshrc.pre-oh-my-zsh $HOME/.zshrc
 
 # Install vundle (vim plugin manager)
 [ ! -e "$HOME/.vim/bundle/Vundle.bim" ] && git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
