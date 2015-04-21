@@ -261,37 +261,26 @@ if has("autocmd")
         au BufNewFile,BufRead *.gcov set ft=gcov
     augroup END
 
-    augroup swig_source
+    augroup twospace_source
         autocmd!
-        au BufNewFile,BufRead *.i set et ts=2 sts=2 sw=2 ft=swig
-        au BufNewFile,BufRead *.swg set et ts=2 sts=2 sw=2 ft=swig
-        au BufNewFile,BufRead *.swig set et ts=2 sts=2 sw=2 ft=swig
-    augroup END
-
-    augroup haskell_source
-        autocmd!
+        au BufNewFile,BufRead *.css set et ts=2 sts=2 sw=2
+        au BufNewFile,BufRead *.go set noet ts=2 sts=2 sw=2
         au BufNewFile,BufRead *.hs set et ts=2 sts=2 sw=2
-    augroup EN
-
-    augroup rust_source
-        autocmd!
+        au BufNewFile,BufRead *.html set et ts=2 sts=2 sw=2
+        au BufNewFile,BufRead *.js set et ts=2 sts=2 sw=2
         au BufNewFile,BufRead *.rs set et ts=2 sts=2 sw=2
-    augroup EN
-
-    augroup python_source
-        autocmd!
-        au BufNewFile,BufRead *.py set et ts=4 sts=4 sw=4
-    augroup END
-
-    augroup ruby_source
-        autocmd!
         au BufNewFile,BufRead *.rb set et ts=2 sts=2 sw=2
         au BufNewFile,BufRead *.rake set et ts=2 sts=2 sw=2
-    augroup END
+        au BufNewFile,BufRead *.i set et ts=2 sts=2 sw=2 ft=swig
+        au BufNewFile,BufRead *.scss set et ts=2 sts=2 sw=2
+        au BufNewFile,BufRead *.swg set et ts=2 sts=2 sw=2 ft=swig
+        au BufNewFile,BufRead *.swig set et ts=2 sts=2 sw=2 ft=swig
+        au BufNewFile,BufRead *.md set et ts=2 sts=2 sw=2 spell
+    augroup EN
 
-    augroup markdown_source
+    augroup fourspace_source
         autocmd!
-        au BufNewFile,BufRead *.md set et ts=2 sts=2 sw=4 spell
+        au BufNewFile,BufRead *.py set et ts=4 sts=4 sw=4
     augroup END
 
     augroup cpp_source
@@ -301,16 +290,8 @@ if has("autocmd")
         au BufNewFile,BufRead *.hpp set mps+=<:>
     augroup END
 
-    augroup web_source
-        autocmd!
-        au BufNewFile,BufRead *.html set et ts=2 sts=2 sw=2
-        au BufNewFile,BufRead *.js set et ts=2 sts=2 sw=2
-        au BufNewFile,BufRead *.css set et ts=4 sts=4 sw=4
-        au BufNewFile,BufRead *.scss set et ts=4 sts=4 sw=4
-    augroup END
-
     " TODO specify :set options by using a dictionary mapping here
-    let s:sources = ['c', 'cpp', 'css', 'html', 'java', 'javascript',
+    let s:sources = ['c', 'cpp', 'css', 'go', 'html', 'java', 'javascript',
     \                'python', 'ruby', 'vim']
 
     function! SourceFileAutoCommands()
