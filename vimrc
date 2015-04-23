@@ -90,7 +90,7 @@ set undolevels=1000  " max number of changes to remember
 set visualbell       " no beeps
 set noerrorbells     " no beeps
 set confirm          " confirm changes before closing buffers
-
+set splitright       " vertical splits on the right
 set autoindent       " automatic indentation
 
 " Autocompletion when typing commands shows options above instead of inline
@@ -371,9 +371,10 @@ nnoremap <C-P> :prev<CR>
 " Other plugin config
 "---------------------------------------------------------------------
 
-" netrw preview in vertical splits
+" netrw preview in vertical splits, equal size, wide list style
 let g:netrw_preview = 1
-let g:netrw_winsize = 15
+let g:netrw_winsize = 0
+let g:netrw_liststyle = 3
 
 " Session.vim configuration
 let g:session_autoload='yes'
