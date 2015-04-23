@@ -9,8 +9,9 @@
 #----------------------------------------------------------------------
 
 # Make commands colorful
-alias ls='ls -G -h'                     # ls always has color
-alias less='less -R'                    # less always has color
+alias ls='ls -G -h'
+alias less='less -R'
+alias aws='aws --color=on'
 
 alias f='find . -name'                  # simplified find for basic search in current directory
 alias df='df -h'                        # Human readable df by default
@@ -146,6 +147,12 @@ then
 	export BOOST_ROOT="$(brew --prefix boost)"
 	export ANDROID_HOME="$(brew --prefix android-sdk)"
 fi
+
+#----------------------------------------------------------------------
+# For go
+#----------------------------------------------------------------------
+export GOPATH="$HOME/code/go"
+export PATH="$PATH:$GOPATH/bin"
 
 #----------------------------------------------------------------------
 # For virtualenv
