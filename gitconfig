@@ -29,6 +29,7 @@
 	abort = rebase --abort
 	head = rev-parse HEAD
 	thisweek = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' @{1.week.ago}..
+	prune = remote prune origin
 
 	# Aliased forms for listing things
 	aliases = !git config --get-regex 'alias.*' | gawk 'match($0, /alias.(\\w+)\\s+(.*)/, m) { printf \"%-15s %s\\n\", m[1], m[2] }' | grep '^\\w\\+'
@@ -49,6 +50,9 @@
 	# Compact/graph log
 	clog = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
 	glog = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+
+	# Upload current branch to remote (default: origin)
+	up = !"__f() { git push --set-upstream ${1:-origin} $([ -z "$2" ] && git symbolic-ref --short HEAD || echo "$2"); }; __f"
 
 	# Stash untracked changes and ignore staged files
 	stashu = stash save --include-untracked --keep-index
