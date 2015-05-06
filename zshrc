@@ -11,7 +11,26 @@ ZSH_THEME="bira"
 #----------------------------------------------------------------------
 # Plugins used by oh-my-zsh
 #----------------------------------------------------------------------
-plugins=(aws brew chruby cmake django docker gem mvn osx pip svn)
+plugins=(
+    aws
+    brew
+    bundler
+    chruby
+    cmake
+    django
+    docker
+    gem
+    go
+    knife
+    mvn
+    node
+    npm
+    osx
+    pip
+    svn
+    tmux
+    vagrant
+)
 
 #----------------------------------------------------------------------
 # Command history
