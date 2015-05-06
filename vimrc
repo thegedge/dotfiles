@@ -222,25 +222,6 @@ nnoremap + zr    " + reduces fold level across buffer
 nnoremap - zm    " - increases fold level across buffer
 
 "---------------------------------------------------------------------
-" NERDTree configuration
-"---------------------------------------------------------------------
-let g:nerdtree_tabs_open_on_console_startup=1 " nerdtree/tab plugin always opens in console
-let NERDTreeShowHidden=1                      " always show hidden files
-let NERDTreeIgnore=[
-    \ '\.git$', '\.svn', '\.sass-cache$', '\.bundle$', '\.DS_Store$', 'tmp$',
-    \ 'vendor$', '\.log$', 'doc$', '\.o$', 'CMakeFiles$', 'CMakeCache.txt$',
-    \ '\.pyc', '\.cmake$', '\.webassets-cache$',
-\ ]
-
-" CTRL+Y To toggle NERDTree
-nmap <silent> <C-Y>     :NERDTreeMirrorToggle<CR>
-
-" Close vim if NERDTree is only buffer left open
-if has("autocmd")
-    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-endif
-
-"---------------------------------------------------------------------
 " Filetype specifics
 "---------------------------------------------------------------------
 if has("autocmd")
