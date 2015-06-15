@@ -1,4 +1,24 @@
 #----------------------------------------------------------------------
+# Setting TRACING=1 will enable some tracing statements which help you
+# profile slow parts of your zshrc.
+#----------------------------------------------------------------------
+TRACING=0
+if [ tracing -ne 0 ]; then
+    zmodload zsh/datetime
+    setopt promptsubst
+    # Set the trace prompt to include seconds, nanoseconds, script name and
+    # line number This is GNU date syntax; by default Macs ship with the BSD
+    # date program, which isn't compatible
+    PS4='+$EPOCHREALTIME %N:%i> '
+    # Save file stderr to file descriptor 3 and redirect stderr (including
+    # trace output) to a file with the script's PID as an extension.
+    exec 3>&2 2>/tmp/startlog.$$
+    # Set options to turn on tracing/expansion of commands contained in the
+    # prompt.
+    setopt xtrace prompt_subst
+fi
+
+#----------------------------------------------------------------------
 # Path to oh-my-zsh configuration.
 #----------------------------------------------------------------------
 ZSH=$HOME/.oh-my-zsh
@@ -22,9 +42,7 @@ plugins=(
     gem
     go
     knife
-    mvn
     node
-    npm
     osx
     pip
     svn
@@ -76,3 +94,11 @@ unsetopt correct_all
 # Include any local configuration
 #----------------------------------------------------------------------
 [[ -e "${HOME}/.zshrc.local" ]] && . "${HOME}/.zshrc.local"
+
+
+if [ tracing -ne 0 ]; then
+    # Turn off tracing.
+    unsetopt xtrace
+    # Restore stderr to the value saved in FD 3.
+    exec 2>&3 3>&-
+fi
