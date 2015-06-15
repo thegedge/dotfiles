@@ -120,7 +120,7 @@ function new_angular {
 #----------------------------------------------------------------------
 # Other stuff
 #----------------------------------------------------------------------
-export EDITOR='vim'
+export EDITOR=vim
 export GREP_OPTIONS='--color=always'
 export PIP_DOWNLOAD_CACHE="${HOME}/.pip/cache"
 export SSH_ASKPASS='/usr/libexec/ssh-askpass'
@@ -135,17 +135,13 @@ then
 	alias clangpy="LD_LIBRARY_PATH=$(brew --prefix llvm)/lib/ PYTHONPATH=$(brew --prefix llvm)/lib/python2.7/site-packages python"
 
 	export HOMEBREW_PREFIX="$(brew --prefix)"
-
-	#export C_INCLUDE_PATH="${HOMEBREW_PREFIX}/include"
-	#export CPLUS_INCLUDE_PATH="${HOMEBREW_PREFIX}/include"
-	#export LIBRARY_PATH="${HOMEBREW_PREFIX}/lib:${LIBRARY_PATH}"
-	export DYLD_FALLBACK_LIBRARY_PATH="${HOMEBREW_PREFIX}/lib:${HOMEBREW_PREFIX}:${DYLD_FALLBACK_LIBRARY_PATH}"
-
 	export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:${PATH}"
 	export MANPATH="${HOMEBREW_PREFIX}/man:${MANPATH}"
 
 	export BOOST_ROOT="$(brew --prefix boost)"
 	export ANDROID_HOME="$(brew --prefix android-sdk)"
+else
+	alias clangpy='echo "Install homebrew and `brew install llvm`"'
 fi
 
 #----------------------------------------------------------------------
