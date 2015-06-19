@@ -1,0 +1,16 @@
+#!/bin/zsh
+#-----------------------------------------------------------------------------
+# Conditionally sources all scripts in if_command.d.
+#
+# The basename of the script should be the command that one wants to
+# conditionally check for, and if that command exists on the system,
+# the script will be sourced.
+#-----------------------------------------------------------------------------
+setopt nonomatch
+for file in $(realpath $0).d/*; do
+  if [ -e "$file"  ]; then
+    if command -v "$(basename $file)" &>/dev/null; then
+      source $file  
+    fi
+  fi
+done

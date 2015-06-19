@@ -10,9 +10,9 @@ fi
 
 # Symbolic links to the dotfiles
 echo -e "---> \e[92mLinking dotfiles...\e[0m"
-FILES=(profile gitconfig gitignore_global tmux.conf vimrc zprofile zshrc vim)
+FILES=(bashrc bash_profile profile gitconfig gitignore_global tmux.conf vimrc zshrc vim)
 for fname in "${FILES[@]}"; do
-    if [ ! -e $HOME/.$fname ]; then
+    if [[ ! -e $HOME/.$fname && -f $HOME/dotfiles/$fname ]]; then
 		echo "Linking .$fname"
     	ln -s $HOME/dotfiles/$fname $HOME/.$fname
     fi
