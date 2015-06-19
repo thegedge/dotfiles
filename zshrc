@@ -3,7 +3,7 @@
 # profile slow parts of your zshrc.
 #----------------------------------------------------------------------
 TRACING=0
-if [ tracing -ne 0 ]; then
+if [ $TRACING -ne 0 ]; then
     zmodload zsh/datetime
     setopt promptsubst
     # Set the trace prompt to include seconds, nanoseconds, script name and
@@ -19,18 +19,10 @@ if [ tracing -ne 0 ]; then
 fi
 
 #----------------------------------------------------------------------
-# Path to oh-my-zsh configuration.
-#----------------------------------------------------------------------
-ZSH=$HOME/.oh-my-zsh
-
-#----------------------------------------------------------------------
-# Theming
+# Oh-my-zsh config
 #----------------------------------------------------------------------
 ZSH_THEME="bira"
 
-#----------------------------------------------------------------------
-# Plugins used by oh-my-zsh
-#----------------------------------------------------------------------
 plugins=(
     aws
     brew
@@ -87,6 +79,7 @@ setopt EXTENDED_GLOB
 #----------------------------------------------------------------------
 # Bring oh-my-zsh into the picture
 #----------------------------------------------------------------------
+ZSH=$HOME/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 unsetopt correct_all
 
@@ -95,8 +88,17 @@ unsetopt correct_all
 #----------------------------------------------------------------------
 [[ -e "${HOME}/.zshrc.local" ]] && . "${HOME}/.zshrc.local"
 
+#----------------------------------------------------------------------
+# Runs all scripts in profile.d
+#----------------------------------------------------------------------
+for file in $(dirname "$(readlink $HOME/.zshrc)")/profile.d/*; do
+  [ -f "$file" ] && source $file
+done
 
-if [ tracing -ne 0 ]; then
+#----------------------------------------------------------------------
+# Disable tracing
+#----------------------------------------------------------------------
+if [ $TRACING -ne 0 ]; then
     # Turn off tracing.
     unsetopt xtrace
     # Restore stderr to the value saved in FD 3.

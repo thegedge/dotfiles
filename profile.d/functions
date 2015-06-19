@@ -1,0 +1,82 @@
+#!/bin/zsh
+#----------------------------------------------------------------------
+# Some custom functions
+#----------------------------------------------------------------------
+
+# Syntax highlighting with less
+function hilite {
+	less -f -x2 <(type pygmentize &>/dev/null && pygmentize -f terminal "$1" || cat "$1")
+}
+
+# List the contents of a module
+function pylist {
+	python -c "import $1; print str.join('\n', dir($1))"
+}
+
+# Filters lines that we typically don't want to count
+function _count_lines {
+	if command -v cloc &>/dev/null
+	then
+		sed -e'/\.svn/d' -e'/\.git/d' -e'/build/d' /dev/stdin \
+			| sed 's/\(.*\)/\"\1\"/' \
+			| xargs cloc 2>/dev/null
+	else
+		sed -e'/\.svn/d' -e'/\.git/d' -e'/build/d' /dev/stdin \
+			| sed 's/\(.*\)/\"\1\"/' \
+			| xargs cat 2>/dev/null \
+			| sed '/^[ \t]*$/d' \
+			| sed -E '/^[ \t]*\/\//d' \
+			| wc -l
+	fi
+}
+
+# Total line count for source files of a given type
+function lc4type { 
+	local TYPES
+	TYPES=$(echo "$@" | sed 's/ /" -or -name "*./g')
+	TYPES="-name \"*.$TYPES\""
+	eval "find . $TYPES" | _count_lines
+}
+
+# Use install_name_tool to modify all things with a given prefix
+function change_prefixes {
+	local FILE=$1
+	local OLD_PREFIX=$2
+	local NEW_PREFIX=$3
+
+	if [ ! command -v otool &>/dev/null -o ! command -v install_name_tool &>/dev/null ]
+	then
+		echo "test"
+	elif [ ! -e $FILE ]
+	then
+		echo "'$FILE' does not exist"
+	else
+		otool -L "$FILE" 2>/dev/null | grep --colour=never "$OLD_PREFIX" | while read -r line
+		do
+			local piece="$(echo $line | cut -f1 -d\ )"
+			install_name_tool -change "$piece" "${NEW_PREFIX}${piece#$OLD_PREFIX}" $FILE
+		done
+	fi
+}
+
+# Recursively download a webpage
+function recursive_download_webpage {
+	wget --recursive \
+	     --no-clobber \
+	     --page-requisites \
+	     --html-extension \
+	     --convert-links \
+	     --restrict-file-names=windows \
+	     --domains ${2-:''} \
+	     --no-parent \
+	     $1
+}
+
+# Generates a PNG for a given LaTeX math formula
+function texify {
+	local fname=${3:-formula.png}
+	local url=$(python -c 'import urllib,sys;print urllib.quote(sys.argv[1])' "$1")
+	url="http://latex.codecogs.com/png.latex?\\dpi\{${2:-150}\}&$url"
+	curl "$url" --silent -o "${fname%.png}.png"
+}
+

@@ -1,0 +1,10 @@
+#/bin/zsh
+# Use LibClang with Python
+alias clangpy="LD_LIBRARY_PATH=$(brew --prefix llvm)/lib/ PYTHONPATH=$(brew --prefix llvm)/lib/python2.7/site-packages python"
+
+export HOMEBREW_PREFIX="$(brew --prefix)"
+export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH"
+export MANPATH="$HOMEBREW_PREFIX/man:$MANPATH"
+
+export BOOST_ROOT="$(brew --prefix boost)"
+export ANDROID_HOME="$(brew --prefix android-sdk)"
