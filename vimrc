@@ -50,6 +50,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 " Manipulate surroundings
 Plugin 'tpope/vim-surround'
+" Fuzzy matching
+Plugin 'kien/ctrlp.vim'
 
 call vundle#end()
 
@@ -95,6 +97,7 @@ set autoindent       " automatic indentation
 
 " Autocompletion when typing commands shows options above instead of inline
 set wildmenu
+set wildmode=longest:full
 
 " Files to ignore when expanding wildcards
 set wildignore=*.swp,*.bak,*.pyc,*.class,*.o
@@ -248,15 +251,15 @@ if has("autocmd")
         au BufNewFile,BufRead *.go set noet ts=2 sts=2 sw=2
         au BufNewFile,BufRead *.hs set et ts=2 sts=2 sw=2
         au BufNewFile,BufRead *.html set et ts=2 sts=2 sw=2
-        au BufNewFile,BufRead *.js set et ts=2 sts=2 sw=2
-        au BufNewFile,BufRead *.rs set et ts=2 sts=2 sw=2
-        au BufNewFile,BufRead *.rb set et ts=2 sts=2 sw=2
-        au BufNewFile,BufRead *.rake set et ts=2 sts=2 sw=2
         au BufNewFile,BufRead *.i set et ts=2 sts=2 sw=2 ft=swig
+        au BufNewFile,BufRead *.js set et ts=2 sts=2 sw=2
+        au BufNewFile,BufRead *.md set et ts=2 sts=2 sw=2 spell
+        au BufNewFile,BufRead *.rake set et ts=2 sts=2 sw=2
+        au BufNewFile,BufRead *.rb set et ts=2 sts=2 sw=2
+        au BufNewFile,BufRead *.rs set et ts=2 sts=2 sw=2
         au BufNewFile,BufRead *.scss set et ts=2 sts=2 sw=2
         au BufNewFile,BufRead *.swg set et ts=2 sts=2 sw=2 ft=swig
         au BufNewFile,BufRead *.swig set et ts=2 sts=2 sw=2 ft=swig
-        au BufNewFile,BufRead *.md set et ts=2 sts=2 sw=2 spell
     augroup EN
 
     augroup fourspace_source
@@ -272,8 +275,10 @@ if has("autocmd")
     augroup END
 
     " TODO specify :set options by using a dictionary mapping here
-    let s:sources = ['c', 'cpp', 'css', 'go', 'html', 'java', 'javascript',
-    \                'python', 'ruby', 'vim']
+    let s:sources = [
+	\     'c', 'cpp', 'css', 'go', 'html', 'java', 'javascript', 'python',
+	\     'ruby', 'vim'
+	\ ]
 
     function! SourceFileAutoCommands()
         if index(s:sources, &ft) != -1
@@ -292,7 +297,8 @@ if has("autocmd")
 
             " Improve source code indenting
             set cindent
-            set cino=(0 " new line will be adjacent to opening parenthesis
+			" new line will be adjacent to opening parenthesis
+            set cino=(0
         endif
     endfunction
 
@@ -375,3 +381,8 @@ let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
 " YouCompleteMe configuration
 let g:ycm_auto_trigger = 0
 let g:ycm_extra_conf_globlist = ['~/*']
+
+" CtrlP configuration
+let g:ctrlp_custom_ignore = {
+\   'dir':  '\v[\/](\.(git|hg|svn))|Godeps$',
+\ }
