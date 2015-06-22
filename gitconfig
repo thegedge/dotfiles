@@ -1,11 +1,6 @@
 [include]
 	path = ~/.gitconfig_private
 
-[core]
-	editor = vim
-	excludesfile = ~/.gitignore_global
-	autocrlf = false
-
 [branch]
 	autosetuprebase = always
 
@@ -14,12 +9,26 @@
 	status = auto
 	branch = auto
 
+[credential]
+	helper = osxkeychain
+
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore_global
+	autocrlf = false
+
 [diff]
 	tool = vimdiff
 	renames = copies
 
 [difftool]
 	prompt = false
+
+[log]
+	decorate = true
+
+[push]
+	default = simple
 
 [alias]
 	# Short command names
@@ -62,9 +71,3 @@
 
 	# Amend commit with everything
 	amend = commit --all --amend --no-edit
-
-[push]
-	default = simple
-
-[credential]
-	helper = osxkeychain
