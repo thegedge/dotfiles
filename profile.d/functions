@@ -79,4 +79,3 @@ function texify {
 	url="http://latex.codecogs.com/png.latex?\\dpi\{${2:-150}\}&$url"
 	curl "$url" --silent -o "${fname%.png}.png"
 }
-

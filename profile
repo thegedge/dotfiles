@@ -1,6 +1,2 @@
-#!/bin/bash
-#----------------------------------------------------------------------
-# Include any local configuration (post profile)
-#----------------------------------------------------------------------
-[[ -e "$HOME/.profile.local" ]] && . "$HOME/.profile.local"
-
+#!/bin/zsh
+[[ -e "$HOME/.profile.local" ]] && source "$HOME/.profile.local"
