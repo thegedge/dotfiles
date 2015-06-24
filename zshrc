@@ -91,7 +91,7 @@ unsetopt correct_all
 #----------------------------------------------------------------------
 # Runs all scripts in profile.d
 #----------------------------------------------------------------------
-for file in $(dirname "$(readlink $HOME/.zshrc)")/profile.d/*; do
+for file in $(dirname "$(readlink $HOME/.zshrc)")/profile.d/*(on); do
   [ -f "$file" ] && source $file
 done
 

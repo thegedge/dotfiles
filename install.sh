@@ -18,6 +18,8 @@ for fname in "${FILES[@]}"; do
     fi
 done
 
+ln -s $HOME/.zshrc $HOME/.profile.local
+
 # Install oh-my-zsh (zsh plugins and such)
 if [ ! -e "$HOME/.oh-my-zsh" ]; then
 	echo -e "---> \e[92mFetching and installing oh-my-zsh...\e[0m"
