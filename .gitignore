@@ -3,7 +3,7 @@
 
 vim/vim_dir/backups/*~
 vim/vim_dir/bundle/*
-!vim/vim_dir/bundle/vundle
+!vim/vim_dir/bundle/Vundle.vim
 vim/vim_dir/doc
 vim/vim_dir/ruby
 vim/vim_dir/sessions

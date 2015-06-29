@@ -2,7 +2,8 @@
 #----------------------------------------------------------------------
 # Environment variable things
 #----------------------------------------------------------------------
-export EDITOR=vim
+export EDITOR='vim'
+export PAGER='vimpager'
 export GREP_OPTIONS='--color=always'
 export PIP_DOWNLOAD_CACHE="$HOME/.pip/cache"
 export SSH_ASKPASS='/usr/libexec/ssh-askpass'
