@@ -2,14 +2,14 @@
 
 function download {
   if [[ ! -e "${FLAG_dotfiles_dir}" ]]; then
-    echo -e "---> \e[92mFetching dotfiles repo...\e[0m"
+    echo -e "--->\e[92m Fetching dotfiles repo...\e[0m"
     git clone 'https://github.com/thegedge/dotfiles.git' "${FLAG_dotfiles_dir}"
   fi
 }
 
 function install_links {
   # Symbolic links to the dotfiles
-  echo -e "---> \e[92mLinking dotfiles...\e[0m"
+  echo -e "--->\e[92m Linking dotfiles...\e[0m"
   for link_file in $(find "${FLAG_dotfiles_dir}" -name links); do
     cat "${link_file}" | while read link_data; do
       local -a link_spec; link_spec=( "${(@s/ -> /)link_data}" )
@@ -23,23 +23,15 @@ function install_links {
   done
 }
 
-function zsh_setup {
-  # Install oh-my-zsh (zsh plugins and such)
-  if [[ ! -e "${HOME}/.oh-my-zsh" ]]; then
-    echo -e "---> \e[92mFetching and installing oh-my-zsh...\e[0m"
-    curl -L "https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh" | sh
-    [[ -e "${HOME}/.zshrc.pre-oh-my-zsh" ]] && mv "${HOME}/.zshrc.pre-oh-my-zsh" "${HOME}/.zshrc"
-  fi
+function install_powerline_fonts {
+  echo -e "--->\e[92m Installing powerline fonts...\e[0m"
+  git clone --depth=1 'https://github.com/powerline/fonts.git' "$TMPDIR/powerline-fonts"
+  $TMPDIR/powerline-fonts/install.sh
+  rm -rf "$TMPDIR/powerline-fonts"
 }
 
 function vim_setup {
-  # Install vundle (vim plugin manager)
-  if [[ ! -e "${HOME}/.vim/bundle/Vundle.vim" ]]; then
-    echo -e "---> \e[92mFetching and installing Vundle...\e[0m"
-    git clone "https://github.com/gmarik/Vundle.vim.git" "${HOME}/.vim/bundle/Vundle.vim"
-  fi
-
-  echo -e "---> \e[92mInstalling vundle plugins...\e[0m"
+  echo -e "--->\e[92m Installing vundle plugins...\e[0m"
   vim +PluginInstall +qall
 }
 
@@ -74,8 +66,8 @@ function main {
   parse_args "$@"
   download
   install_links
-  #zsh_setup
-  #vim_setup
+  install_powerline_fonts
+  vim_setup
 }
 
 main "$@"

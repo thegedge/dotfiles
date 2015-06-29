@@ -1,2 +1,5 @@
 zshrc -> ~/.zshrc
 zshrc -> ~/.profile.local
+zlogin -> ~/.zlogin
+prezto -> ~/.zprezto
+zpreztorc -> ~/.zpreztorc
