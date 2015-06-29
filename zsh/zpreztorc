@@ -11,12 +11,11 @@ zstyle ':prezto:load' pmodule \
   'completion' \
   'directory' \
   'git' \
-  'gnu-utility' \
   'history' \
   'prompt' \
+  'ruby' \
   'spectrum' \
-  'tmux' \
-  'utility'
+  'tmux'
 
 #-----------------------------------------------------------------------------
 # GNU Utility
@@ -64,19 +63,6 @@ zstyle ':prezto:module:syntax-highlighting' styles \
   'builtin' 'bg=blue' \
   'command' 'bg=blue' \
   'function' 'bg=blue'
-
-#-----------------------------------------------------------------------------
-# Terminal
-#-----------------------------------------------------------------------------
-
-# Auto set the tab and window titles.
-#zstyle ':prezto:module:terminal' auto-title 'yes'
-
-# Set the window title format.
-#zstyle ':prezto:module:terminal:window-title' format '%n@%m: %s'
-
-# Set the tab title format.
-#zstyle ':prezto:module:terminal:tab-title' format '%m: %s'
 
 #-----------------------------------------------------------------------------
 # Tmux
