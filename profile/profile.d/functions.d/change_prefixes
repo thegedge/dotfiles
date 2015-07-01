@@ -1,0 +1,19 @@
+#!/bin/zsh
+#-----------------------------------------------------------------------------
+# Use install_name_tool to modify all things with a given prefix
+#-----------------------------------------------------------------------------
+local FILE=$1 local OLD_PREFIX=$2 local NEW_PREFIX=$3
+
+if [ ! command -v otool &>/dev/null -o ! command -v install_name_tool &>/dev/null ]
+then
+	echo "test"
+elif [ ! -e $FILE ]
+then
+	echo "'$FILE' does not exist"
+else
+	otool -L "$FILE" 2>/dev/null | grep --colour=never "$OLD_PREFIX" | while read -r line
+	do
+		local piece="$(echo $line | cut -f1 -d\ )"
+		install_name_tool -change "$piece" "${NEW_PREFIX}${piece#$OLD_PREFIX}" $FILE
+	done
+fi
