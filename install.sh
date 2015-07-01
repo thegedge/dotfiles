@@ -30,6 +30,10 @@ function install_powerline_fonts {
   rm -rf "$TMPDIR/powerline-fonts"
 }
 
+function install_env {
+  echo "$FLAG_dotfiles_dir" >> "${ZDOTDIR:-$HOME}/.zshenv"
+}
+
 function vim_setup {
   echo -e "--->\e[92m Installing vundle plugins...\e[0m"
   vim +PluginInstall +qall
@@ -67,6 +71,7 @@ function main {
   download
   install_links
   install_powerline_fonts
+  install_env
   vim_setup
 }
 
