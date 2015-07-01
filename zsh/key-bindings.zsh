@@ -31,6 +31,7 @@ if [[ "${terminfo[kend]}" != "" ]]; then
   bindkey "${terminfo[kend]}"  end-of-line            # [End] - Go to end of line
 fi
 
+bindkey '\edw' backward-delete-word                   # [Esc + dw] - backward delete a word
 bindkey ' ' magic-space                               # [Space] - do history expansion
 bindkey '^r' history-incremental-search-backward      # [Ctrl-r] - Search backward incrementally for a specified string.
 bindkey '^[[1;5C' forward-word                        # [Ctrl-RightArrow] - move forward one word
