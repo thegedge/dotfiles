@@ -18,6 +18,14 @@ if [[ $TRACING -ne 0 ]]; then
   setopt xtrace prompt_subst
 fi
 
+if [[ -e "$HOME/.profile" ]]; then
+  source "$HOME/.profile"
+fi
+
+if [[ -e "${DOTFILES_DIR}/zsh/key-bindings.zsh" ]]; then 
+  source "${DOTFILES_DIR}/zsh/key-bindings.zsh"
+fi
+
 #----------------------------------------------------------------------
 # zsh options
 #----------------------------------------------------------------------
@@ -33,9 +41,6 @@ setopt EXTENDED_GLOB
 # All non-alphanumeric characters are word separators
 export WORDCHARS=''
 
-DOTFILES_ZSH_DIR="$(dirname $(readlink ${HOME}/.zshrc))"
-source "${DOTFILES_ZSH_DIR}/key-bindings.zsh"
-
 #----------------------------------------------------------------------
 # Prezto - config framework for ZSH
 #----------------------------------------------------------------------
@@ -50,15 +55,6 @@ fi
 if [[ -e "${HOME}/.zshrc.local" ]]; then
   source "${HOME}/.zshrc.local"
 fi
-
-#----------------------------------------------------------------------
-# Runs all scripts in profile.d
-#----------------------------------------------------------------------
-for file in $(dirname "$(readlink ${HOME}/.zshrc)")/../profile/profile.d/*(on); do
-  if [[ -f "${file}" ]]; then
-    source ${file}
-  fi
-done
 
 #----------------------------------------------------------------------
 # Disable tracing
