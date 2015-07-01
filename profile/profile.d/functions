@@ -79,3 +79,12 @@ function texify {
 	url="http://latex.codecogs.com/png.latex?\\dpi\{${2:-150}\}&$url"
 	curl "$url" --silent -o "${fname%.png}.png"
 }
+
+# Read a value from a second in INI
+function iniread {
+	awk -F'\\s*=\\s*' -v section="[$2]" -v key="$3"  '
+	    $0 == section { f=1; next }    # Enable a flag when the line is like your section
+	    /\[/ { f=0; next }             # For any lines with [ disable the flag
+	    f && $1 == key { print $2 }    # If flag is set and first field is the key print key=value
+	' "$1"
+}
