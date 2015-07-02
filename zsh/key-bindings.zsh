@@ -33,7 +33,9 @@ fi
 
 bindkey '\edw' backward-delete-word                   # [Esc + dw] - backward delete a word
 bindkey ' ' magic-space                               # [Space] - do history expansion
-bindkey '^r' history-incremental-search-backward      # [Ctrl-r] - Search backward incrementally for a specified string.
+bindkey '^r' history-incremental-search-backward
+bindkey '^a' beginning-of-line
+bindkey '^e' end-of-line
 bindkey '^[[1;5C' forward-word                        # [Ctrl-RightArrow] - move forward one word
 bindkey '^[[1;5D' backward-word                       # [Ctrl-LeftArrow] - move backward one word
 bindkey '^?' backward-delete-char                     # [Backspace] - delete backward
