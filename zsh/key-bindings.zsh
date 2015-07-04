@@ -15,6 +15,9 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
   zle -N zle-line-finish
 fi
 
+# Use the emacs keymap
+bindkey -e
+
 if [[ -n "${terminfo[kcuu1]}" ]]; then
   bindkey "${terminfo[kcuu1]}" up-line-or-search      # Fuzzy find in history after [Up-Arrow]
 fi
@@ -31,11 +34,8 @@ if [[ "${terminfo[kend]}" != "" ]]; then
   bindkey "${terminfo[kend]}"  end-of-line            # [End] - Go to end of line
 fi
 
-bindkey '\edw' backward-delete-word                   # [Esc + dw] - backward delete a word
 bindkey ' ' magic-space                               # [Space] - do history expansion
 bindkey '^r' history-incremental-search-backward
-bindkey '^a' beginning-of-line
-bindkey '^e' end-of-line
 bindkey '^[[1;5C' forward-word                        # [Ctrl-RightArrow] - move forward one word
 bindkey '^[[1;5D' backward-word                       # [Ctrl-LeftArrow] - move backward one word
 bindkey '^?' backward-delete-char                     # [Backspace] - delete backward
