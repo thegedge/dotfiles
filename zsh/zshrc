@@ -18,14 +18,6 @@ if [[ $TRACING -ne 0 ]]; then
   setopt xtrace prompt_subst
 fi
 
-if [[ -e "$HOME/.profile" ]]; then
-  source "$HOME/.profile"
-fi
-
-if [[ -e "${DOTFILES_DIR}/zsh/key-bindings.zsh" ]]; then 
-  source "${DOTFILES_DIR}/zsh/key-bindings.zsh"
-fi
-
 #----------------------------------------------------------------------
 # zsh options
 #----------------------------------------------------------------------
@@ -47,6 +39,17 @@ export WORDCHARS=''
 PREZTO_DIR="${ZDOTDIR:-$HOME}/.zprezto"
 if [[ -s "${PREZTO_DIR}/init.zsh" ]]; then
   source "${PREZTO_DIR}/init.zsh"
+fi
+
+#----------------------------------------------------------------------
+# Source my own stuff now
+#----------------------------------------------------------------------
+if [[ -e "$HOME/.profile" ]]; then
+  source "$HOME/.profile"
+fi
+
+if [[ -e "${DOTFILES_DIR}/zsh/key-bindings.zsh" ]]; then
+  source "${DOTFILES_DIR}/zsh/key-bindings.zsh"
 fi
 
 #----------------------------------------------------------------------
