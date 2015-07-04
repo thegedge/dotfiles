@@ -2,8 +2,7 @@
 # Setting TRACING=1 will enable some tracing statements which help you
 # profile slow parts of your zshrc.
 #----------------------------------------------------------------------
-TRACING=0
-if [[ $TRACING -ne 0 ]]; then
+if [[ -n "${TRACING}" ]]; then
   zmodload zsh/datetime
   setopt promptsubst
   # Set the trace prompt to include seconds, nanoseconds, script name and
@@ -55,9 +54,11 @@ fi
 #----------------------------------------------------------------------
 # Disable tracing
 #----------------------------------------------------------------------
-if [[ ${TRACING} -ne 0 ]]; then
+if [[ -n "${TRACING}" ]]; then
   # Turn off tracing.
   unsetopt xtrace
   # Restore stderr to the value saved in FD 3.
   exec 2>&3 3>&-
+  # Check out the startup log
+  $PAGER /tmp/startlog.$$
 fi
