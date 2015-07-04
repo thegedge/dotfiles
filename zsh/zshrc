@@ -18,7 +18,7 @@ if [[ -n "${TRACING}" ]]; then
 fi
 
 #----------------------------------------------------------------------
-# zsh options
+: zsh options
 #----------------------------------------------------------------------
 # .. use a cache file
 zstyle ':completion:*' use-cache on
@@ -33,7 +33,7 @@ setopt EXTENDED_GLOB
 export WORDCHARS=''
 
 #----------------------------------------------------------------------
-# Prezto - config framework for ZSH
+: Prezto - config framework for ZSH
 #----------------------------------------------------------------------
 PREZTO_DIR="${ZDOTDIR:-$HOME}/.zprezto"
 if [[ -s "${PREZTO_DIR}/init.zsh" ]]; then
@@ -41,8 +41,9 @@ if [[ -s "${PREZTO_DIR}/init.zsh" ]]; then
 fi
 
 #----------------------------------------------------------------------
-# Source my own stuff now
+: Source my own stuff now
 #----------------------------------------------------------------------
+
 if [[ -e "$HOME/.profile" ]]; then
   source "$HOME/.profile"
 fi

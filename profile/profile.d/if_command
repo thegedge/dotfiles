@@ -6,9 +6,7 @@
 # the script will be sourced.
 #-----------------------------------------------------------------------------
 for file in $(find $(realpath $0).d -type f); do
-  if [[ -e "$file" ]]; then
-    if command -v "$(basename ${file})" &>/dev/null; then
-      source "${file}"
-    fi
+  if command -v "${file##*/}" &>/dev/null; then
+    source "${file}"
   fi
 done
