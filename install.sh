@@ -3,7 +3,7 @@
 function download {
   if [[ ! -e "${FLAG_dotfiles_dir}" ]]; then
     echo -e "--->\e[92m Fetching dotfiles repo...\e[0m"
-    git clone 'https://github.com/thegedge/dotfiles.git' "${FLAG_dotfiles_dir}"
+    git clone --recursive 'https://github.com/thegedge/dotfiles.git' "${FLAG_dotfiles_dir}"
   fi
 }
 
