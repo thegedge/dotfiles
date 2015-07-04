@@ -1,2 +1,4 @@
 # Switch to some version of Ruby
-chruby "$(chruby | head -n1 | xargs)"
+if ! chruby | grep -q '\*'; then
+  chruby "$(chruby | head -n1 | xargs)"
+fi
