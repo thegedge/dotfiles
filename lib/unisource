@@ -1,0 +1,14 @@
+#-----------------------------------------------------------------------------
+# unisource: a more "universal" source command
+#-----------------------------------------------------------------------------
+
+# Get source-able files in a directory
+function source_files {
+  find -s "$1" -depth 1 -type f | sed 's/\.zwc$//g' | uniq
+}
+
+# Universal (i.e., cross-shell compatible) source function
+function unisource {
+  local file="$1"; shift
+  source "${file}" "$@"
+}
