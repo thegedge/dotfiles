@@ -20,4 +20,4 @@ alias java16='/System/Library/Frameworks/JavaVM.framework/Versions/1.6/Commands/
 alias pipupgrade="pip freeze --local | grep -v '^-e' | cut -d = -f 1 | sed '/vboxapi/d' | xargs pip install -U"
 
 # Update my dotfiles
-alias updot="git -C ${HOME}/dotfiles pull --rebase && git submodule update --init --recursive"
+alias updot="git -C ${HOME}/dotfiles pull --rebase && git -C ${HOME}/dotfiles submodule update --init --recursive"
