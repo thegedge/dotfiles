@@ -1,15 +1,18 @@
-# TODO make this work for bash also
-myshell="$(ps -p $$ | awk 'NR > 1 { print $4 }')"
-case "${myshell##*/}" in
+#-----------------------------------------------------------------------------
+: Create functions from all source files in functions.d.
+#-----------------------------------------------------------------------------
+FUNCTIONS_DIR="${DOTFILES_DIR}/profile/profile.d/functions.d"
+case "${MYSHELL}" in
   zsh)
-    fpath+=( "${0%/*}/functions.d" )
-    for file in $(find -s "${0%/*}/functions.d/" -depth 1 -type f -not -name '*.zwc'); do
+    fpath+=( "${FUNCTIONS_DIR}" )
+	for file in $(source_files "${FUNCTIONS_DIR}"); do
       autoload "${file##*/}"
     done
     ;;
   bash)
-    for file in $(find -s $(dirname $BASH_SOURCE)/functions.d -depth 1 -type f); do
-      eval "function ${file##*/} { source \"${file}\"; }"
+	for file in $(source_files "${FUNCTIONS_DIR}"); do
+      eval "function ${file##*/} { unisource \"${file}\" \"\$@\"; }"
+      export -f "${file##*/}"
     done
     ;;
 esac

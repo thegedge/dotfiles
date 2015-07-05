@@ -1,24 +1,12 @@
 #-----------------------------------------------------------------------------
-# Conditionally sources all scripts in if_command.d.
+: Conditionally sources all scripts in if_command.d.
 #
 # The basename of the script should be the command that one wants to
 # conditionally check for, and if that command exists on the system,
 # the script will be sourced.
 #-----------------------------------------------------------------------------
-myshell="$(ps -p $$ | awk 'NR > 1 { print $4 }')"
-case "${myshell##*/}" in
-  zsh)
-    for file in $(find "${0%/*}/if_command.d/" -depth 1 -type f -not -name '*.zwc'); do
-      if command -v "${file##*/}" &>/dev/null; then
-        source "${file}"
-      fi
-    done
-    ;;
-  bash)
-    for file in $(find "${BASH_SOURCE%/*}/if_command.d" -depth 1 -type f); do
-      if command -v "${file##*/}" &>/dev/null; then
-        source "${file}"
-      fi
-    done
-    ;;
-esac
+for file in $(source_files "${DOTFILES_DIR}/profile/profile.d/if_command.d/"); do
+  if command -v "${file##*/}" &>/dev/null; then
+    unisource "${file}"
+  fi
+done
