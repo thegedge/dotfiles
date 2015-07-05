@@ -1,3 +1,2 @@
-#/bin/zsh
 launchctl setenv PATH "$PATH" 2>/dev/null
 launchctl setenv BOOST_ROOT "$BOOST_ROOT" 2>/dev/null

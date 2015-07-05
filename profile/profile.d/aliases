@@ -1,5 +1,3 @@
-#!/bin/zsh
-
 # Make commands colorful
 alias ls='ls -G -h'
 alias less='less -R'
