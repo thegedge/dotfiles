@@ -9,7 +9,7 @@ if [[ -e "${HOME}/.profile.local" ]]; then
 fi
 
 if [[ -e "${DOTFILES_DIR}/profile/profile.d" ]]; then
-  for file in $(find -s "${DOTFILES_DIR}/profile/profile.d" -depth 1 -type f); do
+  for file in $(find -s "${DOTFILES_DIR}/profile/profile.d" -depth 1 -type f -not -name '*.zwc'); do
     source "${file}"
   done
 fi
