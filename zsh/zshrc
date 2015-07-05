@@ -5,10 +5,11 @@
 if [[ -n "${TRACING}" ]]; then
   zmodload zsh/datetime
   setopt promptsubst
+  PROFILE_START_TIME="${EPOCHREALTIME}"
   # Set the trace prompt to include seconds, nanoseconds, script name and
   # line number This is GNU date syntax; by default Macs ship with the BSD
   # date program, which isn't compatible
-  PS4='+${EPOCHREALTIME} %N:%i> '
+  PS4='$(( 1000*(EPOCHREALTIME - PROFILE_START_TIME) )) %N:%i> '
   # Save file stderr to file descriptor 3 and redirect stderr (including
   # trace output) to a file with the script's PID as an extension.
   exec 3>&2 2>/tmp/startlog.$$

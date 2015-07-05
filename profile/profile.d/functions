@@ -1,16 +1,15 @@
 # TODO make this work for bash also
-
 myshell="$(ps -p $$ | awk 'NR > 1 { print $4 }')"
-case "$(basename -- $myshell)" in
+case "${myshell##*/}" in
   zsh)
-    fpath+=( "$(dirname $0)/functions.d" )
-    for file in "$(dirname $0)/functions.d/"*; do
-      autoload "$(basename $file)"
+    fpath+=( "${0%/*}/functions.d" )
+    for file in "${0%/*}/functions.d/"*; do
+      autoload "${file##*/}"
     done
     ;;
   bash)
     for file in $(find $(dirname $BASH_SOURCE)/functions.d -depth 1 -type f); do
-      eval "function $(basename $file) { source \"$file\"; }"
+      eval "function ${file##*/} { source \"${file}\"; }"
     done
     ;;
 esac
