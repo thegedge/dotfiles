@@ -5,8 +5,21 @@
 # conditionally check for, and if that command exists on the system,
 # the script will be sourced.
 #-----------------------------------------------------------------------------
-for file in $(find $(realpath $0).d -type f); do
-  if command -v "${file##*/}" &>/dev/null; then
-    source "${file}"
-  fi
-done
+
+myshell="$(ps -p $$ | awk 'NR > 1 { print $4 }')"
+case "$(basename -- $myshell)" in
+  zsh)
+    for file in "$(dirname $0)/if_command.d/"*; do
+      if command -v "${file##*/}" &>/dev/null; then
+        source "${file}"
+      fi
+    done
+    ;;
+  bash)
+    for file in $(find "$(dirname ${BASH_SOURCE})/if_command.d" -depth 1 -type f); do
+      if command -v "${file##*/}" &>/dev/null; then
+        source "${file}"
+      fi
+    done
+    ;;
+esac

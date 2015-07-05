@@ -1,6 +1,9 @@
 #/bin/zsh
-export WORKON_HOME="$HOME/.virtualenvs"
+export WORKON_HOME="${HOME}/.virtualenvs"
 export VIRTUALENVWRAPPER_PYTHON="$(which python2.7)"
-export PIP_VIRTUALENV_BASE="$WORKON_HOME"
-export PIP_RESPECT_VIRTUALENV=true
-[ -f virtualenvwrapper.sh ] && source virtualenvwrapper.sh
+export PIP_VIRTUALENV_BASE="${WORKON_HOME}"
+export PIP_RESPECT_VIRTUALENV='true'
+
+if [[ -f virtualenvwrapper.sh ]]; then
+  source 'virtualenvwrapper.sh'
+fi
