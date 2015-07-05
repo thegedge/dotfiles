@@ -1,8 +1,25 @@
-#!/bin/zsh
 #-----------------------------------------------------------------------------
 # Total line count for source files of a given type
 #-----------------------------------------------------------------------------
+
+# Filters lines that we typically don't want to count
+function _count_lines {
+	if command -v cloc &>/dev/null
+	then
+		sed -e'/\.svn/d' -e'/\.git/d' -e'/build/d' /dev/stdin \
+			| sed 's/\(.*\)/\"\1\"/' \
+			| xargs cloc 2>/dev/null
+	else
+		sed -e'/\.svn/d' -e'/\.git/d' -e'/build/d' /dev/stdin \
+			| sed 's/\(.*\)/\"\1\"/' \
+			| xargs cat 2>/dev/null \
+			| sed '/^[ \t]*$/d' \
+			| sed -E '/^[ \t]*\/\//d' \
+			| wc -l
+	fi
+}
+
 local TYPES
 TYPES=$(echo "$@" | sed 's/ /" -or -name "*./g')
-TYPES="-name \"*.$TYPES\""
-eval "find . $TYPES" | _count_lines
+TYPES="-name \"*.${TYPES}\""
+eval "find ${PWD} ${TYPES}" | _count_lines
