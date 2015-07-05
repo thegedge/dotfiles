@@ -1,5 +1,6 @@
 .DS_Store
 *.tmp
+*.zwc
 
 vim/vim_dir/backups/*~
 vim/vim_dir/bundle/*

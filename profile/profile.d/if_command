@@ -8,7 +8,7 @@
 myshell="$(ps -p $$ | awk 'NR > 1 { print $4 }')"
 case "${myshell##*/}" in
   zsh)
-    for file in "${0%/*}/if_command.d/"*; do
+    for file in $(find "${0%/*}/if_command.d/" -depth 1 -type f -not -name '*.zwc'); do
       if command -v "${file##*/}" &>/dev/null; then
         source "${file}"
       fi
