@@ -8,7 +8,7 @@ if [[ -e "$GOPATH/src" ]]; then
   search_dirs+=("$GOPATH/src")
 fi
 
-local dir=$(find ${search_dirs[@]} -name "$1" -type d -maxdepth 3 -print -quit)
+local dir=$(find ${search_dirs[@]} -path "*/$1" -type d -maxdepth 3 -print -quit)
 if [[ -n "${dir}" ]]; then
   tmux new-session -ADs "${1##*/}" -c "${dir}"
 else
