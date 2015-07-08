@@ -3,7 +3,7 @@
 #----------------------------------------------------------------------
 
 # When running a shell inside of another, we want the innermost one
-export MYSHELL="$(ps -p $$ | awk 'NR > 1 { sub(".*/", "", $4); print $4 }')"
+export MYSHELL="$(ps -p $$ | awk 'NR > 1 { sub(".*/|-", "", $4); print $4 }')"
 
 export EDITOR='vim'
 export PAGER='vimpager'
