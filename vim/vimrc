@@ -387,7 +387,7 @@ if has("autocmd")
 
     " CtrlP configuration
     let g:ctrlp_custom_ignore = {
-          \   'dir':  '\v[\/](\.(git|hg|svn))|Godeps$',
+          \   'dir':  '\v[\/](\.(git|hg|svn))|Godeps|target$',
           \ }
 
     " Don't have a passthrough for vimpager
