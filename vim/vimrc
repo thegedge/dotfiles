@@ -23,7 +23,6 @@ Plugin 'honza/vim-snippets'
 
 " Coloring
 Plugin 'flazz/vim-colorschemes'
-Plugin 'duythinht/vim-coffee'
 Plugin 'nathanaelkane/vim-indent-guides'
 
 " Plugins for syntax
