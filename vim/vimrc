@@ -263,132 +263,132 @@ if has("autocmd")
     au BufNewFile,BufRead *.swig set et ts=2 sts=2 sw=2 ft=swig
     au BufNewFile,BufRead *.tf set et ts=2 sts=2 sw=2 ft=terraform
     au BufNewFile,BufRead *.tfstate set ft=json
-    augroup EN
+  augroup END
 
-      augroup fourspace_source
-        autocmd!
-        au BufNewFile,BufRead *.py set et ts=4 sts=4 sw=4
-      augroup END
+  augroup fourspace_source
+    autocmd!
+    au BufNewFile,BufRead *.py set et ts=4 sts=4 sw=4
+  augroup END
 
-      augroup cpp_source
-        autocmd!
-        au BufNewFile,BufRead *.cc set mps+=<:>
-        au BufNewFile,BufRead *.cpp set mps+=<:>
-        au BufNewFile,BufRead *.hpp set mps+=<:>
-      augroup END
+  augroup cpp_source
+    autocmd!
+    au BufNewFile,BufRead *.cc set mps+=<:>
+    au BufNewFile,BufRead *.cpp set mps+=<:>
+    au BufNewFile,BufRead *.hpp set mps+=<:>
+  augroup END
 
-      " TODO specify :set options by using a dictionary mapping here
-      let s:sources = [
-            \     'c', 'cpp', 'css', 'go', 'html', 'java', 'javascript', 'python',
-            \     'ruby', 'vim'
-            \ ]
+  " TODO specify :set options by using a dictionary mapping here
+  let s:sources = [
+        \     'c', 'cpp', 'css', 'go', 'html', 'java', 'javascript', 'python',
+        \     'ruby', 'vim'
+        \ ]
 
-      function! SourceFileAutoCommands()
-        if index(s:sources, &ft) != -1
-          " Highlight extra whitespace at the end of a line
-          hi ExtraWhitespace ctermbg=red guibg=red
-          match ExtraWhitespace /\s\+$/
+  function! SourceFileAutoCommands()
+    if index(s:sources, &ft) != -1
+      " Highlight extra whitespace at the end of a line
+      hi ExtraWhitespace ctermbg=red guibg=red
+      match ExtraWhitespace /\s\+$/
 
-          " Color column at 80 characters for soft limit, 100+ for hard limit
-          let columns = '80,'.join(range(100, 1000), ',')
-          execute 'set colorcolumn=' . columns
-          hi ColorColumn term=bold, cterm=bold, ctermbg=235
+      " Color column at 80 characters for soft limit, 100+ for hard limit
+      let columns = '80,'.join(range(100, 1000), ',')
+      execute 'set colorcolumn=' . columns
+      hi ColorColumn term=bold, cterm=bold, ctermbg=235
 
-          " Indent guides
-          hi IndentGuidesOdd  ctermbg=233
-          hi IndentGuidesEven ctermbg=234
+      " Indent guides
+      hi IndentGuidesOdd  ctermbg=233
+      hi IndentGuidesEven ctermbg=234
 
-          " Improve source code indenting
-          "   (0 - with unclosed parentheses, line up in front of open paren
-          set cindent
-          set cino='(0'
-        endif
-      endfunction
-
-      augroup all_source
-        autocmd!
-        au BufNewFile,BufRead * call SourceFileAutoCommands()
-      augroup END
+      " Improve source code indenting
+      "   (0 - with unclosed parentheses, line up in front of open paren
+      set cindent
+      set cino='(0'
     endif
+  endfunction
 
-    "---------------------------------------------------------------------
-    " Windows and tabs
-    "---------------------------------------------------------------------
-    set winminwidth=0   " Windows can have zero width
-    set winminheight=0  " Windows can have zero height
+  augroup all_source
+    autocmd!
+    au BufNewFile,BufRead * call SourceFileAutoCommands()
+  augroup END
+endif
 
-    " Window switching commands with leader+arrow keys
-    nmap <leader><Left>  :wincmd h<CR>
-    nmap <leader><Down>  :wincmd j<CR>
-    nmap <leader><Up>    :wincmd k<CR>
-    nmap <leader><Right> :wincmd l<CR>
+"---------------------------------------------------------------------
+" Windows and tabs
+"---------------------------------------------------------------------
+set winminwidth=0   " Windows can have zero width
+set winminheight=0  " Windows can have zero height
 
-    " Maximize window height
-    nmap <leader>_       :wincmd _<CR>
+" Window switching commands with leader+arrow keys
+nmap <leader><Left>  :wincmd h<CR>
+nmap <leader><Down>  :wincmd j<CR>
+nmap <leader><Up>    :wincmd k<CR>
+nmap <leader><Right> :wincmd l<CR>
 
-    " Maximize window width
-    nmap <leader>\|      :wincmd \|<CR>
+" Maximize window height
+nmap <leader>_       :wincmd _<CR>
 
-    " Tab commands with leader keys
-    nmap <leader>+       :tabn<CR>
-    nmap <leader>-       :tabc<CR>
-    nmap <leader>>       :tabn<CR>
-    nmap <leader><       :tabp<CR>
+" Maximize window width
+nmap <leader>\|      :wincmd \|<CR>
 
-    "---------------------------------------------------------------------
-    " Miscellanouse key mappings and such
-    "---------------------------------------------------------------------
-    autocmd FileType java set makeprg=javac\ $*\ %
+" Tab commands with leader keys
+nmap <leader>+       :tabn<CR>
+nmap <leader>-       :tabc<CR>
+nmap <leader>>       :tabn<CR>
+nmap <leader><       :tabp<CR>
 
-    " typing a semi-colon starts command (normal mode)
-    nnoremap ; :
+"---------------------------------------------------------------------
+" Miscellanouse key mappings and such
+"---------------------------------------------------------------------
+autocmd FileType java set makeprg=javac\ $*\ %
 
-    " Q reflows paragraph (normal and visual mode)
-    nnoremap Q gqap
-    vnoremap Q gq
+" typing a semi-colon starts command (normal mode)
+nnoremap ; :
 
-    " Tab toggles hidden characters (normal mode)
-    nnoremap <Tab> :set list!<CR>
+" Q reflows paragraph (normal and visual mode)
+nnoremap Q gqap
+vnoremap Q gq
 
-    " Reloads a file
-    nnoremap <C-E> :edit<CR>
+" Tab toggles hidden characters (normal mode)
+nnoremap <Tab> :set list!<CR>
 
-    " Remapping for next/previous file (normal mode)
-    nnoremap <C-N> :next<CR>
-    nnoremap <C-P> :prev<CR>
+" Reloads a file
+nnoremap <C-E> :edit<CR>
 
-    "---------------------------------------------------------------------
-    " Other plugin config
-    "---------------------------------------------------------------------
+" Remapping for next/previous file (normal mode)
+nnoremap <C-N> :next<CR>
+nnoremap <C-P> :prev<CR>
 
-    " netrw preview in vertical splits, equal size, wide list style
-    let g:netrw_preview = 1
-    let g:netrw_winsize = 0
-    let g:netrw_liststyle = 3
+"---------------------------------------------------------------------
+" Other plugin config
+"---------------------------------------------------------------------
 
-    " Session.vim configuration
-    let g:session_autoload='yes'
-    let g:session_autosave='yes'
-    let g:session_default_to_last=1
+" netrw preview in vertical splits, equal size, wide list style
+let g:netrw_preview = 1
+let g:netrw_winsize = 0
+let g:netrw_liststyle = 3
 
-    " Syntastic defaults to passive mode
-    let g:syntastic_mode_map = {'mode': 'passive'}
+" Session.vim configuration
+let g:session_autoload='yes'
+let g:session_autosave='yes'
+let g:session_default_to_last=1
 
-    " Indent guides
-    let g:indent_guides_auto_colors = 0
-    let g:indent_guides_guide_size = 1
-    let g:indent_guides_space_guides = 1
-    let g:indent_guides_enable_on_vim_startup = 1
-    let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
+" Syntastic defaults to passive mode
+let g:syntastic_mode_map = {'mode': 'passive'}
 
-    " YouCompleteMe configuration
-    let g:ycm_auto_trigger = 0
-    let g:ycm_extra_conf_globlist = ['~/*']
+" Indent guides
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_guide_size = 1
+let g:indent_guides_space_guides = 1
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
 
-    " CtrlP configuration
-    let g:ctrlp_custom_ignore = {
-          \   'dir':  '\v[\/](\.(git|hg|svn))|Godeps|target$',
-          \ }
+" YouCompleteMe configuration
+let g:ycm_auto_trigger = 0
+let g:ycm_extra_conf_globlist = ['~/*']
 
-    " Don't have a passthrough for vimpager
-    let vimpager_passthrough = 0
+" CtrlP configuration
+let g:ctrlp_custom_ignore = {
+      \   'dir':  '\v[\/](\.(git|hg|svn))|Godeps|target$',
+      \ }
+
+" Don't have a passthrough for vimpager
+let vimpager_passthrough = 0
