@@ -257,7 +257,6 @@ if has("autocmd")
     au BufNewFile,BufRead *.md set et ts=2 sts=2 sw=2 spell
     au BufNewFile,BufRead *.rake set et ts=2 sts=2 sw=2
     au BufNewFile,BufRead *.rb set et ts=2 sts=2 sw=2
-    au BufNewFile,BufRead *.rs set et ts=2 sts=2 sw=2
     au BufNewFile,BufRead *.scss set et ts=2 sts=2 sw=2
     au BufNewFile,BufRead *.swg set et ts=2 sts=2 sw=2 ft=swig
     au BufNewFile,BufRead *.swig set et ts=2 sts=2 sw=2 ft=swig
@@ -268,6 +267,7 @@ if has("autocmd")
   augroup fourspace_source
     autocmd!
     au BufNewFile,BufRead *.py set et ts=4 sts=4 sw=4
+    au BufNewFile,BufRead *.rs set et ts=4 sts=4 sw=4
   augroup END
 
   augroup cpp_source
