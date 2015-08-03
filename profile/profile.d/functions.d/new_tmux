@@ -8,9 +8,10 @@ if [[ -e "$GOPATH/src" ]]; then
   search_dirs+=("$GOPATH/src")
 fi
 
+local session_name=$(echo "${1##*/}" | sed 's/[^_a-zA-Z0-9-]/_/g')
 local dir=$(find ${search_dirs[@]} -path "*/$1" -type d -maxdepth 3 -print -quit)
 if [[ -n "${dir}" ]]; then
-  tmux new-session -ADs "${1##*/}" -c "${dir}"
+  tmux new-session -ADs "${session_name}" -c "${dir}"
 else
-  tmux new-session -ADs "${1##*/}" -c "$1"
+  tmux new-session -ADs "${session_name}" -c "$1"
 fi
