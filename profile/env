@@ -11,6 +11,10 @@ export GREP_OPTIONS='--color=always --exclude-dir=.git --exclude-dir=.svn --excl
 export PIP_DOWNLOAD_CACHE="${HOME}/.pip/cache"
 export SSH_ASKPASS='/usr/libexec/ssh-askpass'
 export JAVA_HOME='/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home'
+export GPG_TTY="$(tty)"
+export GNUPGHOME="$HOME/.gnupg"
+export LANG='en_US.UTF-8'
+export LC_ALL="${LANG}"
 
 # Add go bin to the path
 export GOPATH="${CODE_DIR}/go"
