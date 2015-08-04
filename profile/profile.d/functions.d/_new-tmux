@@ -1,0 +1,10 @@
+#compdef new-tmux
+#autoload
+
+__tmux_sessions() {
+  _existing_sessions=($(tmux list-sessions -F'#{session_name}'))
+  compadd "$@" -k _existing_sessions
+}
+
+_arguments \
+  '1:existing sessions:__tmux_sessions'
