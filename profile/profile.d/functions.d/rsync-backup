@@ -1,0 +1,30 @@
+#
+# TODO:
+# - See if I can check for hard-link support dynamically (and instead use --compare-dest
+#   or some other set of options).
+# - Investigate dir-merge to make it easier to manage files to back up.
+# - Allow backups to go into a single directory instead of backup.<YYYY-MM-DD> dirs
+#
+
+function main() {
+  local DST="$1";
+  shift
+
+  if [[ ! -e "${DST}" ]]; then
+    mkdir -p "${DST}"
+  fi
+
+  local ARGS
+  ARGS=($@)
+  ARGS+=(--archive --delete --include-from=$HOME/.rsync-backup-files)
+
+  local LAST_BACKUP="$(find "${DST}" -name 'backup.*' -type d | sort | tail -n1)"
+  if [[ -n "${LAST_BACKUP}" ]]; then
+    ARGS+=(--link-dest="${LAST_BACKUP}")
+  fi
+
+  local CURRENT_DATE="$(date '+%Y-%m-%d')"
+  rsync ${ARGS} / "${DST}/backup.${CURRENT_DATE}"
+}
+
+main "$@"
