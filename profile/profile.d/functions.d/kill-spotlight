@@ -1,0 +1,5 @@
+# Kills and disables Spotlight (usually in preference for another quick launcher)
+sudo mdutil -a -i off
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
+sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
+killall SystemUIServer
