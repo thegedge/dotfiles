@@ -280,7 +280,7 @@ if has("autocmd")
   " TODO specify :set options by using a dictionary mapping here
   let s:sources = [
         \     'c', 'cpp', 'css', 'go', 'html', 'java', 'javascript', 'python',
-        \     'ruby', 'vim'
+        \     'ruby', 'rust', 'vim'
         \ ]
 
   function! SourceFileAutoCommands()
