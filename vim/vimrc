@@ -98,7 +98,7 @@ set autoindent       " automatic indentation
 
 " Autocompletion when typing commands shows options above instead of inline
 set wildmenu
-set wildmode=longest:full
+set wildmode=full
 
 " Files to ignore when expanding wildcards
 set wildignore=*.swp,*.bak,*.pyc,*.class,*.o
