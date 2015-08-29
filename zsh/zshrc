@@ -30,6 +30,9 @@ zstyle ':completion:*' cache-path ~/.zcache
 # More glob features
 setopt EXTENDED_GLOB
 
+# Don't include commands prefixed with a space in history
+setopt HIST_IGNORE_SPACE
+
 # All non-alphanumeric characters are word separators
 export WORDCHARS=''
 
