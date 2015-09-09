@@ -1,4 +1,2 @@
 # Switch to some version of Ruby
-if ! chruby | grep -q '\*'; then
-  chruby ruby
-fi
+chruby ruby
