@@ -386,6 +386,7 @@ let g:ycm_auto_trigger = 0
 let g:ycm_extra_conf_globlist = ['~/*']
 
 " CtrlP configuration
+let g:ctrlp_match_window = 'max:25'
 let g:ctrlp_custom_ignore = {
       \   'dir':  '\v[\/](\.(git|hg|svn))|Godeps|target|_site|tmp$',
       \ }
