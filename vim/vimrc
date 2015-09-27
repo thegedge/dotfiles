@@ -16,24 +16,25 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " Snippets
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
 Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
+Plugin 'tomtom/tlib_vim'
 
 " Coloring
 Plugin 'flazz/vim-colorschemes'
 Plugin 'nathanaelkane/vim-indent-guides'
 
-" Plugins for syntax
+" Plugins for syntax and completion
 Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'ebfe/vim-racer'
+Plugin 'fatih/vim-go'
 Plugin 'peterhoeg/vim-qml'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-markdown'
 Plugin 'vim-scripts/gcov.vim'
 Plugin 'vim-scripts/swig-syntax'
 Plugin 'wting/rust.vim'
-Plugin 'fatih/vim-go'
 
 " Code/markup commenting shortcuts
 Plugin 'scrooloose/nerdcommenter'
@@ -51,7 +52,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 " Manipulate surroundings
 Plugin 'tpope/vim-surround'
-" Fuzzy matching
+" Fuzzy path matching
 Plugin 'kien/ctrlp.vim'
 
 call vundle#end()
@@ -144,6 +145,8 @@ endif
 if &term == "screen" || &term =~? "^xterm"
   set title
 endif
+
+set omnifunc=syntaxcomplete#Complete
 
 "---------------------------------------------------------------------
 " Status Line
@@ -360,6 +363,9 @@ nnoremap <C-P> :prev<CR>
 "---------------------------------------------------------------------
 " Other plugin config
 "---------------------------------------------------------------------
+
+" Sueprtab configuration
+let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 
 " netrw preview in vertical splits, equal size, wide list style
 let g:netrw_preview = 1
