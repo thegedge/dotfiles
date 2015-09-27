@@ -15,12 +15,18 @@ export GPG_TTY="$(tty)"
 export GNUPGHOME="$HOME/.gnupg"
 export LANG='en_US.UTF-8'
 export LC_ALL="${LANG}"
+export PATH="${HOME}/bin:${PATH}"
+
+# Racer needs to know where the Rust source is
+export RUST_SRC_PATH="${CODE_DIR}/other/rust/src"
 
 # Add go bin to the path
 export GOPATH="${CODE_DIR}/go"
-export PATH="${GOPATH}/bin:${PATH}"
+if [[ -d "${GOPATH}/bin" ]]; then
+  export PATH="${GOPATH}/bin:${PATH}"
+fi
 
 # If cabal is lying around, add its bin folder to the path
-if [[ -e "${HOME}/.cabal" ]]; then
+if [[ -d "${HOME}/.cabal/bin" ]]; then
   export PATH="${HOME}/.cabal/bin:${PATH}"
 fi
