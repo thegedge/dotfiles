@@ -30,3 +30,14 @@ fi
 if [[ -d "${HOME}/.cabal/bin" ]]; then
   export PATH="${HOME}/.cabal/bin:${PATH}"
 fi
+
+# If cargo is installed, use $HOME/.cargo as a staging ground
+if [[ -d "${HOME}/.cargo/bin" ]]; then
+  export PATH="${HOME}/.cargo/bin:${PATH}"
+fi
+
+if [[ -d "${HOME}/.multirust" ]]; then
+  for toolchain in "${HOME}/.multirust/toolchains"/*; do
+	export PATH="${toolchain}/cargo/bin:${PATH}"
+  done
+fi
