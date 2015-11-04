@@ -15,7 +15,7 @@ function install_links {
       local -a link_spec; link_spec=( "${(@s/ -> /)link_data}" )
       local link_src=$(eval "echo $(dirname ${link_file})/${link_spec[1]}")
       local link_dest=$(eval "echo ${link_spec[2]}")
-      if [[ FLAG_override_links -ne 0 || ( ! -e "${link_dest}" && -f "${link_src}" ) ]]; then
+      if [[ FLAG_override_links -ne 0 || ! -e "${link_dest}" ]]; then
         echo "\e[36m " ln -nfs "${link_src}" "${link_dest}" "\e[0m"
         ln -nfs "${link_src}" "${link_dest}"
       fi
