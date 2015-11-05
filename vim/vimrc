@@ -365,7 +365,7 @@ nnoremap <C-P> :prev<CR>
 "---------------------------------------------------------------------
 
 " Sueprtab configuration
-let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+let g:SuperTabDefaultCompletionType = "context"
 
 " netrw preview in vertical splits, equal size, wide list style
 let g:netrw_preview = 1
