@@ -1,0 +1,4 @@
+# Useful terraform environment variables
+export TF_LOG=1
+export TF_LOG_PATH=/tmp/terraform.log
+export TF_MODULE_DEPTH=-1
