@@ -10,3 +10,9 @@ for file in $(source_files "${DOTFILES_DIR}/profile/profile.d/if_command.d/"); d
     unisource "${file}"
   fi
 done
+
+for file in $(source_files "${DOTFILES_DIR}/profile/profile.d/if_not_command.d/"); do
+  if ! command -v "${file##*/}" &>/dev/null; then
+    unisource "${file}"
+  fi
+done
