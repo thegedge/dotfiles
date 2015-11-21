@@ -68,9 +68,12 @@ zstyle ':prezto:module:tmux:auto-start' remote 'yes'
 zstyle ':prezto:load' pmodule \
   'completion' \
   'directory' \
+  'environment' \
   'git' \
+  'gpg' \
   'history' \
   'prompt' \
+  'python' \
   'rsync' \
   'ruby' \
   'spectrum' \
