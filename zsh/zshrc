@@ -21,17 +21,6 @@ fi
 #----------------------------------------------------------------------
 : zsh options
 #----------------------------------------------------------------------
-# .. use a cache file
-zstyle ':completion:*' use-cache on
-
-# .. and then specify the cache file to use (not added to repo: separate file for each machine)
-zstyle ':completion:*' cache-path ~/.zcache
-
-# More glob features
-setopt EXTENDED_GLOB
-
-# Don't include commands prefixed with a space in history
-setopt HIST_IGNORE_SPACE
 
 # All non-alphanumeric characters are word separators
 export WORDCHARS=''
