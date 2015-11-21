@@ -29,6 +29,7 @@
 
 [log]
 	decorate = true
+	topo-order = true
 
 [push]
 	default = simple
