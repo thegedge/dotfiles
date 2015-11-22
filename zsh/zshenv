@@ -1,0 +1,2 @@
+# Speed up ZSH initialization by skipping global completion initialization
+skip_global_compinit=1

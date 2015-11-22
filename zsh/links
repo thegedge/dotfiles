@@ -1,4 +1,5 @@
-zshrc -> ~/.zshrc
-zlogin -> ~/.zlogin
 prezto -> ~/.zprezto
+zlogin -> ~/.zlogin
 zpreztorc -> ~/.zpreztorc
+zshenv -> ~/.zshenv
+zshrc -> ~/.zshrc
