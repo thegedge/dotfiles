@@ -15,12 +15,6 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 
-" Snippets
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'garbas/vim-snipmate'
-Plugin 'honza/vim-snippets'
-Plugin 'tomtom/tlib_vim'
-
 " Coloring
 Plugin 'flazz/vim-colorschemes'
 Plugin 'nathanaelkane/vim-indent-guides'
