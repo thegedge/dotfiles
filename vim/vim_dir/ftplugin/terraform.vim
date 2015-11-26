@@ -35,7 +35,7 @@ syn keyword tfKeywords     variable output
 syn keyword tfInterpOnlyKeywords  var path count self contained
 
 " SpecialChar
-syn match tfSpecialChar "\\[abcfnrtyv\\]" contained
+syn match tfSpecialChar "\\[abcfnrtyv\\'\"]" contained
 syn match tfSpecialChar "\\x[0-9a-fA-F]\{2}" contained
 syn match tfSpecialCharEsc "\[\+" contained
 
