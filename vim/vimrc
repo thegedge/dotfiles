@@ -255,8 +255,7 @@ if has("autocmd")
     au BufNewFile,BufRead *.rake set et ts=2 sts=2 sw=2
     au BufNewFile,BufRead *.rb set et ts=2 sts=2 sw=2
     au BufNewFile,BufRead *.scss set et ts=2 sts=2 sw=2
-    au BufNewFile,BufRead *.swg set et ts=2 sts=2 sw=2 ft=swig
-    au BufNewFile,BufRead *.swig set et ts=2 sts=2 sw=2 ft=swig
+    au BufNewFile,BufRead *.swg,*.swig set et ts=2 sts=2 sw=2 ft=swig
     au BufNewFile,BufRead *.tf set et ts=2 sts=2 sw=2 ft=terraform
     au BufNewFile,BufRead *.tfstate set ft=json
   augroup END
