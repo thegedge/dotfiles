@@ -62,7 +62,10 @@
 	rollback = reset --hard HEAD~1
 
 	# Close out a branch
-	completed = !"__f() { local foo=$(git rev-parse --abbrev-ref HEAD); git fetch ${1:-origin} && git checkout ${1-origin}/master && git branch -d \"${foo}\"; }; __f"
+	completed = !"__f() { local foo=$(git rev-parse --abbrev-ref HEAD); git fetch ${1:-origin} && git checkout ${1:-origin}/master && git branch -d \"${foo}\"; }; __f"
+
+	# Start a new branch based on the latest master
+	start = !"__f() { git fetch ${2:-origin} && git checkout -b $1 ${2:-origin}/${3:-master}; }; __f"
 
 	# Compact/graph log
 	clog = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
