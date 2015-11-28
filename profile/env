@@ -10,12 +10,10 @@ export PAGER='vimpager'
 export GREP_OPTIONS='--color=always --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.svn --binary-file=without-match'
 export PIP_DOWNLOAD_CACHE="${HOME}/.pip/cache"
 export SSH_ASKPASS='/usr/libexec/ssh-askpass'
-export JAVA_HOME='/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home'
 export GPG_TTY="$(tty)"
 export GNUPGHOME="$HOME/.gnupg"
 export LANG='en_US.UTF-8'
 export LC_ALL="${LANG}"
-export PATH="${HOME}/bin:${PATH}"
 
 # Racer needs to know where the Rust source is
 export RUST_SRC_PATH="${CODE_DIR}/other/rust/src"
@@ -41,3 +39,5 @@ if [[ -d "${HOME}/.multirust" ]]; then
 	export PATH="${toolchain}/cargo/bin:${PATH}"
   done
 fi
+
+export PATH="${HOME}/bin:${PATH}"
