@@ -3,16 +3,10 @@ alias ls='ls -G -h'
 alias less='less -R'
 alias aws='aws --color=on'
 
-alias f='find . -name'                  # simplified find for basic search in current directory
-alias df='df -h'                        # Human readable df by default
-alias fastssh='ssh -C -c blowfish'      # ssh that uses compression
-alias fastscp='scp -C -c blowfish'      # scp that uses compression
-alias top='top -o cpu -s 1'             # top defaults to ordering by CPU usage and 1 second delay
-alias sedi='sed -i ""'                  # in-place sed
-
-alias java14='/System/Library/Frameworks/JavaVM.framework/Versions/1.4/Commands/java'
-alias java15='/System/Library/Frameworks/JavaVM.framework/Versions/1.5/Commands/java'
-alias java16='/System/Library/Frameworks/JavaVM.framework/Versions/1.6/Commands/java'
+alias f='find . -name'         # simplified find for basic search in current directory
+alias df='df -h'               # Human readable df by default
+alias top='top -o cpu -s 1'    # top defaults to ordering by CPU usage and 1 second delay
+alias sedi='sed -i ""'         # in-place sed
 
 # Upgrade all Pip packages
 alias pipupgrade="pip freeze --local | grep -v '^-e' | cut -d = -f 1 | sed '/vboxapi/d' | xargs pip install -U"
