@@ -82,3 +82,6 @@
 
 	# Amend commit with everything
 	amend = commit --all --amend --no-edit
+
+	# Clone a GitHub repo
+	hub = !"__f() { git clone git@github.com:${1}.git $2; }; __f"
