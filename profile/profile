@@ -16,3 +16,6 @@ if [[ -e "${DOTFILES_DIR}/profile/profile.d" ]]; then
     unisource "${file}"
   done
 fi
+
+# Clean up path variable
+export PATH=$(echo "${PATH}" | awk -v RS=':' -v ORS=':' '!a[$1]++')
