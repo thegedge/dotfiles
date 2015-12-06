@@ -39,6 +39,7 @@
 	# Short command names
 	st = status
 	co = checkout
+	eb = enhanced-blame
 	continue = rebase --continue
 	abort = rebase --abort
 	head = rev-parse HEAD
