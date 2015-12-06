@@ -5,9 +5,10 @@
 	autosetuprebase = always
 
 [color]
+	branch = auto
 	diff = auto
 	status = auto
-	branch = auto
+	ui = false
 
 [credential]
 	helper = osxkeychain
