@@ -1,0 +1,12 @@
+#!/bin/zsh
+function main {
+  local pager="${GIT_PAGER:-$(git config --get core.pager || printf ${PAGER})}"
+  if [[ -z "${pager}" ]]; then
+    pager="${PAGER:-cat}"
+  fi
+
+  # TODO figure out whether or not to use color from config
+  git blame -p "$@" | awk -f "${DOTFILES_DIR}/bin/parse-git-blame.awk" | $pager
+}
+
+main "$@"
