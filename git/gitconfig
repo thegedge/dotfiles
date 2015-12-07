@@ -35,6 +35,9 @@
 [push]
 	default = simple
 
+[enhancedblame]
+	columnsize = 50
+
 [alias]
 	# Short command names
 	st = status
