@@ -5,8 +5,12 @@ function main {
     pager="${PAGER:-cat}"
   fi
 
+  local column_size="$(git config --get enhancedblame.columnsize)"
   # TODO figure out whether or not to use color from config
-  git blame -p "$@" | awk -f "${DOTFILES_DIR}/bin/parse-git-blame.awk" | $pager
+
+  git blame -p "$@" \
+    | COLUMN_SIZE="${column_size}" awk -f "${DOTFILES_DIR}/bin/parse-git-blame.awk" \
+    | $pager
 }
 
 main "$@"
