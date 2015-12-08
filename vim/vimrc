@@ -56,11 +56,13 @@ call vundle#end()
 "---------------------------------------------------------------------
 
 if &t_Co >= 256 || has("gui_running")
-  colorscheme molokai
-  set background=dark
+  let g:gruvbox_italic = 0
+  let g:gruvbox_contrast_dark = "hard"
+  let g:gruvbox_contrast_light = "hard"
+  let g:gruvbox_invert_tabline = 1
+  colorscheme gruvbox
 elseif &t_Co > 1
   colorscheme desert
-  set background=dark
 endif
 
 if &t_Co > 1
@@ -90,6 +92,7 @@ set noerrorbells     " no beeps
 set confirm          " confirm changes before closing buffers
 set splitright       " vertical splits on the right
 set autoindent       " automatic indentation
+set background=dark
 
 " Autocompletion when typing commands shows options above instead of inline
 set wildmenu
