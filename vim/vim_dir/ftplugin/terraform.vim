@@ -15,7 +15,7 @@ endif
 syn case match
 
 if !exists("main_syntax")
-  let main_syntax = 'tf'
+  let main_syntax = 'terraform'
 endif
 
 " Types
