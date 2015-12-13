@@ -344,6 +344,10 @@ nnoremap <C-E> :edit<CR>
 nnoremap <C-N> :next<CR>
 nnoremap <C-P> :prev<CR>
 
+" Simpify working with my vimrc
+nnoremap <leader>ev :edit $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
+
 "---------------------------------------------------------------------
 " Other plugin config
 "---------------------------------------------------------------------
