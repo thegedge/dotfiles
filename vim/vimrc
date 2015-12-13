@@ -242,27 +242,21 @@ if has("autocmd")
     au BufReadPost * call RestoreCursor()
   augroup END
 
-  augroup gcov_files
-    autocmd!
-    au BufNewFile,BufRead *.gcov set ft=gcov
-  augroup END
-
   augroup twospace_source
     autocmd!
     au BufNewFile,BufRead *.css set et ts=2 sts=2 sw=2
     au BufNewFile,BufRead *.go set noet ts=2 sts=2 sw=2
     au BufNewFile,BufRead *.hs set et ts=2 sts=2 sw=2
     au BufNewFile,BufRead *.html set et ts=2 sts=2 sw=2
-    au BufNewFile,BufRead *.i set et ts=2 sts=2 sw=2 ft=swig
+    au BufNewFile,BufRead *.i set et ts=2 sts=2 sw=2
     au BufNewFile,BufRead *.js set et ts=2 sts=2 sw=2
     au BufNewFile,BufRead *.md set et ts=2 sts=2 sw=2 spell
     au BufNewFile,BufRead *.rake set et ts=2 sts=2 sw=2
     au BufNewFile,BufRead *.rb set et ts=2 sts=2 sw=2
     au BufNewFile,BufRead .vimrc set et ts=2 sts=2 sw=2
     au BufNewFile,BufRead *.scss set et ts=2 sts=2 sw=2
-    au BufNewFile,BufRead *.swg,*.swig set et ts=2 sts=2 sw=2 ft=swig
-    au BufNewFile,BufRead *.tf set et ts=2 sts=2 sw=2 ft=terraform
-    au BufNewFile,BufRead *.tfstate set ft=json
+    au BufNewFile,BufRead *.swg,*.swig set et ts=2 sts=2 sw=2
+    au BufNewFile,BufRead *.tf set et ts=2 sts=2 sw=2
   augroup END
 
   augroup fourspace_source
@@ -314,20 +308,17 @@ endif
 set winminwidth=0   " Windows can have zero width
 set winminheight=0  " Windows can have zero height
 
-" Window switching commands with leader+arrow keys
+" Leader-based window commands
 nmap <leader><Left>  :wincmd h<CR>
 nmap <leader><Down>  :wincmd j<CR>
 nmap <leader><Up>    :wincmd k<CR>
 nmap <leader><Right> :wincmd l<CR>
-
-" Maximize window height
 nmap <leader>_       :wincmd _<CR>
-
-" Maximize window width
 nmap <leader>\|      :wincmd \|<CR>
+nmap <leader>=       :wincmd =<CR>
 
 " Tab commands with leader keys
-nmap <leader>+       :tabn<CR>
+nmap <leader>+       :tabnew<CR>
 nmap <leader>-       :tabc<CR>
 nmap <leader>>       :tabn<CR>
 nmap <leader><       :tabp<CR>
@@ -335,7 +326,6 @@ nmap <leader><       :tabp<CR>
 "---------------------------------------------------------------------
 " Miscellanouse key mappings and such
 "---------------------------------------------------------------------
-autocmd FileType java set makeprg=javac\ $*\ %
 
 " typing a semi-colon starts command (normal mode)
 nnoremap ; :
