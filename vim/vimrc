@@ -242,41 +242,11 @@ if has("autocmd")
     au BufReadPost * call RestoreCursor()
   augroup END
 
-  augroup twospace_source
-    autocmd!
-    au BufNewFile,BufRead *.css set et ts=2 sts=2 sw=2
-    au BufNewFile,BufRead *.go set noet ts=2 sts=2 sw=2
-    au BufNewFile,BufRead *.hs set et ts=2 sts=2 sw=2
-    au BufNewFile,BufRead *.html set et ts=2 sts=2 sw=2
-    au BufNewFile,BufRead *.i set et ts=2 sts=2 sw=2
-    au BufNewFile,BufRead *.js set et ts=2 sts=2 sw=2
-    au BufNewFile,BufRead *.md set et ts=2 sts=2 sw=2 spell
-    au BufNewFile,BufRead *.rake set et ts=2 sts=2 sw=2
-    au BufNewFile,BufRead *.rb set et ts=2 sts=2 sw=2
-    au BufNewFile,BufRead .vimrc set et ts=2 sts=2 sw=2
-    au BufNewFile,BufRead *.scss set et ts=2 sts=2 sw=2
-    au BufNewFile,BufRead *.swg,*.swig set et ts=2 sts=2 sw=2
-    au BufNewFile,BufRead *.tf set et ts=2 sts=2 sw=2
-  augroup END
-
-  augroup fourspace_source
-    autocmd!
-    au BufNewFile,BufRead *.py set et ts=4 sts=4 sw=4
-    au BufNewFile,BufRead *.rs set et ts=4 sts=4 sw=4
-  augroup END
-
-  augroup cpp_source
-    autocmd!
-    au BufNewFile,BufRead *.cc set mps+=<:>
-    au BufNewFile,BufRead *.cpp set mps+=<:>
-    au BufNewFile,BufRead *.hpp set mps+=<:>
-  augroup END
-
   " TODO specify :set options by using a dictionary mapping here
   let s:sources = [
-        \     'c', 'cpp', 'css', 'go', 'html', 'java', 'javascript', 'python',
-        \     'ruby', 'rust', 'vim'
-        \ ]
+  \   'c', 'cpp', 'css', 'go', 'html', 'java', 'javascript', 'python',
+  \   'ruby', 'rust', 'terraform', 'vim'
+  \ ]
 
   function! SourceFileAutoCommands()
     if index(s:sources, &ft) != -1
@@ -287,7 +257,6 @@ if has("autocmd")
       " Color column at 80 characters for soft limit, 100+ for hard limit
       let columns = '80,'.join(range(100, 1000), ',')
       execute 'set colorcolumn=' . columns
-      hi ColorColumn term=bold, cterm=bold, ctermbg=235
 
       " Improve source code indenting
       "   (0 - with unclosed parentheses, line up in front of open paren

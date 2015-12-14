@@ -1,3 +1,8 @@
+set expandtab
+set shiftwidth=2
+set tabstop=2
+set softtabstop=2
+
 "
 " tf files, forked from the tf.vim syntax file
 "
