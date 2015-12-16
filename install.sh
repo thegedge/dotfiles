@@ -13,12 +13,18 @@ function install_links {
   for link_file in $(find "${FLAG_dotfiles_dir}" -name links); do
     cat "${link_file}" | while read link_data; do
       local -a link_spec; link_spec=( "${(@s/ -> /)link_data}" )
-      local link_src=$(eval "echo $(dirname ${link_file})/${link_spec[1]}")
+      local -a link_srcs; link_srcs=( $(eval "echo $(dirname ${link_file})/${link_spec[1]}") )
       local link_dest=$(eval "echo ${link_spec[2]}")
-      if [[ FLAG_override_links -ne 0 || ! -e "${link_dest}" ]]; then
-        echo "\e[36m " ln -nfs "${link_src}" "${link_dest}" "\e[0m"
-        ln -nfs "${link_src}" "${link_dest}"
+
+      local link_flags='-ns'
+      if [[ FLAG_override_links -ne 0 ]]; then
+        link_flags="${link_flags} -f"
       fi
+
+      for link_src in "${link_srcs[@]}"; do
+        echo "\e[36m " ln ${link_flags} "${link_src}" "${link_dest}" "\e[0m"
+        ln ${link_flags} "${link_src}" "${link_dest}" &>/dev/null
+      done
     done
   done
 }

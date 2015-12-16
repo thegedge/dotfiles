@@ -1,7 +1,13 @@
+#!/bin/zsh
 #-----------------------------------------------------------------------------
 # Generates a PNG for a given LaTeX math formula
 #-----------------------------------------------------------------------------
-local fname=${3:-formula.png}
-local url=$(python -c 'import urllib,sys;print urllib.quote(sys.argv[1])' "$1")
-url="http://latex.codecogs.com/png.latex?\\dpi\{${2:-150}\}&$url"
-curl "$url" --silent -o "${fname%.png}.png"
+function main {
+  local url=$(python -c "import urllib; print urllib.quote('$1')")
+  local dpi="${2:-150}"
+  local fname="${3:-formula.png}"
+  url="http://latex.codecogs.com/png.latex?\\dpi\{${dpi}\}&${url}"
+  curl "${url}" --silent -o "${fname%.png}.png"
+}
+
+main "$@"

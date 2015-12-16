@@ -1,4 +1,9 @@
+#!/bin/zsh
 #-----------------------------------------------------------------------------
 # List the contents of a module
 #-----------------------------------------------------------------------------
-python -c "import $1; print str.join('\n', dir($1))"
+function main {
+  python -c "import $1; print str.join('\n', sorted(dir($1)))"
+}
+
+main "$@"

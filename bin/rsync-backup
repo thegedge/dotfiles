@@ -1,3 +1,4 @@
+#!/bin/zsh
 #
 # TODO:
 # - See if I can check for hard-link support dynamically (and instead use --compare-dest
