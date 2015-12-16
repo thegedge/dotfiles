@@ -1,5 +1,5 @@
 #-----------------------------------------------------------------------------
-# Read a value from a second in an INI configuration file
+# Read a value from a section in an INI configuration file
 #-----------------------------------------------------------------------------
 awk -F'\\s*=\\s*' -v section="[$2]" -v key="$3"  '
   $0 == section { found_section=1; next }

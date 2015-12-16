@@ -1,3 +1,4 @@
+#!/bin/zsh
 #-----------------------------------------------------------------------------
 # Total line count for source files of a given type
 #-----------------------------------------------------------------------------
@@ -19,7 +20,11 @@ function _count_lines {
 	fi
 }
 
-local TYPES
-TYPES=$(echo "$@" | sed 's/ /" -or -name "*./g')
-TYPES="-name \"*.${TYPES}\""
-eval "find ${PWD} ${TYPES}" | _count_lines
+function main {
+  local TYPES
+  TYPES=$(echo "$@" | sed 's/ /" -or -name "*./g')
+  TYPES="-name \"*.${TYPES}\""
+  eval "find ${PWD} ${TYPES}" | _count_lines
+}
+
+main "$@"
