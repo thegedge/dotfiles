@@ -38,6 +38,9 @@
 [enhancedblame]
 	columnsize = 50
 
+[status]
+	submodulesummary = true
+
 [alias]
 	# Short command names
 	st = status
