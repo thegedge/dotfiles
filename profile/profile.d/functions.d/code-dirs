@@ -1,5 +1,3 @@
-set -o pipefail
-
 typeset -a search_dirs
 
 if [[ -e "${CODE_DIR}" ]]; then
