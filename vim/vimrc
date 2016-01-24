@@ -48,6 +48,8 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 " Fuzzy path matching
 Plugin 'kien/ctrlp.vim'
+" Fuzzy completion while typing
+Plugin 'Valloric/YouCompleteMe'
 
 call vundle#end()
 
@@ -144,7 +146,7 @@ if &term == "screen" || &term =~? "^xterm"
   set title
 endif
 
-set omnifunc=syntaxcomplete#Complete
+"set omnifunc=syntaxcomplete#Complete
 
 "---------------------------------------------------------------------
 " Status Line
@@ -209,7 +211,7 @@ set hlsearch       " highlight search terms
 set magic          " how backslashes are interpreted in searches
 
 " Remove highlight from searches (normal mode)
-nmap <silent> <leader>/ :nohlsearch<CR>
+nmap <Silent> <Leader>/ :nohlsearch<CR>
 
 " n/N will move to the next/previous result and center line on screen
 nnoremap n nzz
@@ -222,7 +224,7 @@ set foldmethod=indent     " folding on indentation
 set foldlevel=100         " 'disable' folding at first
 
 " Space increases fold level, if possible, otherwise behaves as normal
-nnoremap <silent> <Leader><Space> @=(foldlevel('.') ? 'za' : "\<Space>")<CR>
+nnoremap <Silent> <Leader><Space> @=(foldlevel('.') ? 'za' : "\<Space>")<CR>
 nnoremap + zr    " + reduces fold level across buffer
 nnoremap - zm    " - increases fold level across buffer
 
@@ -278,19 +280,19 @@ set winminwidth=0   " Windows can have zero width
 set winminheight=0  " Windows can have zero height
 
 " Leader-based window commands
-nmap <leader><Left>  :wincmd h<CR>
-nmap <leader><Down>  :wincmd j<CR>
-nmap <leader><Up>    :wincmd k<CR>
-nmap <leader><Right> :wincmd l<CR>
-nmap <leader>_       :wincmd _<CR>
-nmap <leader>\|      :wincmd \|<CR>
-nmap <leader>=       :wincmd =<CR>
+nmap <Leader><Left>  :wincmd h<CR>
+nmap <Leader><Down>  :wincmd j<CR>
+nmap <Leader><Up>    :wincmd k<CR>
+nmap <Leader><Right> :wincmd l<CR>
+nmap <Leader>_       :wincmd _<CR>
+nmap <Leader>\|      :wincmd \|<CR>
+nmap <Leader>=       :wincmd =<CR>
 
 " Tab commands with leader keys
-nmap <leader>+       :tabnew<CR>
-nmap <leader>-       :tabc<CR>
-nmap <leader>>       :tabn<CR>
-nmap <leader><       :tabp<CR>
+nmap <Leader>+       :tabnew<CR>
+nmap <Leader>-       :tabc<CR>
+nmap <Leader>>       :tabn<CR>
+nmap <Leader><       :tabp<CR>
 
 "---------------------------------------------------------------------
 " Miscellanouse key mappings and such
@@ -314,8 +316,8 @@ nnoremap <C-N> :next<CR>
 nnoremap <C-P> :prev<CR>
 
 " Simpify working with my vimrc
-nnoremap <leader>ev :edit $MYVIMRC<CR>
-nnoremap <leader>sv :source $MYVIMRC<CR>
+nnoremap <Leader>ev :edit $MYVIMRC<CR>
+nnoremap <Leader>sv :source $MYVIMRC<CR>
 
 "---------------------------------------------------------------------
 " Other plugin config
