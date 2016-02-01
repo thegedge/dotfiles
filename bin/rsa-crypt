@@ -1,0 +1,19 @@
+#!/bin/zsh
+main() {
+  local identity="${2:-id_rsa}"
+  case "$1" in
+  encrypt)
+    openssl rsautl -encrypt -pubin -inkey "$HOME/.ssh/${identity}.pem.pub" -ssl
+    ;;
+  decrypt)
+    openssl rsautl -decrypt -inkey "${HOME}/.ssh/${identity}"
+    ;;
+  *)
+    echo "Usage: cat <file> | $0 [encrypt|decrypt]"
+    exit 1
+    ;;
+  esac
+}
+
+unsetopt FUNCTION_ARGZERO
+main "$@"
