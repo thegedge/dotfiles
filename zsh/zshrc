@@ -28,6 +28,10 @@ export WORDCHARS=''
 #----------------------------------------------------------------------
 : Prezto - config framework for ZSH
 #----------------------------------------------------------------------
+
+# Necessary to add before below so that we find custom prompt themes
+fpath+=($DOTFILES_DIR/zsh/functions)
+
 PREZTO_DIR="${ZDOTDIR:-$HOME}/.zprezto"
 if [[ -s "${PREZTO_DIR}/init.zsh" ]]; then
   source "${PREZTO_DIR}/init.zsh"
