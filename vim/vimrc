@@ -50,6 +50,8 @@ Plugin 'tpope/vim-surround'
 Plugin 'kien/ctrlp.vim'
 " Fuzzy completion while typing
 Plugin 'Valloric/YouCompleteMe'
+" Silver searcher (ag) integration
+Plugin 'rking/ag.vim'
 
 call vundle#end()
 
