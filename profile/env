@@ -18,7 +18,7 @@ export LC_ALL="${LANG}"
 # Racer needs to know where the Rust source is
 export RUST_SRC_PATH="${CODE_DIR}/github.com/rust-lang/rust/src"
 
-# Add go to the path
+# Go-style layout right at $HOME
 export GOPATH="${HOME}"
 
 # If cabal is lying around, add its bin folder to the path

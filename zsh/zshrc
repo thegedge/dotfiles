@@ -45,6 +45,10 @@ if [[ -e "${DOTFILES_DIR}/zsh/key-bindings.zsh" ]]; then
   source "${DOTFILES_DIR}/zsh/key-bindings.zsh"
 fi
 
+# Change to a code directory
+function _code_cd() { cd "$(code-dirs ${1%.code})" }
+alias -s code=_code_cd
+
 #----------------------------------------------------------------------
 # Disable tracing
 #----------------------------------------------------------------------
