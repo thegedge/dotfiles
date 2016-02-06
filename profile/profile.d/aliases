@@ -13,7 +13,3 @@ alias pipupgrade="pip freeze --local | grep -v '^-e' | cut -d = -f 1 | sed '/vbo
 
 # Update my dotfiles
 alias updot="git -C ${HOME}/dotfiles --no-pager incoming && git -C ${HOME}/dotfiles rebase origin/master && git -C ${HOME}/dotfiles subup"
-
-# Change to a code directory
-function _code_cd() { cd "$(code-dirs ${1%.code})" }
-alias -s code=_code_cd
