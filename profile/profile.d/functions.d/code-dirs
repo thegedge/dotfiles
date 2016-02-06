@@ -1,11 +1,7 @@
-typeset -a search_dirs
+local -a search_dirs
 
 if [[ -e "${CODE_DIR}" ]]; then
   search_dirs+=("${CODE_DIR}")
 fi
 
-if [[ -e "${GOPATH}/src" ]]; then
-  search_dirs+=("${GOPATH}/src")
-fi
-
-find ${search_dirs[@]} -path "*/$1" -type d -maxdepth 3 -print -quit
+find ${search_dirs[@]} -path "*/$1" -type d -mindepth 3 -maxdepth 4 -print -quit
