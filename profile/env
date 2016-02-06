@@ -16,13 +16,10 @@ export LANG='en_US.UTF-8'
 export LC_ALL="${LANG}"
 
 # Racer needs to know where the Rust source is
-export RUST_SRC_PATH="${CODE_DIR}/other/rust/src"
+export RUST_SRC_PATH="${CODE_DIR}/github.com/rust-lang/rust/src"
 
-# Add go bin to the path
-export GOPATH="${CODE_DIR}/go"
-if [[ -d "${GOPATH}/bin" ]]; then
-  export PATH="${GOPATH}/bin:${PATH}"
-fi
+# Add go to the path
+export GOPATH="${HOME}"
 
 # If cabal is lying around, add its bin folder to the path
 if [[ -d "${HOME}/.cabal/bin" ]]; then
