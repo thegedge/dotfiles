@@ -1,0 +1,33 @@
+#!/bin/bash
+main() {
+  if [[ -z "${HOMEBREW_GITHUB_API_TOKEN}" ]]; then
+    echo 'You must set $HOMEBREW_GITHUB_API_TOKEN first'
+    exit 1
+  fi
+
+  local select
+  local jqq='.items[].full_name'
+  while [[ "$1" =~ '--' ]]; do
+    case "$1" in
+      --select)
+        select='yes'
+        ;;
+      --descriptions)
+        jqq='.items[] | select(.description != "") | "\(.full_name): \(.description)"'
+        ;;
+    esac
+    shift
+  done
+
+  local query=$(python -c "import urllib; print urllib.quote_plus('$@')")
+  local data="$(curl -su "$(whoami):${HOMEBREW_GITHUB_API_TOKEN}" "https://api.github.com/search/repositories?q=${query}" | jq -r "${jqq}")";
+
+  if [[ "${select}" == 'yes' ]]; then
+    IFS=$'\n'
+    select data in ${data}; do data="${data%%:*}"; break; done
+  fi
+
+  echo "${data}"
+}
+
+main "$@"
