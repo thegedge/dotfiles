@@ -92,4 +92,4 @@
 	amend = commit --all --amend --no-edit
 
 	# Clone a GitHub repo
-	hub = !"__f() { git clone git@github.com:$1.git ${CODE_DIR}/github.com/$1; }; __f"
+	hub = !"__f() { unset GIT_WORK_TREE; git clone -- git@github.com:$1.git ${CODE_DIR}/github.com/$1; }; __f"
