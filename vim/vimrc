@@ -33,7 +33,7 @@ Plugin 'wting/rust.vim'
 " Code/markup commenting shortcuts
 Plugin 'scrooloose/nerdcommenter'
 " Magical tabbing
-Plugin 'ervandew/supertab'
+"Plugin 'ervandew/supertab'
 " Table-based manipulations
 Plugin 'godlygeek/tabular'
 " Text object for function arguments (a, and i,)
@@ -348,7 +348,7 @@ let g:indentLine_showFirstIndentLevel = 1
 let g:indentLine_fileTypeExclude = ['help', 'man']
 
 " YouCompleteMe configuration
-let g:ycm_auto_trigger = 0
+let g:ycm_auto_trigger = 1
 let g:ycm_extra_conf_globlist = ['~/*']
 
 " CtrlP configuration
