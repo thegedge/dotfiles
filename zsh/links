@@ -1,5 +1,6 @@
 prezto -> ~/.zprezto
 zlogin -> ~/.zlogin
+zlogout -> ~/.zlogout
 zpreztorc -> ~/.zpreztorc
 zshenv -> ~/.zshenv
 zshrc -> ~/.zshrc
