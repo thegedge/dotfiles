@@ -1,0 +1,4 @@
+# If inside tmux and closing off last shell in a session, switch to another
+if [[ -n "${TMUX}" && $(tmux list-sessions | wc -l) -gt 0 ]]; then
+  tmux switch-client -n
+fi
