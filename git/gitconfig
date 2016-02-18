@@ -10,23 +10,26 @@
 	status = auto
 	ui = false
 
-[credential]
-	helper = osxkeychain
-
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore_global
 	autocrlf = false
 
+[credential]
+	helper = osxkeychain
+
 [diff]
 	tool = vimdiff
 	renames = copies
 
-[fetch]
-	prune = true
-
 [difftool]
 	prompt = false
+
+[enhancedblame]
+	columnsize = 50
+
+[fetch]
+	prune = true
 
 [log]
 	decorate = true
@@ -35,11 +38,11 @@
 [push]
 	default = simple
 
-[enhancedblame]
-	columnsize = 50
-
 [status]
 	submodulesummary = true
+
+[transfer] 
+	fsckobjects = true 
 
 [alias]
 	# Short command names
