@@ -2,7 +2,7 @@
 #autoload
 
 __tmux_sessions() {
-  _existing_sessions=($(tmux list-sessions -F'#{session_name}'))
+  _existing_sessions=($(tmux list-sessions -F'#{session_name}' 2>/dev/null))
   compadd "$@" -k _existing_sessions
 }
 
