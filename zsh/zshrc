@@ -64,8 +64,3 @@ if [[ -n "${TRACING}" ]]; then
   # Check out the startup log
   $PAGER /tmp/startlog.$$
 fi
-
-# added by dev
-source /usr/local/share/chruby/chruby.sh
-source /usr/local/share/chruby/auto.sh
-RUBIES+=(/usr/local/Cellar/shopify-ruby/*)
