@@ -30,6 +30,7 @@ Plugin 'vim-scripts/gcov.vim'
 Plugin 'vim-scripts/swig-syntax'
 Plugin 'wting/rust.vim'
 Plugin 'powerman/vim-plugin-AnsiEsc'
+Plugin 'hashivim/vim-terraform'
 
 " Code/markup commenting shortcuts
 Plugin 'scrooloose/nerdcommenter'
