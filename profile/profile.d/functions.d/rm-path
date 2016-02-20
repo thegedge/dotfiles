@@ -1,0 +1,1 @@
+printf "${PATH}" | awk -v RS=: '{print}' | grep -v "$1" | awk -v ORS=: '{print}' | sed 's/:$//'
