@@ -1,3 +1,8 @@
+# Custom local profile that should exist outside of the repo
+if [[ -e "${HOME}/.profile.local" ]]; then
+  source "${HOME}/.profile.local"
+fi
+
 # Load library functions
 source "${DOTFILES_DIR}/lib/unisource"
 
@@ -6,13 +11,8 @@ if [[ -e "${DOTFILES_DIR}/profile/env" ]]; then
   source "${DOTFILES_DIR}/profile/env"
 fi
 
-# Custom local profile that should exist outside of the repo
-if [[ -e "${HOME}/.profile.local" ]]; then
-  source "${HOME}/.profile.local"
-fi
-
 if [[ -e "${DOTFILES_DIR}/profile/profile.d" ]]; then
-  for file in $(find -s "${DOTFILES_DIR}/profile/profile.d" -depth 1 -type f -not -name '*.zwc'); do
+  for file in $(find "${DOTFILES_DIR}/profile/profile.d" -mindepth 1 -maxdepth 1 -type f -not -name '*.zwc' | sort); do
     unisource "${file}"
   done
 fi

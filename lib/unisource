@@ -4,7 +4,7 @@
 
 # Get source-able files in a directory
 function source_files {
-  find -s "$1" -depth 1 -type f | sed 's/\.zwc$//g' | uniq
+  find "$1" -mindepth 1 -maxdepth 1 -type f | sort | sed 's/\.zwc$//g' | uniq
 }
 
 # Universal (i.e., cross-shell compatible) source function
