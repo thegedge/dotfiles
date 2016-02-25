@@ -33,11 +33,10 @@ Plugin 'powerman/vim-plugin-AnsiEsc'
 Plugin 'hashivim/vim-terraform'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-bundler'
+Plugin 'kchmck/vim-coffee-script'
 
 " Code/markup commenting shortcuts
 Plugin 'scrooloose/nerdcommenter'
-" Magical tabbing
-"Plugin 'ervandew/supertab'
 " Table-based manipulations
 Plugin 'godlygeek/tabular'
 " Text object for function arguments (a, and i,)
@@ -56,6 +55,8 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'Valloric/YouCompleteMe'
 " Silver searcher (ag) integration
 Plugin 'rking/ag.vim'
+" Improved matching for CtrlP
+Plugin 'nixprime/cpsm'
 
 call vundle#end()
 
@@ -357,9 +358,12 @@ let g:ycm_complete_in_comments = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_key_list_select_completion = ['<TAB>']
+let g:ycm_key_list_previous_completion = ['<S-TAB>']
 
 " CtrlP configuration
 let g:ctrlp_match_window = 'max:25'
+let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
 let g:ctrlp_custom_ignore = {
       \   'dir':  '\v[\/](\.(git|hg|svn))|Godeps|target|_site|tmp|vendor$',
       \ }
