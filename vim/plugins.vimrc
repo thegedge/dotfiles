@@ -31,48 +31,50 @@ Plug 'kchmck/vim-coffee-script',    { 'for': 'coffee' }
 
 Plug 'powerman/vim-plugin-AnsiEsc', { 'on': 'AnsiEsc' }
 
-" Code/markup commenting shortcuts
-Plug 'scrooloose/nerdcommenter'
-
-" Table-based manipulations
-Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
-
-" Text object for function arguments (a, and i,)
-Plug 'PeterRincker/vim-argumentative'
-
 " Additional character info (e.g., html entity, unicode name)
 Plug 'tpope/vim-characterize'
 
-" Git support
-Plug 'tpope/vim-fugitive'
+if !exists("vimpager")
+  " Code/markup commenting shortcuts
+  Plug 'scrooloose/nerdcommenter'
 
-" Repeat plugin commands with .
-Plug 'tpope/vim-repeat'
+  " Table-based manipulations
+  Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
 
-" Manipulate surroundings
-Plug 'tpope/vim-surround'
+  " Text object for function arguments (a, and i,)
+  Plug 'PeterRincker/vim-argumentative'
 
-" Fuzzy path matching, with improved path-based matching given by cpsm
-function! BuildCpsm(info)
-  if a:info.status == 'installed' || a:info.force
-    !./install.sh
-  endif
-endfunction
+  " Git support
+  Plug 'tpope/vim-fugitive'
 
-Plug 'kien/ctrlp.vim'
-  \ | Plug 'nixprime/cpsm', { 'do': function('BuildCpsm') }
+  " Repeat plugin commands with .
+  Plug 'tpope/vim-repeat'
 
-" Fuzzy completion while typing
-function! BuildYCM(info)
-  if a:info.status == 'installed' || a:info.force
-    !./install.py --clang-completer --gocode-completer --tern-completer --racer-completer
-  endif
-endfunction
+  " Manipulate surroundings
+  Plug 'tpope/vim-surround'
 
-Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+  " Fuzzy path matching, with improved path-based matching given by cpsm
+  function! BuildCpsm(info)
+    if a:info.status == 'installed' || a:info.force
+      !./install.sh
+    endif
+  endfunction
 
-" Silver searcher (ag) integration
-Plug 'rking/ag.vim', { 'on': 'Ag' }
+  Plug 'kien/ctrlp.vim'
+    \ | Plug 'nixprime/cpsm', { 'do': function('BuildCpsm') }
+
+  " Fuzzy completion while typing
+  function! BuildYCM(info)
+    if a:info.status == 'installed' || a:info.force
+      !./install.py --clang-completer --gocode-completer --tern-completer --racer-completer
+    endif
+  endfunction
+
+  Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+
+  " Silver searcher (ag) integration
+  Plug 'rking/ag.vim', { 'on': 'Ag' }
+endif
 
 if installed_vim_plug ==1
   echo "Installing plugins..."
