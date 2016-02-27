@@ -173,7 +173,7 @@ set nobackup
 set noswapfile
 set directory=~/.vim/tmp,/var/tmp,/tmp
 
-" Remember cursor position for files
+" Remember more stuff
 set viminfo='10,\"100,:20,%,n~/.vim/.viminfo
 
 " Set title in terminal window
@@ -185,8 +185,6 @@ endif
 if &term == "screen" || &term =~? "^xterm"
   set title
 endif
-
-"set omnifunc=syntaxcomplete#Complete
 
 "---------------------------------------------------------------------
 " Status Line
@@ -268,22 +266,14 @@ nnoremap <silent> <Leader><Space> @=(foldlevel('.') ? 'za' : "\<Space>")<CR>
 nnoremap + zr    " + reduces fold level across buffer
 nnoremap - zm    " - increases fold level across buffer
 
+" Restore cursor, folds, etc
+autocmd BufWinLeave * if expand("%") != "" | mkview | endif
+autocmd BufWinEnter * if expand("%") != "" | loadview | endif
+
 "---------------------------------------------------------------------
 " Filetype specifics
 "---------------------------------------------------------------------
 if has("autocmd")
-  function! RestoreCursor()
-    if line("'\"") <= line("$")
-      normal! g`"
-      return 1
-    endif
-  endfunction
-
-  augroup restore_cursor
-    autocmd!
-    au BufReadPost * call RestoreCursor()
-  augroup END
-
   " TODO specify :set options by using a dictionary mapping here
   let s:sources = [
   \   'c', 'cpp', 'css', 'go', 'html', 'java', 'javascript', 'python',
