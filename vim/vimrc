@@ -6,92 +6,12 @@ if !exists("vimpager")
   let mapleader=" "  " space bar for leader
 endif
 
-"---------------------------------------------------------------------
-" Plugins
-"---------------------------------------------------------------------
-let installed_vim_plug=0
-if !filereadable(expand('~/.vim/autoload/plug.vim'))
-  echo "Installing vim-plug.."
-  echo ""
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  let installed_vim_plug=1
-endif
-
-filetype off
-call plug#begin('~/.vim/plugged')
-
-" Coloring
-Plug 'flazz/vim-colorschemes'
-Plug 'Yggdroot/indentLine'
-
-" Plugins for syntax and completion
-Plug 'cakebaker/scss-syntax.vim',   { 'for': 'scss' }
-Plug 'ebfe/vim-racer',              { 'for': 'rust' }
-Plug 'wting/rust.vim',              { 'for': 'rust' }
-Plug 'fatih/vim-go',                { 'for': 'go' }
-Plug 'peterhoeg/vim-qml',           { 'for': 'qml' }
-"Plug 'scrooloose/syntastic'
-Plug 'tpope/vim-markdown',          { 'for': 'markdown' }
-Plug 'vim-scripts/gcov.vim',        { 'for': 'gcov' }
-Plug 'vim-scripts/swig-syntax',     { 'for': 'swig' }
-Plug 'hashivim/vim-terraform',      { 'for': 'terraform' }
-Plug 'tpope/vim-rails',             { 'for': 'ruby' }
-Plug 'tpope/vim-bundler',           { 'for': 'ruby' }
-Plug 'kchmck/vim-coffee-script',    { 'for': 'coffee' }
-
-Plug 'powerman/vim-plugin-AnsiEsc', { 'on': 'AnsiEsc' }
-
-" Code/markup commenting shortcuts
-Plug 'scrooloose/nerdcommenter'
-
-" Table-based manipulations
-Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
-
-" Text object for function arguments (a, and i,)
-Plug 'PeterRincker/vim-argumentative'
-
-" Additional character info (e.g., html entity, unicode name)
-Plug 'tpope/vim-characterize'
-
-" Git support
-Plug 'tpope/vim-fugitive'
-
-" Repeat plugin commands with .
-Plug 'tpope/vim-repeat'
-
-" Manipulate surroundings
-Plug 'tpope/vim-surround'
-
-" Fuzzy path matching, with improved path-based matching given by cpsm
-function! BuildCpsm(info)
-  if a:info.status == 'installed' || a:info.force
-    !./install.sh
-  endif
+function! DotfilesSource(name)
+  let pluginrc = expand($DOTFILES_DIR) . "/vim/" . a:name
+  exec "source " . pluginrc
 endfunction
 
-Plug 'kien/ctrlp.vim'
-  \ | Plug 'nixprime/cpsm', { 'do': function('BuildCpsm') }
-
-" Fuzzy completion while typing
-function! BuildYCM(info)
-  if a:info.status == 'installed' || a:info.force
-    !./install.py --clang-completer --gocode-completer --tern-completer --racer-completer
-  endif
-endfunction
-
-Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-
-" Silver searcher (ag) integration
-Plug 'rking/ag.vim', { 'on': 'Ag' }
-
-if installed_vim_plug ==1
-  echo "Installing plugins..."
-  echo ""
-  PlugInstall
-endif
-
-call plug#end()
+call DotfilesSource("plugins.vimrc")
 
 "---------------------------------------------------------------------
 " Syntax coloring
@@ -186,58 +106,8 @@ if &term == "screen" || &term =~? "^xterm"
   set title
 endif
 
-"---------------------------------------------------------------------
-" Status Line
-"--------------------------------------------------------------------
-function! FugitiveLine()
-  let out = ''
-  let has_fugitive = (exists('g:loaded_fugitive') && g:loaded_fugitive == 1)
-  if l:has_fugitive
-    let out = " \u2442 " . fugitive#head() . ' '
-  endif
-  return out
-endfunction
-
-function! CharDescription()
-  let c = matchstr(getline('.')[col('.') - 1:-1], '.')
-  let nr = (c ==# "\n" ? 0 : char2nr(c))
-
-  let has_characterize = (exists('g:loaded_characterize') && g:loaded_characterize == 1)
-  if l:has_characterize
-    let out = '<' . characterize#description(nr, 'unknown')
-    let entity = characterize#html_entity(nr)
-    if !empty(entity)
-      let out .= ', ' . entity
-    endif
-    let out .= '> ' . printf('U+%04X', nr)
-  else
-    let out = printf('U+%04X', nr)
-  endif
-
-  return out
-endfunction
-
-let &statusline=""
-"let &statusline.="%2*\ \ %t\ \ "                             " tail of the filename
-let &statusline.="%1*\ \ %{strlen(&fenc)?&fenc:'none'}"      " file encoding
-let &statusline.="\ \u00B7\ %{&ff}"                          " file format
-let &statusline.="\ \u00B7\ %{strlen(&ft)?&ft:'<unknown>'}"  " file type
-let &statusline.="%h"                                        " help file flag
-let &statusline.="%m"                                        " modified flag
-let &statusline.="%r"                                        " read only flag
-let &statusline.="\ \ "
-let &statusline.="%0*%{FugitiveLine()}"                      " git branch
-let &statusline.="%="                                        " left/right separator
-let &statusline.="%{CharDescription()}\ "                    " char under cursor
-let &statusline.="%4*\ l\ %1*%5l/%-5L\ "                     " cursor line/total lines
-let &statusline.="%5*\ c\ %2*%3c-%-3v\ "                     " cursor column/virtual column
-let &statusline.="%3*\ \ %P\ \ "                             " percent through file
-
-hi User1 term=bold,reverse cterm=bold,reverse ctermfg=235 ctermbg=253
-hi User2 term=bold,reverse cterm=bold,reverse ctermfg=234 ctermbg=253
-hi User3 term=bold,reverse cterm=bold,reverse ctermfg=233 ctermbg=253
-hi User4 term=bold,reverse cterm=bold,reverse ctermfg=235 ctermbg=241
-hi User5 term=bold,reverse cterm=bold,reverse ctermfg=234 ctermbg=241
+" Status line
+call DotfilesSource("statusline.vimrc")
 
 "---------------------------------------------------------------------
 " Search
@@ -267,8 +137,8 @@ nnoremap + zr    " + reduces fold level across buffer
 nnoremap - zm    " - increases fold level across buffer
 
 " Restore cursor, folds, etc
-autocmd BufWinLeave * if expand("%") != "" | mkview | endif
-autocmd BufWinEnter * if expand("%") != "" | loadview | endif
+"autocmd BufWinLeave * if expand("%") != "" | mkview | endif
+"autocmd BufWinEnter * if expand("%") != "" | loadview | endif
 
 "---------------------------------------------------------------------
 " Filetype specifics
