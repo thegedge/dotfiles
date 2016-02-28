@@ -263,11 +263,27 @@ let g:ycm_key_list_select_completion = ['<TAB>']
 let g:ycm_key_list_previous_completion = ['<S-TAB>']
 
 " CtrlP configuration
+let g:ctrlp_show_hidden = 0
+let g:ctrlp_max_depth = 10
+let g:ctrlp_max_files = 10000
 let g:ctrlp_match_window = 'max:25'
 let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
+let g:ctrlp_lazy_update = 100
 let g:ctrlp_custom_ignore = {
-      \   'dir':  '\v[\/](\.(git|hg|svn))|Godeps|target|_site|tmp|vendor$',
-      \ }
+  \   'dir':  '\v[\/](\.(git|hg|svn))|Godeps|target|_site|tmp|vendor$',
+  \ }
+
+if has("unix")
+  let g:ctrlp_user_command = {
+    \   'types': {
+    \     1: ['.git/', 'git -C %s ls-files'],
+    \     2: ['.hg/', 'hg --cwd %s manifest'],
+    \   },
+    \   'fallback': 'find %s -type f -maxdepth ' . g:ctrlp_max_depth .
+    \               ' | head -' . g:ctrlp_max_files,
+    \   'ignore': 1,
+    \ }
+endif
 
 " Don't have a passthrough for vimpager
 let vimpager_passthrough = 0
