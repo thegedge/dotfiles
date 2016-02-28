@@ -21,7 +21,7 @@
 *.sql
 *.sqlite
 
-# OS-generated files
+# OS-generated files, backup files, etc
 .DS_Store
 .DS_Store?
 ._*
@@ -32,6 +32,9 @@ ehthumbs.db
 Thumbs.db
 Repo
 * (Autosaved).txt
+*.swp
+*.swo
+*.bak
 
 # qmake project user files
 *.pro.user*

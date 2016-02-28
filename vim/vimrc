@@ -61,7 +61,15 @@ set wildmenu
 set wildmode=full
 
 " Files to ignore when expanding wildcards
-set wildignore=*.swp,*.bak,*.pyc,*.class,*.o
+set wildignore=*.swp,*.bak,*.pyc,*.class,*.o,.DS_Store
+if filereadable(expand("~/.gitignore_global"))
+  for line in readfile(expand("~/.gitignore_global"))
+    if line =~ '^#' | con | endif
+    if line == ''   | con | endif
+    if line =~ '^!' | con | endif
+    exec "set wildignore+=" . substitute(line, '\v([ ()])', '\\\1', "g")
+  endfor
+endif
 
 " Whitespace behaviour
 set noexpandtab      " I like <Tab>s more than spaces
