@@ -3,9 +3,9 @@ local session_name=$(echo "${1##*/}" | sed 's/[^_a-zA-Z0-9-]/_/g')
 
 if [[ -n "${TMUX}" ]]; then
   if ! tmux list-sessions | grep "${session_name}" >/dev/null; then
-    tmux new-session -ds "${session_name}" -c "${dir:$1}"
+    tmux new-session -ds "${session_name}" -c "${dir:-$1}"
   fi
   tmux switch-client -t "${session_name}"
 else
-  tmux new-session -ADs "${session_name}" -c "${dir:$1}"
+  tmux new-session -ADs "${session_name}" -c "${dir:-$1}"
 fi
