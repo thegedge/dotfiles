@@ -10,8 +10,7 @@ case "${MYSHELL}" in
     done
 
     # Since we changed the fpath, reload completions
-    autoload -Uz compinit
-    compinit
+    autoload -Uz compinit && compinit -i
     ;;
   bash)
 	for file in $(source_files "${FUNCTIONS_DIR}"); do
