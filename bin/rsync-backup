@@ -19,7 +19,7 @@ function main() {
   ARGS=($@)
   ARGS+=(--archive --delete --include-from=$HOME/.rsync-backup-files)
 
-  local LAST_BACKUP="$(find "${DST}" -name 'backup.*' -type d | sort | tail -n1)"
+  local LAST_BACKUP="$(find "${DST}" -name 'backup.*' -type d -maxdepth 1 | sort | tail -n1)"
   if [[ -n "${LAST_BACKUP}" ]]; then
     ARGS+=(--link-dest="${LAST_BACKUP}")
   fi
