@@ -206,6 +206,10 @@ nmap <Leader><       :tabp<CR>
 " Miscellanouse key mappings and such
 "---------------------------------------------------------------------
 
+" Execute :Ag searches for things under the cursor
+nnoremap gA :Ag '<C-R><C-W>'<CR>
+vnoremap gA y:Ag '<C-R>"'<CR>
+
 " typing a semi-colon starts command (normal mode)
 nnoremap ; :
 
