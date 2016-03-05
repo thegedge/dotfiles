@@ -1,0 +1,12 @@
+#!/bin/bash
+main() {
+  if [[ $# -lt 2 ]]; then
+    echo "usage: $(basename $0) path command [args..]"
+    return 1
+  fi
+
+  local file=$1; shift;
+  fswatch -o "${file}" | xargs -n1 -I{} "$@"
+}
+
+main "$@"
