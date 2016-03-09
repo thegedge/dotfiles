@@ -1,2 +1,4 @@
-# Switch to some version of Ruby
-chruby ruby
+# Switch to some version of Ruby, if necessary
+if [[ -z "${GEM_ROOT}" ]]; then
+  chruby "$(chruby | tail -n1 | tr -d ' ')"
+fi
