@@ -1,14 +1,14 @@
-# Custom local profile that should exist outside of the repo
-if [[ -e "${HOME}/.profile.local" ]]; then
-  source "${HOME}/.profile.local"
-fi
-
 # Load library functions
 source "${DOTFILES_DIR}/lib/unisource"
 
 # Ensure environment loads first
 if [[ -e "${DOTFILES_DIR}/profile/env" ]]; then
   source "${DOTFILES_DIR}/profile/env"
+fi
+
+# Custom local profile that should exist outside of the repo
+if [[ -e "${HOME}/.profile.local" ]]; then
+  source "${HOME}/.profile.local"
 fi
 
 if [[ -e "${DOTFILES_DIR}/profile/profile.d" ]]; then
