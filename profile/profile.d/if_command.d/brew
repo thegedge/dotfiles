@@ -1,8 +1,11 @@
+export HOMEBREW_PREFIX="$(brew --prefix)"
 export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:${PATH}"
 export MANPATH="${HOMEBREW_PREFIX}/man:${MANPATH}"
 
 export BOOST_ROOT="${HOMEBREW_PREFIX}"
 export ANDROID_HOME="${HOMEBREW_PREFIX}"
+
+alias cask='brew cask'
 
 # Use LibClang with Python
 alias clangpy="LD_LIBRARY_PATH=${HOMEBREW_PREFIX}/lib/ PYTHONPATH=${HOMEBREW_PREFIX}/lib/python2.7/site-packages python"
