@@ -35,4 +35,4 @@ if [[ -d "${HOME}/.multirust" ]]; then
   done
 fi
 
-export PATH="${HOME}/bin:${PATH}"
+export PATH="/usr/local/bin:/usr/local/sbin:${HOME}/bin:${PATH}"
