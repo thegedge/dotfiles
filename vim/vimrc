@@ -17,14 +17,13 @@ call DotfilesSource("plugins.vimrc")
 " Syntax coloring
 "---------------------------------------------------------------------
 
+colorscheme desert
 if &t_Co >= 256 || has("gui_running")
   let g:gruvbox_italic = 0
   let g:gruvbox_contrast_dark = "hard"
   let g:gruvbox_contrast_light = "medium"
   let g:gruvbox_invert_tabline = 1
   colorscheme gruvbox
-elseif &t_Co > 1
-  colorscheme desert
 endif
 
 if &t_Co > 1

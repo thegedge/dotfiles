@@ -11,7 +11,7 @@ filetype off
 call plug#begin('~/.vim/plugged')
 
 " Coloring
-Plug 'flazz/vim-colorschemes'
+Plug 'morhetz/gruvbox'
 Plug 'Yggdroot/indentLine'
 
 " Plugins for syntax and completion
@@ -76,11 +76,10 @@ if !exists("vimpager")
   Plug 'rking/ag.vim', { 'on': 'Ag' }
 endif
 
-if installed_vim_plug ==1
+if installed_vim_plug == 1
   echo "Installing plugins..."
   echo ""
   PlugInstall
 endif
 
 call plug#end()
-
