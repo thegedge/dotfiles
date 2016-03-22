@@ -41,7 +41,6 @@ set ruler            " ruler
 set number           " line numbering
 set showmatch        " show matching brackets
 set mouse=           " disable mouse
-set pastetoggle=<F2> " F2 for paste mode
 set hidden           " buffers are hidden instead of closed
 set showtabline=2    " always show tab bar at top
 set laststatus=2     " always show status line
