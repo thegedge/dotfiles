@@ -35,6 +35,9 @@ Plug 'powerman/vim-plugin-AnsiEsc', { 'on': 'AnsiEsc' }
 Plug 'tpope/vim-characterize'
 
 if !exists("vimpager")
+  " Dim inactive panes
+  Plug 'blueyed/vim-diminactive'
+
   " Auto ':set paste' when pasting
   Plug 'ConradIrwin/vim-bracketed-paste'
 
