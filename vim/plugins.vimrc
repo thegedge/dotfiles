@@ -35,6 +35,9 @@ Plug 'powerman/vim-plugin-AnsiEsc', { 'on': 'AnsiEsc' }
 Plug 'tpope/vim-characterize'
 
 if !exists("vimpager")
+  " Auto ':set paste' when pasting
+  Plug 'ConradIrwin/vim-bracketed-paste'
+
   " Code/markup commenting shortcuts
   Plug 'scrooloose/nerdcommenter'
 
