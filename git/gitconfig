@@ -41,8 +41,8 @@
 [status]
 	submodulesummary = true
 
-[transfer] 
-	fsckobjects = true 
+#[transfer] 
+#	fsckobjects = true 
 
 [alias]
 	# Short command names
@@ -66,6 +66,9 @@
 	submodules = submodule
 	tags = tag --list
 	tracked = ls-files
+
+	# Fetch lastest and checkout origin/master
+	om = !"__f() { git fetch && git checkout origin/master; }; __f"
 
 	# Aliases for Mercurial-like commands
 	incoming = !"__f() { git fetch ${1:-origin} && git clog ..${1:-origin}/${2:-master}; echo; }; __f"
