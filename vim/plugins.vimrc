@@ -35,6 +35,9 @@ Plug 'powerman/vim-plugin-AnsiEsc', { 'on': 'AnsiEsc' }
 Plug 'tpope/vim-characterize'
 
 if !exists("vimpager")
+  " In-place rename file for a buffer (like :saveas, but deletes old file)
+  Plug 'vim-scripts/Rename'
+
   " Dim inactive panes
   Plug 'blueyed/vim-diminactive'
 
