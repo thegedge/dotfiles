@@ -278,7 +278,7 @@ let g:ctrlp_custom_ignore = {
 if has("unix")
   let g:ctrlp_user_command = {
     \   'types': {
-    \     1: ['.git/', 'git -C %s ls-files'],
+    \     1: ['.git/', 'git -C %s ls-files --others --cached --exclude-standard'],
     \     2: ['.hg/', 'hg --cwd %s manifest'],
     \   },
     \   'fallback': 'find %s -type f -maxdepth ' . g:ctrlp_max_depth .
