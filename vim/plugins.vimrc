@@ -20,7 +20,6 @@ Plug 'ebfe/vim-racer',              { 'for': 'rust' }
 Plug 'wting/rust.vim',              { 'for': 'rust' }
 Plug 'fatih/vim-go',                { 'for': 'go' }
 Plug 'peterhoeg/vim-qml',           { 'for': 'qml' }
-"Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-markdown',          { 'for': 'markdown' }
 Plug 'vim-scripts/gcov.vim',        { 'for': 'gcov' }
 Plug 'vim-scripts/swig-syntax',     { 'for': 'swig' }
@@ -28,6 +27,7 @@ Plug 'hashivim/vim-terraform',      { 'for': 'terraform' }
 Plug 'tpope/vim-rails',             { 'for': 'ruby' }
 Plug 'tpope/vim-bundler',           { 'for': 'ruby' }
 Plug 'kchmck/vim-coffee-script',    { 'for': 'coffee' }
+Plug 'mxw/vim-jsx',                 { 'for': 'javascript.jsx' }
 
 Plug 'powerman/vim-plugin-AnsiEsc', { 'on': 'AnsiEsc' }
 
