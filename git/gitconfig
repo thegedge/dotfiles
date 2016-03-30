@@ -68,7 +68,10 @@
 	tracked = ls-files
 
 	# Fetch lastest and checkout origin/master
-	om = !"__f() { git fetch && git checkout origin/master; }; __f"
+	om = !git fetch && git checkout origin/master
+
+	# Amend + force push
+	apush = !git amend && git push -f
 
 	# Aliases for Mercurial-like commands
 	incoming = !"__f() { git fetch ${1:-origin} && git clog ..${1:-origin}/${2:-master}; echo; }; __f"
