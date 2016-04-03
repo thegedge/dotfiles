@@ -225,9 +225,10 @@ nnoremap <C-E> :edit<CR>
 nnoremap <C-N> :next<CR>
 nnoremap <C-P> :prev<CR>
 
-" Simpify working with my vimrc
+" Simpify working with my vimrc files
 nnoremap <Leader>ev :edit $MYVIMRC<CR>
 nnoremap <Leader>sv :source $MYVIMRC<CR>
+nnoremap <Leader>ep :exec 'edit' expand($DOTFILES_DIR) . "/vim/plugins.vimrc"<CR>
 
 "---------------------------------------------------------------------
 " Other plugin config
