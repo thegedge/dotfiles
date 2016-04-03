@@ -28,6 +28,7 @@ Plug 'tpope/vim-rails',             { 'for': 'ruby' }
 Plug 'tpope/vim-bundler',           { 'for': 'ruby' }
 Plug 'kchmck/vim-coffee-script',    { 'for': 'coffee' }
 Plug 'mxw/vim-jsx',                 { 'for': 'javascript.jsx' }
+Plug 'solarnz/thrift.vim',          { 'for': 'thrift' }
 
 Plug 'powerman/vim-plugin-AnsiEsc', { 'on': 'AnsiEsc' }
 
