@@ -70,7 +70,7 @@ if filereadable(expand("~/.gitignore_global"))
 endif
 
 " Whitespace behaviour
-set noexpandtab      " I like <Tab>s more than spaces
+set expandtab        " expand tabs by default
 set tabstop=4        " number of spaces a <Tab> character equals
 set softtabstop=4    " number of spaces a <Tab> character equals (insert mode)
 set shiftwidth=4     " number of spaces to use for indenting
