@@ -70,7 +70,7 @@ if !exists("vimpager")
     endif
   endfunction
 
-  Plug 'kien/ctrlp.vim'
+  Plug 'ctrlpvim/ctrlp.vim'
     \ | Plug 'nixprime/cpsm', { 'do': function('BuildCpsm') }
 
   " Fuzzy completion while typing
