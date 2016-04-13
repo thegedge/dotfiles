@@ -19,3 +19,6 @@ alias pipupgrade="pip freeze --local | grep -v '^-e' | cut -d = -f 1 | sed '/vbo
 
 # Update my dotfiles
 alias updot="git -C ${HOME}/dotfiles --no-pager incoming && git -C ${HOME}/dotfiles rebase origin/master && git -C ${HOME}/dotfiles subup"
+
+# Run an NPM binary
+alias npm-bin='PATH=$(npm bin):$PATH'
