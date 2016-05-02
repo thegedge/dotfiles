@@ -93,3 +93,6 @@ if installed_vim_plug == 1
 endif
 
 call plug#end()
+
+" Better matching for HTML tags
+packadd! matchit

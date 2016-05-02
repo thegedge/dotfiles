@@ -2,7 +2,7 @@
 *.tmp
 *.zwc
 
-vim/vim_dir/autoload/plug.vim
+vim/vim_dir/autoload/plug.vim*
 vim/vim_dir/backups/*~
 vim/vim_dir/plugged/*
 vim/vim_dir/doc
