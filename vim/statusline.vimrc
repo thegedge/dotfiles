@@ -50,4 +50,3 @@ hi User2 term=bold,reverse cterm=bold,reverse ctermfg=234 ctermbg=253
 hi User3 term=bold,reverse cterm=bold,reverse ctermfg=233 ctermbg=253
 hi User4 term=bold,reverse cterm=bold,reverse ctermfg=235 ctermbg=241
 hi User5 term=bold,reverse cterm=bold,reverse ctermfg=234 ctermbg=241
-
