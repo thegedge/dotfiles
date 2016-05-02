@@ -6,7 +6,7 @@ main() {
   fi
 
   local file=$1; shift;
-  fswatch -o "${file}" | xargs -n1 -I{} "$@"
+  fswatch -0 -o "${file}" | xargs -0 -n1 -I{} "$@"
 }
 
 main "$@"
