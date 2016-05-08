@@ -278,4 +278,4 @@ if has("unix")
 endif
 
 " Don't have a passthrough for vimpager
-let vimpager_passthrough = 0
+let g:vimpager_passthrough = 0
