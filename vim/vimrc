@@ -23,7 +23,11 @@ if &t_Co >= 256 || has("gui_running")
   let g:gruvbox_contrast_dark = "hard"
   let g:gruvbox_contrast_light = "medium"
   let g:gruvbox_invert_tabline = 1
-  colorscheme gruvbox
+  try
+    colorscheme gruvbox
+  catch /^Vim\%((\a\+)\)\=:E185/
+    colorscheme desert
+  endtry
 endif
 
 if &t_Co > 1
