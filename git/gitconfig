@@ -22,6 +22,9 @@
 	tool = vimdiff
 	renames = copies
 
+[merge]
+    tool = vimdiff
+
 [difftool]
 	prompt = false
 
