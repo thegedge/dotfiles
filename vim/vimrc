@@ -57,6 +57,7 @@ set confirm          " confirm changes before closing buffers
 set splitright       " vertical splits on the right
 set autoindent       " automatic indentation
 set background=dark
+set synmaxcol=200    " max cols to search for syntax highlighting
 
 " Autocompletion when typing commands shows options above instead of inline
 set wildmenu
