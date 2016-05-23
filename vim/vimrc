@@ -6,8 +6,12 @@ if !exists("vimpager")
   let mapleader=" "  " space bar for leader
 endif
 
+let g:vim_config_directory = (expand("$VIM") =~ "nvim")
+  \ ? expand("$HOME/.config/nvim")
+  \ : expand("$HOME/.vim")
+
 function! DotfilesSource(name)
-  let pluginrc = expand($DOTFILES_DIR) . "/vim/" . a:name
+  let pluginrc = expand("$DOTFILES_DIR/vim/") . a:name
   exec "source " . pluginrc
 endfunction
 
@@ -102,10 +106,12 @@ set path+=./**
 " Backups, swaps, and temps
 set nobackup
 set noswapfile
-set directory=~/.vim/tmp,/var/tmp,/tmp
+
+let &directory = g:vim_config_directory
+set directory+=/var/tmp,/tmp
 
 " Remember more stuff
-set viminfo='10,\"100,:20,%,n~/.vim/.viminfo
+let &viminfo="'10,\"100,:20,%,n" . g:vim_config_directory . ".viminfo"
 
 " Set title in terminal window
 set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:p:h\")})%)%(\ %a%)
@@ -149,7 +155,7 @@ nnoremap - zm    " - increases fold level across buffer
 
 " Restore cursor, folds, etc
 autocmd BufWinLeave * if expand("%") != "" | mkview | endif
-autocmd BufWinEnter * if expand("%") != "" | loadview | endif
+autocmd BufWinEnter * if expand("%") != "" | silent! loadview | endif
 
 "---------------------------------------------------------------------
 " Filetype specifics

@@ -1,2 +1,7 @@
 vimrc -> ~/.vimrc
 vim_dir -> ~/.vim
+vimrc -> ~/.config/nvim/nvimrc
+vim_dir/autoload -> ~/.vim/nvim/autoload
+vim_dir/ftdetect -> ~/.vim/nvim/ftdetect
+vim_dir/ftplugin -> ~/.vim/nvim/ftplugin
+vim_dir/plugin -> ~/.vim/nvim/plugin

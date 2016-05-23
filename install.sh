@@ -23,6 +23,7 @@ function install_links {
 
       for link_src in "${link_srcs[@]}"; do
         echo "\e[36m " ln ${link_flags} "${link_src}" "${link_dest}" "\e[0m"
+        mkdir -p "$(dirname "${link_dest}")"
         ln ${link_flags} "${link_src}" "${link_dest}" &>/dev/null
       done
     done

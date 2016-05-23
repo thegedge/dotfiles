@@ -1,9 +1,11 @@
 let installed_vim_plug = 0
-if !filereadable(expand('~/.vim/autoload/plug.vim'))
+
+if !filereadable(g:vim_config_directory . '/autoload/plug.vim')
   echo "Installing vim-plug.."
   echo ""
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  silent execute
+    \ '!curl -sfLo ' . g:vim_config_directory . '/autoload/plug.vim' . ' --create-dirs' .
+    \ ' https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   let installed_vim_plug=1
 endif
 
@@ -95,4 +97,4 @@ endif
 call plug#end()
 
 " Better matching for HTML tags
-packadd! matchit
+runtime! macros/matchit.vim
