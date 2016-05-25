@@ -4,4 +4,12 @@ if [[ -e "${CODE_DIR}" ]]; then
   search_dirs+=("${CODE_DIR}")
 fi
 
-find ${search_dirs[@]} -path "*/$1" -type d -mindepth 3 -maxdepth 4 -print -quit
+for depth in {3..5}; do
+  local output=$(find ${search_dirs[@]} -path "*/$1" -type d -mindepth $depth -maxdepth $depth -print -quit)
+  if [[ -n "${output}" ]]; then
+    echo "${output}"
+    return 0
+  fi
+done
+
+return 1
