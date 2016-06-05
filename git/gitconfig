@@ -52,8 +52,6 @@
 	st = status
 	co = checkout
 	eb = enhanced-blame
-	continue = rebase --continue
-	abort = rebase --abort
 	head = rev-parse HEAD
 	thisweek = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' @{1.week.ago}..
 	prune = remote prune origin
@@ -63,18 +61,16 @@
 	aliases = !git config --get-regex 'alias.*' | gawk 'match($0, /alias.(\\w+)\\s+(.*)/, m) { printf \"%-15s %s\\n\", m[1], m[2] }' | grep '^\\w\\+'
 	branches = branch --list
 	conflicts = !git ls-files -u | cut -f 2 | sort -u
-	numstat = diff --numstat
 	remotes = remote
 	stat = diff --stat
 	submodules = submodule
 	tags = tag --list
-	tracked = ls-files
 
 	# Fetch lastest and checkout origin/master
 	om = !git fetch && git checkout origin/master
 
 	# Fetch lastest and rebase current branch on origin/master
-	rom = !git fetch && git rebase origin/master
+	rom = !git fetch && git rebase "$@" origin/master
 
 	# Amend + force push
 	apush = !git amend && git push -f
@@ -82,7 +78,7 @@
 	# Aliases for Mercurial-like commands
 	incoming = !"__f() { git fetch ${1:-origin} && git clog ..${1:-origin}/${2:-master}; echo; }; __f"
 	outgoing = !"__f() { git fetch ${1:-origin} && git clog ${1:-origin}/${2:-master}..; echo; }; __f"
-	rollback = reset --hard HEAD~1
+	rollback = !git reset "$@" HEAD~1
 
 	# Close out a branch
 	completed = !"__f() { local foo=$(git rev-parse --abbrev-ref HEAD); git fetch ${1:-origin} && git checkout ${1:-origin}/master && git branch -d \"${foo}\"; }; __f"
