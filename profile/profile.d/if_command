@@ -5,14 +5,18 @@
 # conditionally check for, and if that command exists on the system,
 # the script will be sourced.
 #-----------------------------------------------------------------------------
-for file in $(source_files "${DOTFILES_DIR}/profile/profile.d/if_command.d/"); do
-  if command -v "${file##*/}" &>/dev/null; then
-    unisource "${file}"
-  fi
-done
-
-for file in $(source_files "${DOTFILES_DIR}/profile/profile.d/if_not_command.d/"); do
-  if ! command -v "${file##*/}" &>/dev/null; then
-    unisource "${file}"
-  fi
+for file in $(source_files "${DOTFILES_DIR}/profile/profile.d/if_command.d"); do
+  local base=$(basename "${file}")
+  case "${base:0:1}" in
+  !)
+      if ! command -v "${base##\!}" &>/dev/null; then
+        unisource "${file}"
+      fi
+      ;;
+  *)
+      if command -v "${base}" &>/dev/null; then
+        unisource "${file}"
+      fi
+      ;;
+  esac
 done
