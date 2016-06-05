@@ -9,8 +9,6 @@ alias df='df -h'
 alias top='top -o cpu -s 1'
 alias sedi='sed -i ""'
 
-alias cask='brew cask'
-
 # Get the weather forecast :D
 alias forecast='curl wttr.in'
 
