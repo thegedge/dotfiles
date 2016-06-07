@@ -161,9 +161,11 @@ autocmd BufWinEnter * if expand("%") != "" | silent! loadview | endif
 " Filetype specifics
 "---------------------------------------------------------------------
 if has("autocmd")
-  "augroup all_source
-  "  autocmd!
-  "augroup END
+  augroup ignore_whitespace_errors
+    autocmd!
+    au filetype diff hi clear ExtraWhitespace
+    au filetype git hi clear ExtraWhitespace
+  augroup END
 endif
 
 "---------------------------------------------------------------------
