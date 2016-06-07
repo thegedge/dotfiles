@@ -11,7 +11,7 @@
 	ui = false
 
 [core]
-	editor = vim
+	editor = nvim
 	excludesfile = ~/.gitignore_global
 	autocrlf = false
 
@@ -19,11 +19,11 @@
 	helper = osxkeychain
 
 [diff]
-	tool = vimdiff
+	tool = nvim -d
 	renames = copies
 
 [merge]
-    tool = vimdiff
+    tool = nvim -d
 
 [difftool]
 	prompt = false
