@@ -10,6 +10,9 @@
 	status = auto
 	ui = false
 
+[commit]
+    verbose = true
+
 [core]
 	editor = nvim
 	excludesfile = ~/.gitignore_global
