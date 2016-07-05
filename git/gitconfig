@@ -100,6 +100,9 @@
     clog = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
     glog = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 
+    # Show a diff of everything on your branch
+    bdiff = !"__f() { git diff $(git merge-base --fork-point ${1:-origin/master}); }; __f"
+
     # Upload current branch to remote (default: origin)
     up = !"__f() { git push --set-upstream ${1:-origin} $([ -z "$2" ] && git symbolic-ref --short HEAD || echo "$2"); }; __f"
 
