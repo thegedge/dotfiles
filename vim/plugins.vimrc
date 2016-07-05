@@ -17,22 +17,25 @@ Plug 'morhetz/gruvbox'
 Plug 'Yggdroot/indentLine'
 
 " Plugins for syntax and completion
-Plug 'cakebaker/scss-syntax.vim',   { 'for': 'scss' }
-Plug 'ebfe/vim-racer',              { 'for': 'rust' }
-Plug 'wting/rust.vim',              { 'for': 'rust' }
-Plug 'fatih/vim-go',                { 'for': 'go' }
-Plug 'peterhoeg/vim-qml',           { 'for': 'qml' }
-Plug 'tpope/vim-markdown',          { 'for': 'markdown' }
-Plug 'vim-scripts/gcov.vim',        { 'for': 'gcov' }
-Plug 'vim-scripts/swig-syntax',     { 'for': 'swig' }
-Plug 'hashivim/vim-terraform',      { 'for': 'terraform' }
-Plug 'tpope/vim-rails',             { 'for': 'ruby' }
-Plug 'tpope/vim-bundler',           { 'for': 'ruby' }
-Plug 'kchmck/vim-coffee-script',    { 'for': 'coffee' }
-Plug 'mxw/vim-jsx',                 { 'for': 'javascript.jsx' }
-Plug 'solarnz/thrift.vim',          { 'for': 'thrift' }
+Plug 'cakebaker/scss-syntax.vim',      { 'for': 'scss' }
+Plug 'ebfe/vim-racer',                 { 'for': 'rust' }
+Plug 'wting/rust.vim',                 { 'for': 'rust' }
+Plug 'fatih/vim-go',                   { 'for': 'go' }
+Plug 'peterhoeg/vim-qml',              { 'for': 'qml' }
+Plug 'tpope/vim-markdown',             { 'for': 'markdown' }
+Plug 'vim-scripts/gcov.vim',           { 'for': 'gcov' }
+Plug 'vim-scripts/swig-syntax',        { 'for': 'swig' }
+Plug 'hashivim/vim-terraform',         { 'for': 'terraform' }
+Plug 'tpope/vim-rails',                { 'for': 'ruby' }
+Plug 'tpope/vim-bundler',              { 'for': 'ruby' }
+Plug 'kchmck/vim-coffee-script',       { 'for': 'coffee' }
+Plug 'mxw/vim-jsx',                    { 'for': 'javascript.jsx' }
+Plug 'solarnz/thrift.vim',             { 'for': 'thrift' }
 
-Plug 'powerman/vim-plugin-AnsiEsc', { 'on': 'AnsiEsc' }
+Plug 'kana/vim-textobj-user' |
+\ Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
+
+Plug 'powerman/vim-plugin-AnsiEsc',    { 'on': 'AnsiEsc' }
 
 " Additional character info (e.g., html entity, unicode name)
 Plug 'tpope/vim-characterize'
