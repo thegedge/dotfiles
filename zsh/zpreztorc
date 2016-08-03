@@ -24,7 +24,9 @@ zstyle ':prezto:module:prompt' theme 'myparadox'
 #-----------------------------------------------------------------------------
 
 # Auto switch the Ruby version on directory change.
-zstyle ':prezto:module:ruby:chruby' auto-switch 'yes'
+if [[ ! -d /opt/dev ]]; then
+  zstyle ':prezto:module:ruby:chruby' auto-switch 'yes'
+fi
 
 #-----------------------------------------------------------------------------
 # SSH
