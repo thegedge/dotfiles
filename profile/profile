@@ -1,5 +1,7 @@
 # Load library functions
-source "${DOTFILES_DIR}/lib/unisource"
+for lib in "${DOTFILES_DIR}/lib/"*; do
+  source "${lib}"
+done
 
 # Ensure environment loads first
 if [[ -e "${DOTFILES_DIR}/profile/env" ]]; then

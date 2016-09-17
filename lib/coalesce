@@ -1,0 +1,7 @@
+function coalesce {
+  for arg in $argv; do
+    print "${arg}"
+    return 0
+  done
+  return 1
+}
