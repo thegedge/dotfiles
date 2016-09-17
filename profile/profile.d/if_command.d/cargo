@@ -1,0 +1,11 @@
+dirs=(
+  "${HOME}/.multirust/toolchains/stable/cargo/bin"
+  "${HOME}/.multirust/toolchains/beta/cargo/bin"
+  "${HOME}/.multirust/toolchains/nightly/cargo/bin"
+)
+
+for dir in "${dirs[@]}"; do
+  if [[ -d "${dir}" ]]; then
+    PATH="${dir}:${PATH}"
+  fi
+done
