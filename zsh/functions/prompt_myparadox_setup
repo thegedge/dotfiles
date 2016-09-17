@@ -14,9 +14,6 @@
 #
 # Forked by Jason Gedge, commenting out things that sometimes slow down my prompt
 
-# Load dependencies.
-pmodload 'helper'
-
 # Define variables.
 _prompt_myparadox_current_bg='NONE'
 _prompt_myparadox_segment_separator=''
@@ -103,7 +100,7 @@ function prompt_myparadox_precmd {
 }
 
 function prompt_myparadox_preexec {
-  _prompt_myparadox_start_time="$SECONDS"
+  _prompt_myparadox_start_time="${SECONDS}"
 }
 
 function prompt_myparadox_setup {
@@ -148,6 +145,7 @@ function prompt_myparadox_setup {
   PROMPT='
 ${(e)$(prompt_myparadox_build_prompt)}
  ${editor_info[keymap]} '
+
   RPROMPT='%F{blue}[%F{green}%D{%H:%M:%S}%F{blue}]%f'
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 }
