@@ -29,13 +29,6 @@ export WORDCHARS=''
 : Source my own stuff now
 #----------------------------------------------------------------------
 
-fpath+=($DOTFILES_DIR/zsh/functions)
-
-autoload -Uz git-info
-autoload -Uz git-dir
-autoload -Uz promptinit && promptinit
-prompt "myparadox"
-
 if [[ -e "$HOME/.profile" ]]; then
   source "$HOME/.profile"
 fi
@@ -51,6 +44,17 @@ fi
 # Change to a code directory
 function _code_cd() { cd "$(code-dirs ${1%.code})" }
 alias -s code=_code_cd
+
+#----------------------------------------------------------------------
+: Prezto-y things
+#----------------------------------------------------------------------
+#
+fpath+=($DOTFILES_DIR/zsh/functions)
+
+autoload -Uz git-info
+autoload -Uz git-dir
+autoload -Uz promptinit && promptinit
+prompt "myparadox"
 
 # Smart URL quoting
 autoload -Uz url-quote-magic
