@@ -85,7 +85,8 @@ if !exists("vimpager")
     endif
   endfunction
 
-  Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+  " Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
   " Silver searcher (ag) integration
   Plug 'rking/ag.vim', { 'on': 'Ag' }
