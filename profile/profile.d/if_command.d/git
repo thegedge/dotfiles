@@ -1,0 +1,11 @@
+# Add
+alias gaa='git add --all'
+
+# Commit
+alias gca='git commit --all'
+alias gcaa='git commit --all --amend'
+
+# Rebase
+alias gra='git rebase --abort'
+alias grc='git rebase --continue'
+alias grs='git rebase --skip'
