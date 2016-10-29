@@ -40,6 +40,10 @@ if [[ -e "$HOME/.profile" ]]; then
   source "$HOME/.profile"
 fi
 
+if [[ -e "$HOME/.fzf.zsh" ]]; then
+  source "$HOME/.fzf.zsh"
+fi
+
 if [[ -e "${DOTFILES_DIR}/zsh/key-bindings.zsh" ]]; then
   source "${DOTFILES_DIR}/zsh/key-bindings.zsh"
 fi

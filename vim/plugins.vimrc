@@ -68,15 +68,15 @@ if !exists("vimpager")
   " Manipulate surroundings
   Plug 'tpope/vim-surround'
 
+  " Fuzzy matching
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
   " Fuzzy path matching, with improved path-based matching given by cpsm
   function! BuildCpsm(info)
     if a:info.status == 'installed' || a:info.force
       !./install.sh
     endif
   endfunction
-
-  Plug 'ctrlpvim/ctrlp.vim'
-    \ | Plug 'nixprime/cpsm', { 'do': function('BuildCpsm') }
 
   " Fuzzy completion while typing
   function! BuildYCM(info)
