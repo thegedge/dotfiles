@@ -5,6 +5,9 @@
 *.o
 *.so
 *.pyc
+*.aux
+*.app
+*.framework
 
 # Archives
 *.7z
@@ -19,6 +22,8 @@
 # Logs and databases
 *.log
 *.sqlite
+*.aff
+*.dic
 
 # OS-generated files, backup files, etc
 .DS_Store
