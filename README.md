@@ -1,7 +1,6 @@
 My personal dotfiles. Comes with:
 - a personal shell configuration, centered around __[Zsh](http://www.zsh.org/)__,
-- the __[Prezto](//github.com/sorin-ionescu/prezto)__ (zsh configuration framework),
-- the __[Vundle](//github.com/gmarik/Vundle.vim)__ (plugin manager for Vim),
+- the __[vim-plug](//github.com/junegunn/vim-plug)__ (plugin manager for Vim),
 - a personal __vim__ configuration,
 - a personal __git__ configuration, with commong ignore patterns, and
 - a personal __[tmux](http://tmux.sourceforge.net/)__ configuration.
@@ -23,14 +22,13 @@ things like:
 - check out some repositories, if necessary,
 - create symbolic links to the dotfiles,
 - install [Powerline fonts](//github.com/powerline/fonts),
-- install Prezto (recursively), and
-- install Vundle and plugins specified in `vimrc`.
+- install vim-plug and plugins specified in `vimrc`.
 
 None of these steps are destructive by default (i.e., will prefer keeping
 existing files). Some flags:
 
-- `--download`, download git repo (default: false).
 - `--dotfiles-dir`, specify the directory to install the dotfiles to (default:
-  `$HOME/dotfiles`)
+  `$HOME/dotfiles`).
+- `--only-link`, only install symbolic links.
 - `--override-links`, always force overwriting any existing symbolic links to
   various dotfiles (default: false).
