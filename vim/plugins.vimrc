@@ -68,28 +68,12 @@ if !exists("vimpager")
   " Manipulate surroundings
   Plug 'tpope/vim-surround'
 
-  " Fuzzy matching
+  " Fuzzy matching and searching for all the things
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
 
-  " Fuzzy path matching, with improved path-based matching given by cpsm
-  function! BuildCpsm(info)
-    if a:info.status == 'installed' || a:info.force
-      !./install.sh
-    endif
-  endfunction
-
-  " Fuzzy completion while typing
-  function! BuildYCM(info)
-    if a:info.status == 'installed' || a:info.force
-      !./install.py --clang-completer --gocode-completer --tern-completer --racer-completer
-    endif
-  endfunction
-
-  " Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+  " Autocomplete on type
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-
-  " Silver searcher (ag) integration
-  Plug 'rking/ag.vim', { 'on': 'Ag' }
 endif
 
 if installed_vim_plug == 1
