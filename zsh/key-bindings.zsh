@@ -18,24 +18,26 @@ fi
 # Use the emacs keymap
 bindkey -e
 
+# [Up-Arrow] / [Down-Arrow] - Fuzzy find in history backwards / forwards, respectively
 if [[ -n "${terminfo[kcuu1]}" ]]; then
-  bindkey "${terminfo[kcuu1]}" up-line-or-search      # Fuzzy find in history after [Up-Arrow]
+  bindkey "${terminfo[kcuu1]}" history-beginning-search-backward
 fi
 
 if [[ -n "${terminfo[kcud1]}" ]]; then
-  bindkey "${terminfo[kcud1]}" down-line-or-search    # Fuzzy find in history after [Down-Arrow]
+  bindkey "${terminfo[kcud1]}" history-beginning-search-forward
 fi
 
+# [Home] / [End] - Go to beginning/end of line, respectively
 if [[ "${terminfo[khome]}" != "" ]]; then
-  bindkey "${terminfo[khome]}" beginning-of-line      # [Home] - Go to beginning of line
+  bindkey "${terminfo[khome]}" beginning-of-line
 fi
 
 if [[ "${terminfo[kend]}" != "" ]]; then
-  bindkey "${terminfo[kend]}"  end-of-line            # [End] - Go to end of line
+  bindkey "${terminfo[kend]}"  end-of-line
 fi
 
 bindkey ' ' magic-space                               # [Space] - do history expansion
-bindkey '^r' history-incremental-search-backward
+bindkey '^r' history-incremental-search-backward      # [Ctrl-R] - do 
 bindkey '^[[1;5C' forward-word                        # [Ctrl-RightArrow] - move forward one word
 bindkey '^[[1;5D' backward-word                       # [Ctrl-LeftArrow] - move backward one word
 bindkey '^?' backward-delete-char                     # [Backspace] - delete backward
