@@ -1,0 +1,26 @@
+#
+# Use different commands to quickly find files under the current directory based
+# on various conditions
+#
+main() {
+  local MAX_DEPTH=10
+  local MAX_FILES=10000
+
+  local CWD="$1"
+  [[ -z "${CWD}" ]] && CWD="${PWD}"
+
+  if git rev-parse --git-dir >/dev/null 2>&1; then
+    git -C "${CWD}" ls-files --others --cached --exclude-standard
+  elif HGPLAIN=1 HGRCPATH= hg root >/dev/null 2>&1; then
+    hg --cwd "${CWD}" manifest
+  elif command -v ag 2>&1 >/dev/null; then
+    ag -g ""
+  else
+    find "${CWD}" -type d -name '.*' -prune \
+      -or -not -name '.*' -type f -maxdepth "${MAX_DEPTH}" -print
+  fi \
+    | sed ':/(\.(git|hg|svn))|.*.app|Godeps|target|_site|tmp|vendor):d' \
+    | head -n "${MAX_FILES}"
+}
+
+main "$@"
