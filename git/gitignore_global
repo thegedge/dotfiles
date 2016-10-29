@@ -24,6 +24,7 @@
 *.sqlite
 *.aff
 *.dic
+tags
 
 # OS-generated files, backup files, etc
 .DS_Store
