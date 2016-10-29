@@ -48,21 +48,21 @@ function vim_setup {
 
 function parse_args {
   FLAG_dotfiles_dir="${HOME}/dotfiles"
-  FLAG_download=0
+  FLAG_actions=(download link fonts env vim)
   FLAG_override_links=0
 
   for flag in "$@"; do
-    case $flag in
+    case "${flag}" in
       --dotfiles-dir)
         FLAG_dotfiles_dir="$1"
         shift
         ;;
-      --download)
-        FLAG_download=1
-        shift
-        ;;
       --override-links)
         FLAG_override_links=1
+        shift
+        ;;
+      --only-link)
+        FLAG_actions=(link)
         shift
         ;;
       *)
@@ -73,13 +73,21 @@ function parse_args {
   done
 }
 
-function main {
+includes() {
+  local e
+  for e in "${@:2}"; do
+    [[ "$e" == "$1" ]] && return 0;
+  done
+  return 1
+}
+
+main() {
   parse_args "$@"
-  download
-  install_links
-  install_powerline_fonts
-  install_env
-  vim_setup
+  includes download "${FLAG_actions[@]}" && download
+  includes link "${FLAG_actions[@]}"     && install_links
+  includes fonts "${FLAG_actions[@]}"    && install_powerline_fonts
+  includes env "${FLAG_actions[@]}"      && install_env
+  includes vim "${FLAG_actions[@]}"      && vim_setup
 }
 
 main "$@"
