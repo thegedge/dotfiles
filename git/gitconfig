@@ -76,6 +76,9 @@
     submodules = submodule
     tags = tag --list
 
+    # Rename the current branch
+    rename = !"__f() { git branch -m $(git symbolic-ref --short HEAD) $1; }; __f"
+
     # Fetch lastest and checkout origin/master
     om = !git fetch && git checkout origin/master
 
