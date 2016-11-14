@@ -253,6 +253,7 @@ nnoremap <Leader>ep :exec 'edit' expand($DOTFILES_DIR) . "/vim/plugins.vimrc"<CR
 nnoremap <Leader>ff :call fzf#run({ 'source': 'files', 'sink': 'e', 'down': '40%' })<CR>
 nnoremap <Leader>ft :Tags<CR>
 nnoremap <Leader>fb :Buffers<CR>
+nnoremap <Leader>fa :Ag<CR>
 
 "---------------------------------------------------------------------
 " Other plugin config
