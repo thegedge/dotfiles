@@ -10,7 +10,7 @@ main() {
   [[ -z "${CWD}" ]] && CWD="${PWD}"
 
   if git rev-parse --git-dir >/dev/null 2>&1; then
-    git -C "${CWD}" ls-files --others --cached --exclude-standard
+    git -C "${CWD}" ls-files --others --cached --exclude-standard | uniq
   elif HGPLAIN=1 HGRCPATH= hg root >/dev/null 2>&1; then
     hg --cwd "${CWD}" manifest
   elif command -v ag 2>&1 >/dev/null; then
@@ -19,7 +19,7 @@ main() {
     find "${CWD}" -type d -name '.*' -prune \
       -or -not -name '.*' -type f -maxdepth "${MAX_DEPTH}" -print
   fi \
-    | sed -E '/^\/?(\.git|\.hg|\.svn|.*.app|Godeps|target|_site|tmp|vendor)/d' \
+    | sed -E '/^\/?(\.git|\.hg|\.svn|.*\.app|Godeps|target|_site|tmp|vendor)/d' \
     | head -n "${MAX_FILES}"
 }
 
