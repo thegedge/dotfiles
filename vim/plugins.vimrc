@@ -74,6 +74,9 @@ if !exists("vimpager")
 
   " Autocomplete on type
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+  " Async linting
+  Plug 'w0rp/ale'
 endif
 
 if installed_vim_plug == 1
