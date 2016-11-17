@@ -54,15 +54,13 @@ filetype plugin indent on
 " Basic configuration
 "---------------------------------------------------------------------
 set nowrap           " no line wrapping
-set ruler            " ruler
-set number           " line numbering
 set showmatch        " show matching brackets
 set mouse=           " disable mouse
 set hidden           " buffers are hidden instead of closed
 set showtabline=2    " always show tab bar at top
 set laststatus=2     " always show status line
 set history=1000     " remember more commands
-set autowrite        " write on make/shell commands
+set autowrite        " write on :next, :prev, :!, etc
 set undolevels=1000  " max number of changes to remember
 set visualbell       " no beeps
 set noerrorbells     " no beeps
@@ -71,6 +69,8 @@ set splitright       " vertical splits on the right
 set autoindent       " automatic indentation
 set background=dark
 set synmaxcol=200    " max cols to search for syntax highlighting
+"set scrolloff=999999 " keep cursor centered vertically
+set relativenumber   " relative line number offsets in the gutter
 
 " Autocompletion when typing commands shows options above instead of inline
 set wildmenu
@@ -119,9 +119,6 @@ set noswapfile
 let &directory = g:vim_config_directory
 set directory+=/var/tmp,/tmp
 
-" Remember more stuff
-let &viminfo="'10,\"100,:20,%,n" . g:vim_config_directory . ".viminfo"
-
 " Set title in terminal window
 set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:p:h\")})%)%(\ %a%)
 if &term == "screen"
@@ -162,7 +159,10 @@ nnoremap <silent> <Leader><Space> @=(foldlevel('.') ? 'za' : "\<Space>")<CR>
 nnoremap + zr    " + reduces fold level across buffer
 nnoremap - zm    " - increases fold level across buffer
 
-" Restore cursor, folds, etc
+"---------------------------------------------------------------------
+" Views
+"---------------------------------------------------------------------
+set viewdir=~/vim/view
 autocmd BufWinLeave * if expand("%") != "" | silent! mkview | endif
 autocmd BufWinEnter * if expand("%") != "" | silent! loadview | endif
 
@@ -244,7 +244,7 @@ nnoremap <C-P> :prev<CR>
 " Simpify working with my vimrc files
 nnoremap <Leader>ev :edit $MYVIMRC<CR>
 nnoremap <Leader>sv :source $MYVIMRC<CR>
-nnoremap <Leader>ep :exec 'edit' expand($DOTFILES_DIR) . "/vim/plugins.vimrc"<CR>
+nnoremap <Leader>ep :exec 'edit' expand("$DOTFILES_DIR/vim/plugins.vimrc")<CR>
 
 "---------------------------------------------------------------------
 " FZF helpers
