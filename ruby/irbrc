@@ -1,3 +1,5 @@
+require 'bigdecimal'
+require 'bigdecimal/util'
 require 'irb/completion'
 require 'json'
 require 'pp'
