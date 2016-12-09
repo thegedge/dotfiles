@@ -228,7 +228,7 @@ vnoremap gA y:Ag '<C-R>"'<CR>
 nnoremap ; :
 
 " Q reflows paragraph (normal and visual mode)
-nnoremap Q gqap
+nnoremap Q gwap
 vnoremap Q gq
 
 " Tab toggles hidden characters (normal mode)
