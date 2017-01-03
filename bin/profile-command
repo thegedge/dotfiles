@@ -1,0 +1,28 @@
+#!/bin/bash
+
+trap 'exit 1' INT
+
+profile-command() {
+  local awk_script="$1"; shift
+
+  local num_iters=50
+  local num_warmups=1
+  local -a times
+
+  for x in $(seq 1 "${num_warmups}"); do
+    eval "$@" 2>&1 >/dev/null
+  done
+
+  for x in $(seq 1 "${num_iters}"); do
+    times+=($(eval "$@" | awk "${awk_script}"))
+  done
+
+  ruby -- - "${times[@]}" <<-EOS
+    values = ARGV.map(&:to_f)
+    μ = values.reduce(:+) / values.length
+    σ = (values.map{ |x| (x - μ)**2  }.reduce(:+) / values.length) ** 0.5
+    puts "μ = %.4f, σ = %.4f" % [μ, σ]
+EOS
+}
+
+profile-command "$@"
