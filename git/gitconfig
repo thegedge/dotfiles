@@ -86,7 +86,7 @@
     rom = !git fetch && git rebase "$@" origin/master
 
     # Amend + force push
-    apush = !git amend && git push -f
+    apush = !git amend && git push --force-with-lease
 
     # Aliases for Mercurial-like commands
     incoming = !"__f() { git fetch ${1:-origin} && git clog ..${1:-origin}/${2:-master}; echo; }; __f"
