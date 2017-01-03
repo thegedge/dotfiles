@@ -1,0 +1,3 @@
+#!/bin/bash
+
+profile-command '$0' curl -s -w '%{time_total}\n' -o /dev/null "$@"
