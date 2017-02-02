@@ -1,6 +1,9 @@
 # Add
 alias gaa='git add --all'
 
+# Branch
+alias gb='git branch -vv'
+
 # Commit
 alias gca='git commit --all'
 alias gcaa='git commit --all --amend'
