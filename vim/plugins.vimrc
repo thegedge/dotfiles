@@ -31,6 +31,7 @@ Plug 'tpope/vim-bundler',              { 'for': 'ruby' }
 Plug 'kchmck/vim-coffee-script',       { 'for': 'coffee' }
 Plug 'mxw/vim-jsx',                    { 'for': 'javascript.jsx' }
 Plug 'solarnz/thrift.vim',             { 'for': 'thrift' }
+Plug 'google/vim-jsonnet',             { 'for': 'jsonnet' }
 
 Plug 'kana/vim-textobj-user' |
 \ Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
@@ -41,6 +42,9 @@ Plug 'powerman/vim-plugin-AnsiEsc',    { 'on': 'AnsiEsc' }
 Plug 'tpope/vim-characterize'
 
 if !exists("vimpager")
+  " Emphasizes the focused window by making it bigger
+  Plug 'roman/golden-ratio'
+
   " UNIX operations, such as :Move (for rename) and :Remove (for delete)
   Plug 'tpope/vim-eunuch'
 
