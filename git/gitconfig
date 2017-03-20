@@ -66,6 +66,7 @@
     thisweek = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' @{1.week.ago}..
     prune = remote prune origin
     subup = submodule update --init --recursive
+    fpush = push --force-with-lease
 
     # Aliased forms for listing things
     aliases = !git config --get-regex 'alias.*' | gawk 'match($0, /alias.(\\w+)\\s+(.*)/, m) { printf \"%-15s %s\\n\", m[1], m[2] }' | grep '^\\w\\+'
