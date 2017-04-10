@@ -278,3 +278,6 @@ let g:deoplete#enable_at_startup = 1
 
 " Don't have a passthrough for vimpager
 let g:vimpager_passthrough = 0
+
+" Don't require different indent levels in between lines when jumping between equal indents
+let g:indentwise_equal_indent_skips_contiguous = 0
