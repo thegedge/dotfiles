@@ -41,6 +41,12 @@ Plug 'powerman/vim-plugin-AnsiEsc',    { 'on': 'AnsiEsc' }
 " Additional character info (e.g., html entity, unicode name)
 Plug 'tpope/vim-characterize'
 
+" Movements for indent levels
+Plug 'jeetsukumaran/vim-indentwise'
+
+" A git gutter to show lines added/removed/modified
+Plug 'airblade/vim-gitgutter'
+
 if !exists("vimpager")
   " Emphasizes the focused window by making it bigger
   Plug 'roman/golden-ratio'
