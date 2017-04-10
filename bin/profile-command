@@ -6,11 +6,11 @@ profile-command() {
   local awk_script="$1"; shift
 
   local num_iters=50
-  local num_warmups=1
+  local num_warmups=5
   local -a times
 
   for x in $(seq 1 "${num_warmups}"); do
-    eval "$@" 2>&1 >/dev/null
+    eval "$@" >/dev/null 2>&1
   done
 
   for x in $(seq 1 "${num_iters}"); do
