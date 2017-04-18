@@ -1,123 +1,125 @@
 [include]
-    path = ~/.gitconfig_private
+  path = ~/.gitconfig_private
 
 [branch]
-    autosetuprebase = always
+  autosetuprebase = always
 
 [color]
-    branch = auto
-    diff = auto
-    status = auto
-    ui = false
+  branch = auto
+  diff = auto
+  status = auto
+  ui = false
 
 [color "diff-highlight"]
-    oldNormal = red bold
-    oldHighlight = red bold 52
-    newNormal = green bold
-    newHighlight = green bold 22
+  oldNormal = red bold
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
 
 [commit]
-    verbose = true
+  verbose = true
 
 [core]
-    pager = diff-so-fancy | /usr/bin/less --tabs=4 -RFX
-    editor = nvim
-    excludesfile = ~/.gitignore_global
-    autocrlf = false
+  pager = diff-so-fancy | /usr/bin/less --tabs=4 -RFX
+  editor = nvim
+  excludesfile = ~/.gitignore_global
+  autocrlf = false
 
 [credential]
-    helper = osxkeychain
+  helper = osxkeychain
 
 [diff]
-    renames = copies
-    compactionHeuristic = true
+  renames = copies
+  compactionHeuristic = true
 
 [difftool]
-    prompt = false
+  prompt = false
 
 [enhancedblame]
-    columnsize = 50
+  columnsize = 50
 
 [fetch]
-    prune = true
+  prune = true
 
 [interactive]
-    diffFilter = diff-so-fancy
+  diffFilter = diff-so-fancy
 
 [log]
-    decorate = true
-    topo-order = true
+  decorate = true
+  topo-order = true
 
 [push]
-    default = simple
+  default = simple
 
 [status]
-    submodulesummary = true
+  submodulesummary = true
 
 #[transfer]
 #	fsckobjects = true
 
 [alias]
-    # Short command names
-    st = status
-    co = checkout
-    eb = enhanced-blame
-    head = rev-parse HEAD
-    thisweek = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' @{1.week.ago}..
-    prune = remote prune origin
-    subup = submodule update --init --recursive
-    fpush = push --force-with-lease
+  # Short command names
+  st = status
+  co = checkout
+  eb = enhanced-blame
+  head = rev-parse HEAD
+  thisweek = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' @{1.week.ago}..
+  prune = remote prune origin
+  subup = submodule update --init --recursive
+  fpush = push --force-with-lease
 
-    # Aliased forms for listing things
-    aliases = !git config --get-regex 'alias.*' | gawk 'match($0, /alias.(\\w+)\\s+(.*)/, m) { printf \"%-15s %s\\n\", m[1], m[2] }' | grep '^\\w\\+'
-    branches = branch --list
-    conflicts = !git ls-files -u | cut -f 2 | sort -u
-    remotes = remote
-    stat = diff --stat
-    submodules = submodule
-    tags = tag --list
+  # Aliased forms for listing things
+  aliases = !git config --get-regex 'alias.*' | gawk 'match($0, /alias.(\\w+)\\s+(.*)/, m) { printf \"%-15s %s\\n\", m[1], m[2] }' | grep '^\\w\\+'
+  conflicts = !git ls-files -u | cut -f 2 | sort -u
+  remotes = remote
+  stat = diff --stat
+  submodules = submodule
+  tags = tag --list
 
-    # Rename the current branch
-    rename = !"__f() { git branch -m $(git symbolic-ref --short HEAD) $1; }; __f"
+  # Make branch selection great again
+  branches = !"__f() { git for-each-ref --format='%(refname:strip=2)' '*/*/*' '*/*/*/*' | fzf | xargs git checkout; }; __f"
 
-    # Fetch lastest and checkout origin/master
-    om = !git fetch && git checkout origin/master
+  # Rename the current branch
+  rename = !"__f() { git branch -m $(git symbolic-ref --short HEAD) $1; }; __f"
 
-    # Fetch lastest and rebase current branch on origin/master
-    rom = !git fetch && git rebase "$@" origin/master
+  # Fetch lastest and checkout origin/master
+  om = !git fetch && git checkout origin/master
 
-    # Amend + force push
-    apush = !git amend && git push --force-with-lease
+  # Fetch lastest and rebase current branch on origin/master
+  rom = !git fetch && git rebase "$@" origin/master
 
-    # Aliases for Mercurial-like commands
-    incoming = !"__f() { git fetch ${1:-origin} && git clog ..${1:-origin}/${2:-master}; echo; }; __f"
-    outgoing = !"__f() { git fetch ${1:-origin} && git clog ${1:-origin}/${2:-master}..; echo; }; __f"
-    rollback = !git reset "$@" HEAD~1
+  # Amend + force push
+  apush = !git amend && git push --force-with-lease
 
-    # Close out a branch
-    completed = !"__f() { local foo=$(git rev-parse --abbrev-ref HEAD); git fetch ${1:-origin} && git checkout ${1:-origin}/master && git branch -d \"${foo}\"; }; __f"
+  # Aliases for Mercurial-like commands
+  incoming = !"__f() { git fetch ${1:-origin} && git clog ..${1:-origin}/${2:-master}; echo; }; __f"
+  outgoing = !"__f() { git fetch ${1:-origin} && git clog ${1:-origin}/${2:-master}..; echo; }; __f"
+  rollback = !git reset "$@" HEAD~1
 
-    # Start a new branch based on the latest master
-    start = !"__f() { git fetch ${2:-origin} && git checkout -b $1 ${2:-origin}/${3:-master}; }; __f"
+  # Close out a branch
+  completed = !"__f() { local foo=$(git rev-parse --abbrev-ref HEAD); git fetch ${1:-origin} && git checkout ${1:-origin}/master && git branch -d \"${foo}\"; }; __f"
 
-    # Compact/graph log
-    clog = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
-    glog = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  # Start a new branch based on the latest master
+  start = !"__f() { git fetch ${2:-origin} && git checkout -b $1 ${2:-origin}/${3:-master}; }; __f"
 
-    # Show a diff of everything on your branch
-    bdiff = !"__f() { git diff $(git merge-base --fork-point ${1:-origin/master}); }; __f"
+  # Compact/graph log
+  clog = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
+  glog = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 
-    # Upload current branch to remote (default: origin)
-    up = !"__f() { git push --set-upstream ${1:-origin} $([ -z "$2" ] && git symbolic-ref --short HEAD || echo "$2"); }; __f"
+  # Show a diff of everything on your branch
+  bdiff = !"__f() { git diff $(git merge-base --fork-point ${1:-origin/master}); }; __f"
 
-    # Stash untracked changes and ignore staged files
-    stashu = stash save --include-untracked --keep-index
+  # Upload current branch to remote (default: origin)
+  up = !"__f() { git push --set-upstream ${1:-origin} $([ -z "$2" ] && git symbolic-ref --short HEAD || echo "$2"); }; __f"
 
-    # List all tracked files (master branch only)
-    tracked = ls-tree -r master --name-only
+  # Stash untracked changes and ignore staged files
+  stashu = stash save --include-untracked --keep-index
 
-    # Amend commit with everything
-    amend = commit --all --amend --no-edit
+  # List all tracked files (master branch only)
+  tracked = ls-tree -r master --name-only
 
-    # Clone a GitHub repo
-    hub = !"__f() { unset GIT_WORK_TREE; git clone -- git@github.com:$1.git ${CODE_DIR}/github.com/$1; }; __f"
+  # Amend commit with everything
+  amend = commit --all --amend --no-edit
+
+  # Clone a GitHub repo
+  hub = !"__f() { unset GIT_WORK_TREE; git clone -- git@github.com:$1.git ${CODE_DIR}/github.com/$1; cd ${CODE_DIR}/github.com/$1 }; __f"
