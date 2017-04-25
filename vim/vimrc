@@ -281,3 +281,6 @@ let g:vimpager_passthrough = 0
 
 " Don't require different indent levels in between lines when jumping between equal indents
 let g:indentwise_equal_indent_skips_contiguous = 0
+
+" Indent blocks assigned to variables one level more than the level of the variable
+let g:ruby_indent_assignment_style = 'variable'
