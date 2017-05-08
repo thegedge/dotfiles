@@ -106,7 +106,7 @@ let &fillchars="vert:\u2577,fold:\u254C"
 
 " Dictionary for CTRL+P and CTRL+N auto-completion
 set dictionary=~/.ispell_english,/usr/share/dict/words
-set complete=.,w,k
+set complete=.,w,b,k,t
 set keywordprg=dict
 
 " So find looks in the current directory tree
@@ -209,7 +209,7 @@ nmap <Leader><       :tabp<CR>
 
 " Highlight extra whitespace at the end of a line
 hi ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
+match ExtraWhitespace /\v\s+$/
 
 " Color column at 80 characters for soft limit, 100+ for hard limit
 let columns = '80,100,'.join(range(120, 500), ',')
