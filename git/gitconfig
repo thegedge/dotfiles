@@ -67,6 +67,7 @@
   prune = remote prune origin
   subup = submodule update --init --recursive
   fpush = push --force-with-lease
+  reword = commit --amend
 
   # Aliased forms for listing things
   aliases = !git config --get-regex 'alias.*' | gawk 'match($0, /alias.(\\w+)\\s+(.*)/, m) { printf \"%-15s %s\\n\", m[1], m[2] }' | grep '^\\w\\+'
@@ -122,4 +123,4 @@
   amend = commit --all --amend --no-edit
 
   # Clone a GitHub repo
-  hub = !"__f() { unset GIT_WORK_TREE; git clone -- git@github.com:$1.git ${CODE_DIR}/github.com/$1; cd ${CODE_DIR}/github.com/$1 }; __f"
+  hub = !"__f() { unset GIT_WORK_TREE; git clone -- git@github.com:$1.git ${CODE_DIR}/github.com/$1; cd ${CODE_DIR}/github.com/$1; }; __f"
