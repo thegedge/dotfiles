@@ -71,7 +71,8 @@ if !exists("vimpager")
   Plug 'PeterRincker/vim-argumentative'
 
   " Git support
-  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-fugitive' |
+  \ Plug 'tpope/vim-rhubarb'
 
   " Repeat plugin commands with .
   Plug 'tpope/vim-repeat'
