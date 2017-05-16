@@ -13,8 +13,8 @@ main() {
     git -C "${CWD}" ls-files --others --cached --exclude-standard | uniq
   elif HGPLAIN=1 HGRCPATH= hg root >/dev/null 2>&1; then
     hg --cwd "${CWD}" manifest
-  elif command -v ag 2>&1 >/dev/null; then
-    ag -g ""
+  elif command -v rg 2>&1 >/dev/null; then
+    rg -g ""
   else
     find "${CWD}" -type d -name '.*' -prune \
       -or -not -name '.*' -type f -maxdepth "${MAX_DEPTH}" -print
