@@ -76,6 +76,9 @@ set relativenumber   " relative line number offsets in the gutter
 set wildmenu
 set wildmode=full
 
+" Use ripgrep for grep command
+set grepprg=rg\ --vimgrep
+
 " Files to ignore when expanding wildcards
 set wildignore=*.swp,*.bak,*.pyc,*.class,*.o,.DS_Store
 if filereadable(expand("~/.gitignore_global"))
@@ -250,10 +253,17 @@ nnoremap <Leader>ep :exec 'edit' expand("$DOTFILES_DIR/vim/plugins.vimrc")<CR>
 " FZF helpers
 "---------------------------------------------------------------------
 
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
 nnoremap <Leader>ff :call fzf#run({ 'source': 'files', 'sink': 'e', 'down': '40%' })<CR>
 nnoremap <Leader>ft :Tags<CR>
 nnoremap <Leader>fb :Buffers<CR>
-nnoremap <Leader>fa :Ag<CR>
+nnoremap <Leader>fg :Rg!<CR>
 
 "---------------------------------------------------------------------
 " Other plugin config
