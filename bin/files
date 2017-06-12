@@ -14,7 +14,7 @@ main() {
   elif HGPLAIN=1 HGRCPATH= hg root >/dev/null 2>&1; then
     hg --cwd "${CWD}" manifest
   elif command -v rg 2>&1 >/dev/null; then
-    rg -g ""
+    rg -g "" --files
   else
     find "${CWD}" -type d -name '.*' -prune \
       -or -not -name '.*' -type f -maxdepth "${MAX_DEPTH}" -print
