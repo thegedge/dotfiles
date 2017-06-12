@@ -8,15 +8,17 @@ def silent_require_relative(name)
 rescue LoadError
 end
 
-silent_require 'active_support'
-silent_require 'active_support/timezone'
-silent_require 'benchmark/ips'
 silent_require 'bigdecimal'
 silent_require 'bigdecimal/util'
+silent_require 'forwardable'
 silent_require 'irb/completion'
 silent_require 'json'
 silent_require 'pp'
 silent_require 'yaml'
+
+silent_require 'active_support'
+silent_require 'active_support/timezone'
+silent_require 'benchmark/ips'
 
 silent_require_relative File.join(ENV['HOME'], '.irb_private')
 
