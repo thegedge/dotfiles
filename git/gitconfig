@@ -68,6 +68,7 @@
   subup = submodule update --init --recursive
   fpush = push --force-with-lease
   reword = commit --amend
+  merged = branch --merged
 
   # Aliased forms for listing things
   aliases = !git config --get-regex 'alias.*' | gawk 'match($0, /alias.(\\w+)\\s+(.*)/, m) { printf \"%-15s %s\\n\", m[1], m[2] }' | grep '^\\w\\+'
