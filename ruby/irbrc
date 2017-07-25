@@ -13,6 +13,7 @@ silent_require 'bigdecimal/util'
 silent_require 'forwardable'
 silent_require 'irb/completion'
 silent_require 'json'
+silent_require 'pathname'
 silent_require 'pp'
 silent_require 'yaml'
 
