@@ -217,6 +217,9 @@ vnoremap gA y:Ag '<C-R>"'<CR>
 " typing a semi-colon starts command (normal mode)
 nnoremap ; :
 
+" Always jump to line + column with marks
+nnoremap ' `
+
 " Q reflows paragraph (normal and visual mode)
 nnoremap Q gwap
 vnoremap Q gq
