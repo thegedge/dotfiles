@@ -1,6 +1,4 @@
-"---------------------------------------------------------------------
-" Gedge's .vimrc
-"---------------------------------------------------------------------
+" Foo {{{
 set nocompatible   " use vim defaults, not vi defaults
 if !exists("vimpager")
   let mapleader=" "  " space bar for leader
@@ -25,11 +23,9 @@ function! DotfilesSource(name)
 endfunction
 
 call DotfilesSource("plugins.vimrc")
+" ------------------------------------------------------------------------- }}}
 
-"---------------------------------------------------------------------
-" Syntax coloring
-"---------------------------------------------------------------------
-
+" Syntax coloring {{{
 colorscheme desert
 if &t_Co >= 256 || has("gui_running")
   let g:gruvbox_italic = 0
@@ -49,10 +45,9 @@ endif
 
 " Enable filetype-specific indenting and plugins
 filetype plugin indent on
+" ------------------------------------------------------------------------- }}}
 
-"---------------------------------------------------------------------
-" Basic configuration
-"---------------------------------------------------------------------
+" Basic configuration {{{
 set nowrap           " no line wrapping
 set showmatch        " show matching brackets
 set mouse=           " disable mouse
@@ -134,10 +129,9 @@ endif
 
 " Status line
 call DotfilesSource("statusline.vimrc")
+" ------------------------------------------------------------------------- }}}
 
-"---------------------------------------------------------------------
-" Search
-"--------------------------------------------------------------------
+" Search {{{
 set incsearch      " show matches as typing
 set ignorecase     " ignore case when searching
 set smartcase      " ignore case only if search pattern completely lowercase
@@ -150,33 +144,28 @@ nmap <silent> <Leader>/ :nohlsearch<CR>
 " n/N will move to the next/previous result and center line on screen
 nnoremap n nzz
 nnoremap N Nzz
+" ------------------------------------------------------------------------- }}}
 
-"---------------------------------------------------------------------
-" Folds
-"---------------------------------------------------------------------
-set foldmethod=indent     " folding on indentation
+" Folds {{{
 set foldlevel=100         " 'disable' folding at first
 
 " Space increases fold level, if possible, otherwise behaves as normal
 nnoremap <silent> <Leader><Space> @=(foldlevel('.') ? 'za' : "\<Space>")<CR>
 nnoremap + zr    " + reduces fold level across buffer
 nnoremap - zm    " - increases fold level across buffer
+" ------------------------------------------------------------------------- }}}
 
-"---------------------------------------------------------------------
-" Views
-"---------------------------------------------------------------------
+" Views {{{
 set viewdir=~/vim/view
 autocmd BufWinLeave * if expand("%") != "" | silent! mkview | endif
 autocmd BufWinEnter * if expand("%") != "" | silent! loadview | endif
+" ------------------------------------------------------------------------- }}}
 
-"---------------------------------------------------------------------
-" Async ctags update on BufWrite
-"---------------------------------------------------------------------
+" ctags {{{
 " autocmd BufWritePost * call jobstart(['ctags', '-R'])
+" ------------------------------------------------------------------------- }}}
 
-"---------------------------------------------------------------------
-" Filetype specifics
-"---------------------------------------------------------------------
+" Filetype specifics {{{
 if has("autocmd")
   augroup ignore_whitespace_errors
     autocmd!
@@ -184,10 +173,9 @@ if has("autocmd")
     au filetype git hi clear ExtraWhitespace
   augroup END
 endif
+" ------------------------------------------------------------------------- }}}
 
-"---------------------------------------------------------------------
-" Windows and tabs
-"---------------------------------------------------------------------
+" Windows and tabs {{{
 set winminwidth=0   " Windows can have zero width
 set winminheight=0  " Windows can have zero height
 
@@ -205,10 +193,9 @@ nmap <Leader>+       :tabnew<CR>
 nmap <Leader>-       :tabc<CR>
 nmap <Leader>>       :tabn<CR>
 nmap <Leader><       :tabp<CR>
+" ------------------------------------------------------------------------- }}}
 
-"---------------------------------------------------------------------
-" Miscellanouse key mappings and such
-"---------------------------------------------------------------------
+" Miscellanouse key mappings and such {{{
 
 " Highlight extra whitespace at the end of a line
 hi ExtraWhitespace ctermbg=red guibg=red
@@ -248,10 +235,9 @@ nnoremap <C-P> :prev<CR>
 nnoremap <Leader>ev :edit $MYVIMRC<CR>
 nnoremap <Leader>sv :source $MYVIMRC<CR>
 nnoremap <Leader>ep :exec 'edit' expand("$DOTFILES_DIR/vim/plugins.vimrc")<CR>
+" ------------------------------------------------------------------------- }}}
 
-"---------------------------------------------------------------------
-" FZF helpers
-"---------------------------------------------------------------------
+" FZF {{{
 
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
@@ -272,10 +258,9 @@ nnoremap <Leader>ff
 \     1
 \   )
 \ )<CR>
+" ------------------------------------------------------------------------- }}}
 
-"---------------------------------------------------------------------
-" Other plugin config
-"---------------------------------------------------------------------
+" Plugin config {{{
 
 " netrw preview in vertical splits, equal size, wide list style
 let g:netrw_preview = 1
@@ -305,3 +290,5 @@ let g:ruby_indent_assignment_style = 'variable'
 
 " Prefer :Remove over :Delete tpope/eunuch plugin
 autocmd VimEnter * silent! delc Delete
+
+" ------------------------------------------------------------------------- }}}
