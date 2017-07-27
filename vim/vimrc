@@ -246,9 +246,10 @@ command! -bang -nargs=* Rg
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
 
-nnoremap <Leader>ft :Tags<CR>
+nnoremap <Leader>ft :Tags!<CR>
 nnoremap <Leader>fb :Buffers<CR>
 nnoremap <Leader>fg :Rg!<CR>
+nnoremap <Leader>fm :Marks<CR>
 
 nnoremap <Leader>ff
 \ :call fzf#run(
