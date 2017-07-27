@@ -156,7 +156,7 @@ nnoremap - zm    " - increases fold level across buffer
 " ------------------------------------------------------------------------- }}}
 
 " Views {{{
-set viewdir=~/vim/view
+set viewdir=~/.vim/view
 autocmd BufWinLeave * if expand("%") != "" | silent! mkview | endif
 autocmd BufWinEnter * if expand("%") != "" | silent! loadview | endif
 " ------------------------------------------------------------------------- }}}
