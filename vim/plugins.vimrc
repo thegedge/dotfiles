@@ -84,11 +84,17 @@ if !exists("vimpager")
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
 
+  " Async linting
+  Plug 'w0rp/ale'
+
   " Autocomplete on type
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
-  " Async linting
-  Plug 'w0rp/ale'
+  " Language server support
+  Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+
+  " Show function signature and inline doc.
+  Plug 'Shougo/echodoc.vim'
 endif
 
 if installed_vim_plug == 1
