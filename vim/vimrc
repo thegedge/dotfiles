@@ -253,15 +253,8 @@ nnoremap <Leader>ft :Tags!<CR>
 nnoremap <Leader>fb :Buffers<CR>
 nnoremap <Leader>fg :Rg!<CR>
 nnoremap <Leader>fm :Marks<CR>
+nnoremap <Leader>ff :call fzf#run(fzf#wrap('files', { 'source': 'files', 'down': '40%' }, 1))<CR>
 
-nnoremap <Leader>ff
-\ :call fzf#run(
-\   fzf#wrap(
-\     'files',
-\     { 'source': 'files', 'down': '40%' },
-\     1
-\   )
-\ )<CR>
 " ------------------------------------------------------------------------- }}}
 
 " Plugin config {{{
@@ -292,7 +285,15 @@ let g:indentwise_equal_indent_skips_contiguous = 0
 " Indent blocks assigned to variables one level more than the level of the variable
 let g:ruby_indent_assignment_style = 'variable'
 
-" Prefer :Remove over :Delete tpope/eunuch plugin
+" Language server
+let g:LanguageClient_serverCommands = {
+\   'go': ['rustup', 'run', 'nightly', 'rls'],
+\ }
+
+let g:LanguageClient_autoStart = 1
+
+" Prefer :Remove over :Delete tpope/eunuch plugin because it interferes with
+" my :DeleteAllBuffers flow.
 autocmd VimEnter * silent! delc Delete
 
 " ------------------------------------------------------------------------- }}}
