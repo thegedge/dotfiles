@@ -24,7 +24,11 @@
 *.sqlite
 *.aff
 *.dic
+*.db
 tags
+cscope.out
+cscope.in.out
+cscope.po.out
 
 # OS-generated files, backup files, etc
 .DS_Store
@@ -45,3 +49,7 @@ Repo
 *.pro.user*
 *.pri.user*
 *.qbs.user*
+
+# Ruby things
+.byebug_history
+.pry_history
