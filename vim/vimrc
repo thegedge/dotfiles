@@ -1,4 +1,4 @@
-" Foo {{{
+" Plugin setup and other initialization {{{
 set nocompatible   " use vim defaults, not vi defaults
 if !exists("vimpager")
   let mapleader=" "  " space bar for leader
@@ -195,7 +195,7 @@ nmap <Leader>>       :tabn<CR>
 nmap <Leader><       :tabp<CR>
 " ------------------------------------------------------------------------- }}}
 
-" Miscellanouse key mappings and such {{{
+" Miscellanous key mappings and such {{{
 
 " Highlight extra whitespace at the end of a line
 hi ExtraWhitespace ctermbg=red guibg=red
