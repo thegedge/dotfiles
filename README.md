@@ -12,7 +12,7 @@ to simplify the process of getting up and running. If you like the YOLO
 approach of bootstrapping:
 
 ```
-curl -L https://github.com/thegedge/dotfiles/blob/master/install.sh | sh
+curl -L https://raw.githubusercontent.com/thegedge/dotfiles/master/install.sh | sh
 ```
 
 You can also download, verify, and manually run the script yourself, or pick
