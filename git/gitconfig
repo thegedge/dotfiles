@@ -58,6 +58,9 @@
 #[transfer]
 #	fsckobjects = true
 
+[merge]
+    conflictstyle = diff3
+
 [alias]
   # Short command names
   st = status
