@@ -9,6 +9,9 @@ alias df='df -h'
 alias top='top -o cpu -s 1'
 alias sedi='sed -i ""'
 
+# Ensure we get the term we expect on the remote end
+alias ssh='TERM=xterm-256color ssh'
+
 # Get the weather forecast :D
 alias forecast='curl wttr.in'
 
