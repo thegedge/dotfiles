@@ -253,7 +253,7 @@ nnoremap <Leader>ep :exec 'edit' expand("$DOTFILES_DIR/vim/plugins.vimrc")<CR>
 
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   'rg --vimgrep --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
@@ -267,6 +267,9 @@ nnoremap <Leader>ff :call fzf#run(fzf#wrap('files', { 'source': 'files', 'down':
 " ------------------------------------------------------------------------- }}}
 
 " Plugin config {{{
+
+" vim-markdown
+let g:markdown_fenced_languages = ['html', 'python', 'ruby', 'bash=sh']
 
 " netrw preview in vertical splits, equal size, wide list style
 let g:netrw_preview = 1
