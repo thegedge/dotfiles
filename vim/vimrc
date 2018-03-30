@@ -45,6 +45,15 @@ endif
 
 " Enable filetype-specific indenting and plugins
 filetype plugin indent on
+
+" Enhance some common highlights
+if has("autocmd")
+  augroup enhance_syntax
+    autocmd!
+    au VimEnter * highlight Comment cterm=italic gui=italic
+  augroup END
+endif
+
 " ------------------------------------------------------------------------- }}}
 
 " Basic configuration {{{
