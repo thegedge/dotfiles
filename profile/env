@@ -13,6 +13,11 @@ export GNUPGHOME="$HOME/.gnupg"
 export LANG='en_US.UTF-8'
 export LC_ALL="${LANG}"
 
+# Detect JAVA_HOME on Mac
+if [[ -x "/usr/libexec/java_home" ]]; then
+  export JAVA_HOME="$(/usr/libexec/java_home)"
+fi
+
 # Racer needs to know where the Rust source is
 export RUST_SRC_PATH="${CODE_DIR}/github.com/rust-lang/rust/src"
 
