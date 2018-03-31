@@ -1,12 +1,9 @@
-let installed_vim_plug = 0
-
-if !filereadable(g:vim_config_directory . '/autoload/plug.vim')
-  echo "Installing vim-plug.."
+if !filereadable($HOME. "/.vim/autoload/plug.vim")
+  echo "Installing vim-plug..."
   echo ""
   silent execute
-    \ '!curl -sfLo ' . g:vim_config_directory . '/autoload/plug.vim' . ' --create-dirs' .
+    \ '!curl -sfLo ~/.vim/autoload/plug.vim' . ' --create-dirs' .
     \ ' https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  let installed_vim_plug=1
 endif
 
 filetype off
@@ -95,12 +92,6 @@ if !exists("vimpager")
 
   " Show function signature and inline doc.
   Plug 'Shougo/echodoc.vim'
-endif
-
-if installed_vim_plug == 1
-  echo "Installing plugins..."
-  echo ""
-  PlugInstall
 endif
 
 call plug#end()

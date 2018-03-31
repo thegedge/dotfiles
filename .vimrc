@@ -4,17 +4,9 @@ if !exists("vimpager")
   let mapleader=" "  " space bar for leader
 endif
 
-let g:vim_config_directory = (expand("$VIM") =~ "nvim")
-  \ ? expand("$HOME/.config/nvim")
-  \ : expand("$HOME/.vim")
-
-" Source a file from a file in my dotfiles
-function! DotfilesSource(name)
-  let pluginrc = $DOTFILES_DIR . "/vim/" . a:name
-  if len($SUDO_USER) > 0
-    let pluginrc = $SUDO_USER . "/dotfiles/vim/" . a:name
-  endif
-
+" Source a file from ~/.vim
+function! VimDirSource(name)
+  let pluginrc = $HOME . "/.vim/" . a:name
   if filereadable(pluginrc)
     exec "source " . pluginrc
   else
@@ -22,9 +14,21 @@ function! DotfilesSource(name)
   endif
 endfunction
 
-call DotfilesSource("plugins.vimrc")
+call VimDirSource("plugins.vimrc")
+
 " ------------------------------------------------------------------------- }}}
 
+" Neovim config {{{
+
+if filereadable($PYENV_ROOT . '/versions/neovim2/bin/python')
+  let g:python_host_prog = $PYENV_ROOT . '/versions/neovim2/bin/python'
+end
+
+if filereadable($PYENV_ROOT . '/versions/neovim3/bin/python')
+  let g:python3_host_prog = $PYENV_ROOT . '/versions/neovim3/bin/python'
+end
+
+" ------------------------------------------------------------------------- }}}
 " Syntax coloring {{{
 colorscheme desert
 if &t_Co >= 256 || has("gui_running")
@@ -85,8 +89,8 @@ set grepprg=rg\ --vimgrep
 
 " Files to ignore when expanding wildcards
 set wildignore=*.swp,*.bak,*.pyc,*.class,*.o,.DS_Store
-if filereadable(expand("~/.gitignore_global"))
-  for line in readfile(expand("~/.gitignore_global"))
+if filereadable($HOME . "/.gitignore_global")
+  for line in readfile($HOME . "/.gitignore_global")
     if line =~ '^#' | con | endif
     if line == ''   | con | endif
     if line =~ '^!' | con | endif
@@ -122,9 +126,7 @@ set path+=./**
 " Backups, swaps, and temps
 set nobackup
 set noswapfile
-
-let &directory = g:vim_config_directory
-set directory+=/var/tmp,/tmp
+set directory=/var/tmp,/tmp
 
 " Set title in terminal window
 set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:p:h\")})%)%(\ %a%)
@@ -137,7 +139,7 @@ if &term == "screen" || &term =~? "^xterm"
 endif
 
 " Status line
-call DotfilesSource("statusline.vimrc")
+call VimDirSource("statusline.vimrc")
 " ------------------------------------------------------------------------- }}}
 
 " Search {{{
@@ -244,9 +246,9 @@ nnoremap <C-N> :next<CR>
 nnoremap <C-P> :prev<CR>
 
 " Simpify working with my vimrc files
-nnoremap <Leader>ev :edit $MYVIMRC<CR>
+nnoremap <Leader>ev :edit ~/.vimrc<CR>
 nnoremap <Leader>sv :source $MYVIMRC<CR>
-nnoremap <Leader>ep :exec 'edit' expand("$DOTFILES_DIR/vim/plugins.vimrc")<CR>
+nnoremap <Leader>ep :exec 'edit' $HOME . "/.vim/plugins.vimrc"<CR>
 " ------------------------------------------------------------------------- }}}
 
 " FZF {{{
@@ -269,7 +271,8 @@ nnoremap <Leader>ff :call fzf#run(fzf#wrap('files', { 'source': 'files', 'down':
 " Plugin config {{{
 
 " vim-markdown
-let g:markdown_fenced_languages = ['html', 'python', 'ruby', 'bash=sh']
+let g:markdown_syntax_conceal = 0
+let g:markdown_fenced_languages = ['html', 'python', 'ruby', 'sh', 'vim']
 
 " netrw preview in vertical splits, equal size, wide list style
 let g:netrw_preview = 1

@@ -1,7 +1,7 @@
 #-----------------------------------------------------------------------------
 : Create functions from all source files in functions.d.
 #-----------------------------------------------------------------------------
-FUNCTIONS_DIR="${DOTFILES_DIR}/profile/profile.d/functions.d"
+FUNCTIONS_DIR="$HOME/profile/profile.d/functions.d"
 case "${MYSHELL}" in
   zsh)
     fpath+=( "${FUNCTIONS_DIR}" )

@@ -18,8 +18,12 @@ alias forecast='curl wttr.in'
 # Upgrade all Pip packages
 alias pipupgrade="pip freeze --local | grep -v '^-e' | cut -d = -f 1 | sed '/vboxapi/d' | xargs pip install -U"
 
-# Update my dotfiles
-alias updot="git -C ${HOME}/dotfiles --no-pager incoming && git -C ${HOME}/dotfiles rebase origin/master && git -C ${HOME}/dotfiles subup"
-
 # Run an NPM binary
 alias npm-bin='PATH=$(npm bin):$PATH'
+
+# Manage my dotfiles
+alias dotfiles="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+
+# Update my dotfiles
+alias updot="dotfiles --no-pager incoming && dotfiles rebase origin/master && dotfiles subup"
+

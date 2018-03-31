@@ -33,8 +33,8 @@ if [[ -e "$HOME/.profile" ]]; then
   source "$HOME/.profile"
 fi
 
-if [[ -e "${DOTFILES_DIR}/zsh/key-bindings.zsh" ]]; then
-  source "${DOTFILES_DIR}/zsh/key-bindings.zsh"
+if [[ -e "$HOME/zsh/key-bindings.zsh" ]]; then
+  source "$HOME/zsh/key-bindings.zsh"
 fi
 
 if [[ -e "$HOME/.fzf.zsh" ]]; then
@@ -49,7 +49,7 @@ alias -s code=_code_cd
 : Prezto-y things
 #----------------------------------------------------------------------
 #
-fpath+=($DOTFILES_DIR/zsh/functions)
+fpath+=($HOME/zsh/functions)
 
 autoload -Uz git-info
 autoload -Uz git-dir
@@ -195,7 +195,7 @@ zstyle ':completion:*:(ssh|scp|rsync):*:hosts-host' ignored-patterns '*(.|:)*' l
 zstyle ':completion:*:(ssh|scp|rsync):*:hosts-domain' ignored-patterns '<->.<->.<->.<->' '^[-[:alnum:]]##(.[-[:alnum:]]##)##' '*@*'
 zstyle ':completion:*:(ssh|scp|rsync):*:hosts-ipaddr' ignored-patterns '^(<->.<->.<->.<->|(|::)([[:xdigit:].]##:(#c,2))##(|%*))' '127.0.0.<->' '255.255.255.255' '::1' 'fe80::*'
 
-fpath+=($DOTFILES_DIR/zsh/completions/src)
+fpath+=($HOME/zsh/completions/src)
 
 autoload -Uz compinit && compinit -i
 

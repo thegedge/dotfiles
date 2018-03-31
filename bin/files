@@ -1,3 +1,4 @@
+#!/bin/zsh
 #
 # Use different commands to quickly find files under the current directory based
 # on various conditions
