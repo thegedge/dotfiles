@@ -7,12 +7,23 @@ My personal dotfiles. Comes with:
 
 # Installation
 
+## Basic setup
+
 ```sh
 git clone --bare https://github.com/thegedge/dotfiles.git $HOME/.dotfiles
-git --git-dir=$HOME/.dotfiles checkout master
+git --git-dir=$HOME/.dotfiles --work-tree=$HOME checkout master
 exec zsh
 dotfiles submodule update --init
 dotfiles config --local status.showUntrackedFiles no
-vim +PlugUpdate
+vim +UpdateRemotePlugins +PlugUpdate
 exec zsh
+```
+
+## Powerline fonts
+
+```sh
+TMPDIR=/tmp
+git clone --depth=1 'https://github.com/powerline/fonts.git' "$TMPDIR/powerline-fonts"
+$TMPDIR/powerline-fonts/install.sh
+rm -rf "$TMPDIR/powerline-fonts"
 ```
