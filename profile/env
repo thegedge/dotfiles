@@ -21,6 +21,11 @@ fi
 # Racer needs to know where the Rust source is
 export RUST_SRC_PATH="${CODE_DIR}/github.com/rust-lang/rust/src"
 
+# If pyenv installed, add bin to path
+if [[ -d "${HOME}/.pyenv/bin" ]]; then
+  export PATH="${HOME}/.pyenv/bin:${PATH}"
+fi
+
 # Go-style layout right at $HOME
 export GOPATH="${HOME}"
 
