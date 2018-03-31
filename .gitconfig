@@ -26,9 +26,6 @@
   excludesfile = ~/.gitignore_global
   autocrlf = false
 
-[credential]
-  helper = osxkeychain
-
 [diff]
   renames = copies
   compactionHeuristic = true
