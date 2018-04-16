@@ -126,3 +126,6 @@
 
   # Clone a GitHub repo
   hub = !"__f() { unset GIT_WORK_TREE; git clone -- git@github.com:$1.git ${CODE_DIR}/github.com/$1; cd ${CODE_DIR}/github.com/$1; }; __f"
+
+  # Clone a GitLab repo
+  lab = !"__f() { unset GIT_WORK_TREE; git clone -- git@gitlab.com:$1.git ${CODE_DIR}/gitlab.com/$1; cd ${CODE_DIR}/gitlab.com/$1; }; __f"
