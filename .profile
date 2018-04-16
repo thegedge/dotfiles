@@ -20,4 +20,4 @@ if [[ -e "$HOME/profile/profile.d" ]]; then
 fi
 
 # Clean up path variable
-export PATH="$(echo "${PATH}" | awk -v RS=':' -v ORS=':' '!a[$1]++ { print $1 }')"
+export PATH="$(echo "${PATH}" | awk -v RS=':' -v ORS=':' '!a[$0]++')"
