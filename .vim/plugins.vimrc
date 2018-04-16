@@ -31,8 +31,8 @@ Plug 'mxw/vim-jsx',                    { 'for': 'javascript.jsx' }
 Plug 'solarnz/thrift.vim',             { 'for': 'thrift' }
 Plug 'google/vim-jsonnet',             { 'for': 'jsonnet' }
 
-Plug 'kana/vim-textobj-user' |
-\ Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
+Plug 'kana/vim-textobj-user'
+Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
 
 Plug 'powerman/vim-plugin-AnsiEsc',    { 'on': 'AnsiEsc' }
 
@@ -86,7 +86,9 @@ if !exists("vimpager")
 
   " Autocomplete on type
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-
+  Plug 'sebastianmarkow/deoplete-rust'
+  Plug 'zchee/deoplete-go'
+  Plug 'zchee/deoplete-jedi'
   " Language server support
   Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 

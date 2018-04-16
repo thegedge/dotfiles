@@ -291,6 +291,9 @@ let g:indentLine_fileTypeExclude = ['help', 'man']
 " Deoplete configuration
 let g:deoplete#enable_at_startup = 1
 
+let g:deoplete#sources#rust#racer_binary = $HOME . '/.cargo/bin/racer'
+let g:deoplete#sources#rust#rust_source_path = $CODE_DIR . '/github.com/rust-lang/rust/src'
+
 " Don't have a passthrough for vimpager
 let g:vimpager_passthrough = 0
 
