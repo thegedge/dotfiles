@@ -113,7 +113,7 @@ set nolist           " don't show non-printable characters
 let &listchars="eol:\u00B7,tab:\u25B9\ "
 
 " Fill characters
-let &fillchars="vert:\u2577,fold:\u254C"
+let &fillchars="vert:\uFF5C,fold:\u254C"
 
 " Dictionary for CTRL+P and CTRL+N auto-completion
 set dictionary=~/.ispell_english,/usr/share/dict/words
@@ -269,6 +269,9 @@ nnoremap <Leader>ff :call fzf#run(fzf#wrap('files', { 'source': 'files', 'down':
 " ------------------------------------------------------------------------- }}}
 
 " Plugin config {{{
+
+" vim-fugitive
+noremap gb :Gbrowse!<CR>gv:Gbrowse<CR>
 
 " vim-markdown
 let g:markdown_syntax_conceal = 0
