@@ -5,7 +5,7 @@ function main {
   # TODO figure out whether or not to use color from config
 
   git blame -p "$@" \
-    | COLUMN_SIZE="${column_size}" awk -f "${DOTFILES_DIR}/bin/parse-git-blame.awk" \
+    | COLUMN_SIZE="${column_size}" awk -f "${HOME}/bin/parse-git-blame.awk" \
     | eval "${pager}"
 }
 
