@@ -1,3 +1,4 @@
+#!/bin/zsh
 local -a search_dirs
 
 if [[ -e "${CODE_DIR}" ]]; then
@@ -5,7 +6,7 @@ if [[ -e "${CODE_DIR}" ]]; then
 fi
 
 for depth in {3..5}; do
-  local output=$(find ${search_dirs[@]} -path "*/$1" -type d -mindepth $depth -maxdepth $depth -print -quit)
+  local output=$(find ${search_dirs[@]} -mindepth $depth -maxdepth $depth -type d -path "*/$1" -print -quit)
   if [[ -n "${output}" ]]; then
     echo "${output}"
     return 0
