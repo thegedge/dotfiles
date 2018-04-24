@@ -1,0 +1,1 @@
+set formatprg=xmllint\ --format\ -
