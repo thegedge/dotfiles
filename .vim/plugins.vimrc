@@ -17,7 +17,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'cakebaker/scss-syntax.vim',      { 'for': 'scss' }
 Plug 'ebfe/vim-racer',                 { 'for': 'rust' }
 Plug 'wting/rust.vim',                 { 'for': 'rust' }
-Plug 'fatih/vim-go',                   { 'for': 'go' }
+Plug 'fatih/vim-go',                   { 'for': 'go', 'do': ':GoUpdateBinaries' }
 Plug 'peterhoeg/vim-qml',              { 'for': 'qml' }
 Plug 'tpope/vim-markdown',             { 'for': 'markdown' }
 Plug 'vim-scripts/gcov.vim',           { 'for': 'gcov' }

@@ -80,6 +80,9 @@ set synmaxcol=200    " max cols to search for syntax highlighting
 "set scrolloff=999999 " keep cursor centered vertically
 set relativenumber   " relative line number offsets in the gutter
 
+" Don't show a preview of the doc information
+set completeopt-=preview
+
 " Autocompletion when typing commands shows options above instead of inline
 set wildmenu
 set wildmode=full
@@ -308,7 +311,7 @@ let g:ruby_indent_assignment_style = 'variable'
 
 " Language server
 let g:LanguageClient_serverCommands = {
-\   'go': ['rustup', 'run', 'nightly', 'rls'],
+\   'rust': ['rustup', 'run', 'nightly', 'rls'],
 \ }
 
 let g:LanguageClient_autoStart = 1
