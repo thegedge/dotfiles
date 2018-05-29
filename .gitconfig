@@ -43,6 +43,7 @@
   diffFilter = diff-so-fancy
 
 [log]
+  date = local
   decorate = true
   topo-order = true
 
