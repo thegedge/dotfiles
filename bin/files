@@ -20,7 +20,7 @@ main() {
     find "${CWD}" -type d -name '.*' -prune \
       -or -not -name '.*' -type f -maxdepth "${MAX_DEPTH}" -print
   fi \
-    | sed -E '/^\/?(\.git|\.hg|\.svn|.*\.app|Godeps|target|_site|tmp|vendor)/d' \
+    | egrep -v '^/?(\.git|\.hg|\.svn|.*\.app|Godeps|target|_site|tmp|vendor)' \
     | head -n "${MAX_FILES}"
 }
 
