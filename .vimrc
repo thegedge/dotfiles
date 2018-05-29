@@ -61,24 +61,23 @@ endif
 " ------------------------------------------------------------------------- }}}
 
 " Basic configuration {{{
-set nowrap           " no line wrapping
-set showmatch        " show matching brackets
-set mouse=           " disable mouse
-set hidden           " buffers are hidden instead of closed
-set showtabline=2    " always show tab bar at top
-set laststatus=2     " always show status line
-set history=1000     " remember more commands
-set autowrite        " write on :next, :prev, :!, etc
-set undolevels=1000  " max number of changes to remember
-set visualbell       " no beeps
-set noerrorbells     " no beeps
-set confirm          " confirm changes before closing buffers
-set splitright       " vertical splits on the right
-set autoindent       " automatic indentation
+set nowrap                " no line wrapping
+set showmatch             " show matching brackets
+set mouse=                " disable mouse
+set hidden                " buffers are hidden instead of closed
+set showtabline=2         " always show tab bar at top
+set laststatus=2          " always show status line
+set history=1000          " remember more commands
+set autowrite             " write on :next, :prev, :!, etc
+set undolevels=1000       " max number of changes to remember
+set visualbell            " no beeps
+set noerrorbells          " no beeps
+set confirm               " confirm changes before closing buffers
+set splitright            " vertical splits on the right
+set autoindent            " automatic indentation
 set background=dark
-set synmaxcol=200    " max cols to search for syntax highlighting
-"set scrolloff=999999 " keep cursor centered vertically
-set relativenumber   " relative line number offsets in the gutter
+set synmaxcol=200         " max cols to search for syntax highlighting
+set norelativenumber      " relative line number offsets in the gutter
 
 " Don't show a preview of the doc information
 set completeopt-=preview
