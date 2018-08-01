@@ -19,5 +19,9 @@ if [[ -e "$HOME/profile/profile.d" ]]; then
   done
 fi
 
-# Clean up path variable
-export PATH="$(echo "${PATH}" | awk -v RS=':' -v ORS=':' '!a[$0]++')"
+# Clean up PATH
+#  - remove duplicates
+#  - remove trailing separator
+#  - remove empt PATH components (which can be resolved to current working directory)
+#
+PATH="$(printf "%s" "${PATH}" | awk -v RS=':' -v ORS=':' '!a[$0]++' | sed -e 's/:+/:/g' -e 's/:$//')"
