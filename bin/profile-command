@@ -14,7 +14,12 @@ profile-command() {
   done
 
   for x in $(seq 1 "${num_iters}"); do
-    times+=($(eval "$@" | awk "${awk_script}"))
+    local timing="$(eval "$@" | awk "${awk_script}")"
+    if [[ -z "${timing}" ]]; then
+      echo "Timing was empty. Exiting..." >&2
+      exit 1
+    fi
+    times+=()
   done
 
   ruby -- - "${times[@]}" <<-EOS

@@ -16,6 +16,9 @@ endfunction
 
 call VimDirSource("plugins.vimrc")
 
+" Enable filetype-specific indenting and plugins
+filetype plugin on
+
 " ------------------------------------------------------------------------- }}}
 
 " Neovim config {{{
@@ -46,9 +49,6 @@ endif
 if &t_Co > 1
   syntax enable
 endif
-
-" Enable filetype-specific indenting and plugins
-filetype plugin indent on
 
 " Enhance some common highlights
 if has("autocmd")

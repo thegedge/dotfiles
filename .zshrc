@@ -6,13 +6,16 @@ if [[ -n "${TRACING}" ]]; then
   zmodload zsh/datetime
   setopt promptsubst
   PROFILE_START_TIME="${EPOCHREALTIME}"
+
   # Set the trace prompt to include seconds, nanoseconds, script name and
   # line number This is GNU date syntax; by default Macs ship with the BSD
   # date program, which isn't compatible
   PS4='$(( 1000*(EPOCHREALTIME - PROFILE_START_TIME) )) %N:%i> '
+
   # Save file stderr to file descriptor 3 and redirect stderr (including
   # trace output) to a file with the script's PID as an extension.
   exec 3>&2 2>/tmp/startlog.$$
+
   # Set options to turn on tracing/expansion of commands contained in the
   # prompt.
   setopt xtrace prompt_subst
@@ -197,7 +200,7 @@ zstyle ':completion:*:(ssh|scp|rsync):*:hosts-ipaddr' ignored-patterns '^(<->.<-
 
 fpath+=($HOME/zsh/completions/src)
 
-autoload -Uz compinit && compinit -i
+autoload -Uz compinit && compinit -d
 
 #----------------------------------------------------------------------
 # Disable tracing
@@ -205,8 +208,32 @@ autoload -Uz compinit && compinit -i
 if [[ -n "${TRACING}" ]]; then
   # Turn off tracing.
   unsetopt xtrace
+
   # Restore stderr to the value saved in FD 3.
   exec 2>&3 3>&-
+
+  # Convert to CSV
+  ruby --disable-all -rcsv <<EOS
+  lines = File.readlines("/tmp/startlog.$$")
+  lines.map! { |l| l.chomp.match(/^(\\d+\\.\\d*) ([^:]+):(\\d+)> (.*)$/).captures }
+  lines.map! { |a, b, c, d| [a.to_f, b, c.to_i, d] }
+
+  headers = ["time taken (ms)", "sourced file", "line number", "line"]
+  data = lines.each_cons(2).map do |(prev_time, _, _, _), (time, fname, line_num, line)|
+    [time - prev_time, fname, line_num, line]
+  end
+
+  #headers = ["file", "sourcing time (ms)"]
+  #data = lines.chunk { |x| x[1] }
+  #data = data.map { |fname, times| [fname, times[-1][0] - times[0][0]] }
+
+  CSV.open("/tmp/startlog.$$", "wb") do |csv|
+    csv << headers
+    data.each { |d| csv << d }
+  end
+EOS
+
   # Check out the startup log
-  $PAGER /tmp/startlog.$$
+  vim +'set ft=csv' /tmp/startlog.$$
+  rm /tmp/startlog.$$
 fi

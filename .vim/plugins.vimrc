@@ -30,7 +30,7 @@ Plug 'kchmck/vim-coffee-script',       { 'for': 'coffee' }
 Plug 'mxw/vim-jsx',                    { 'for': 'javascript.jsx' }
 Plug 'solarnz/thrift.vim',             { 'for': 'thrift' }
 Plug 'google/vim-jsonnet',             { 'for': 'jsonnet' }
-Plug 'chrisbra/csv.vim',               { 'for': 'csv' }
+Plug 'chrisbra/csv.vim' ",               { 'for': 'csv' }  can't do this because it causes errors :(
 
 Plug 'kana/vim-textobj-user'
 Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
