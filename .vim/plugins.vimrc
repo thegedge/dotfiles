@@ -30,6 +30,7 @@ Plug 'kchmck/vim-coffee-script',       { 'for': 'coffee' }
 Plug 'mxw/vim-jsx',                    { 'for': 'javascript.jsx' }
 Plug 'solarnz/thrift.vim',             { 'for': 'thrift' }
 Plug 'google/vim-jsonnet',             { 'for': 'jsonnet' }
+Plug 'chrisbra/csv.vim',               { 'for': 'csv' }
 
 Plug 'kana/vim-textobj-user'
 Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
@@ -89,6 +90,7 @@ if !exists("vimpager")
   Plug 'sebastianmarkow/deoplete-rust'
   Plug 'zchee/deoplete-go'
   Plug 'zchee/deoplete-jedi'
+
   " Language server support
   Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 
