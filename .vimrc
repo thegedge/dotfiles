@@ -122,7 +122,7 @@ set dictionary=~/.ispell_english,/usr/share/dict/words
 set complete=.,w,b,k,t
 set keywordprg=dict
 
-" So find looks in the current directory tree
+" So :find looks in the current directory tree
 set path+=./**
 
 " Backups, swaps, and temps
@@ -170,6 +170,7 @@ nnoremap - zm    " - increases fold level across buffer
 
 " Views {{{
 set viewdir=~/.vim/view
+set viewoptions-=curdir
 autocmd BufWinLeave * if expand("%") != "" | silent! mkview | endif
 autocmd BufWinEnter * if expand("%") != "" | silent! loadview | endif
 " ------------------------------------------------------------------------- }}}
