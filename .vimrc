@@ -76,7 +76,7 @@ set confirm               " confirm changes before closing buffers
 set splitright            " vertical splits on the right
 set autoindent            " automatic indentation
 set background=dark
-set synmaxcol=200         " max cols to search for syntax highlighting
+set synmaxcol=500         " max cols to search for syntax highlighting
 set norelativenumber      " relative line number offsets in the gutter
 
 " Don't show a preview of the doc information
@@ -102,9 +102,9 @@ endif
 
 " Whitespace behaviour
 set expandtab        " expand tabs by default
-set tabstop=4        " number of spaces a <Tab> character equals
-set softtabstop=4    " number of spaces a <Tab> character equals (insert mode)
-set shiftwidth=4     " number of spaces to use for indenting
+set tabstop=2        " number of spaces a <Tab> character equals
+set softtabstop=2    " number of spaces a <Tab> character equals (insert mode)
+set shiftwidth=2     " number of spaces to use for indenting
 set smartindent      " smart autoindent on new lines
 set smarttab         " smart <Tab> behaviour at start of line
 set copyindent       " copy indent structure when making new lines
