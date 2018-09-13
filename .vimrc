@@ -77,6 +77,7 @@ set splitright            " vertical splits on the right
 set autoindent            " automatic indentation
 set background=dark
 set synmaxcol=500         " max cols to search for syntax highlighting
+set number                " Show line numbers in the gutter
 set norelativenumber      " relative line number offsets in the gutter
 
 " Don't show a preview of the doc information
