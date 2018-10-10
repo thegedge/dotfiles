@@ -17,7 +17,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'cakebaker/scss-syntax.vim',      { 'for': 'scss' }
 Plug 'ebfe/vim-racer',                 { 'for': 'rust' }
 Plug 'wting/rust.vim',                 { 'for': 'rust' }
-Plug 'fatih/vim-go',                   { 'for': 'go', 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go',                   { 'for': 'go', 'do': ':GoInstallBinaries' }
 Plug 'peterhoeg/vim-qml',              { 'for': 'qml' }
 Plug 'tpope/vim-markdown',             { 'for': 'markdown' }
 Plug 'vim-scripts/gcov.vim',           { 'for': 'gcov' }
@@ -30,7 +30,7 @@ Plug 'kchmck/vim-coffee-script',       { 'for': 'coffee' }
 Plug 'mxw/vim-jsx',                    { 'for': 'javascript.jsx' }
 Plug 'solarnz/thrift.vim',             { 'for': 'thrift' }
 Plug 'google/vim-jsonnet',             { 'for': 'jsonnet' }
-Plug 'chrisbra/csv.vim' ",               { 'for': 'csv' }  can't do this because it causes errors :(
+Plug 'chrisbra/csv.vim',               { 'for': 'csv' }
 
 Plug 'kana/vim-textobj-user'
 Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
@@ -90,9 +90,6 @@ if !exists("vimpager")
   Plug 'sebastianmarkow/deoplete-rust'
   Plug 'zchee/deoplete-go'
   Plug 'zchee/deoplete-jedi'
-
-  " Language server support
-  Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 
   " Show function signature and inline doc.
   Plug 'Shougo/echodoc.vim'

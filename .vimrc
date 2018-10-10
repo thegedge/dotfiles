@@ -32,6 +32,7 @@ if filereadable($PYENV_ROOT . '/versions/neovim3/bin/python')
 end
 
 " ------------------------------------------------------------------------- }}}
+
 " Syntax coloring {{{
 colorscheme desert
 if &t_Co >= 256 || has("gui_running")
@@ -304,18 +305,14 @@ let g:deoplete#sources#rust#rust_source_path = $CODE_DIR . '/github.com/rust-lan
 " Don't have a passthrough for vimpager
 let g:vimpager_passthrough = 0
 
+" Ale (asynchronous linting engine)
+let g:ale_completion_enabled = 1
+
 " Don't require different indent levels in between lines when jumping between equal indents
 let g:indentwise_equal_indent_skips_contiguous = 0
 
 " Indent blocks assigned to variables one level more than the level of the variable
 let g:ruby_indent_assignment_style = 'variable'
-
-" Language server
-let g:LanguageClient_serverCommands = {
-\   'rust': ['rustup', 'run', 'nightly', 'rls'],
-\ }
-
-let g:LanguageClient_autoStart = 1
 
 " Prefer :Remove over :Delete tpope/eunuch plugin because it interferes with
 " my :DeleteAllBuffers flow.
