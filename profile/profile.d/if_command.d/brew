@@ -5,6 +5,8 @@ export MANPATH="${HOMEBREW_PREFIX}/man:${MANPATH}"
 export BOOST_ROOT="${HOMEBREW_PREFIX}"
 export ANDROID_HOME="${HOMEBREW_PREFIX}"
 
+export HOMEBREW_NO_ANALYTICS=1
+
 alias cask='brew cask'
 
 # Use LibClang with Python
