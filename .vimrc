@@ -187,6 +187,7 @@ if has("autocmd")
     autocmd!
     au filetype diff hi clear ExtraWhitespace
     au filetype git hi clear ExtraWhitespace
+    au filetype man hi clear ExtraWhitespace
   augroup END
 endif
 " ------------------------------------------------------------------------- }}}
@@ -270,6 +271,8 @@ nnoremap <Leader>fb :Buffers<CR>
 nnoremap <Leader>fg :Rg!<CR>
 nnoremap <Leader>fm :Marks<CR>
 nnoremap <Leader>ff :call fzf#run(fzf#wrap('files', { 'source': 'files', 'down': '40%' }, 1))<CR>
+
+nnoremap gr :Rg <C-R><C-W><CR>
 
 " ------------------------------------------------------------------------- }}}
 
