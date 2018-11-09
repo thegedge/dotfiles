@@ -29,6 +29,7 @@
 [diff]
   renames = copies
   compactionHeuristic = true
+  algorithm = patience
 
 [difftool]
   prompt = false
@@ -57,7 +58,10 @@
 #	fsckobjects = true
 
 [merge]
-    conflictstyle = diff3
+  conflictstyle = diff3
+
+[protocol]
+  version = 2
 
 [alias]
   # Short command names
