@@ -1,3 +1,7 @@
+[user]
+  name = "Jason Gedge"
+  useConfigOnly = true
+
 [include]
   path = ~/.gitconfig_private
 
@@ -39,9 +43,6 @@
 
 [fetch]
   prune = true
-
-[interactive]
-  diffFilter = diff-so-fancy
 
 [log]
   date = local
