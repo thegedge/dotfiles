@@ -219,17 +219,20 @@ hi ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\v\s+$/
 
 " Color column at 80 characters for soft limit, 100+ for hard limit
-let columns = '80,100,'.join(range(120, 500), ',')
-execute 'set colorcolumn=' . columns
+let columns = '81,101,'.join(range(121, 500), ',')
+let &colorcolumn = columns
 
 " Improve source code indenting
 "   (0 - with unclosed parentheses, line up in front of open paren
-"set cindent
+" TODO: tweak me for various formats
 set cino='(0'
 
-" Execute :Ag searches for things under the cursor
-nnoremap gA :Ag '<C-R><C-W>'<CR>
-vnoremap gA y:Ag '<C-R>"'<CR>
+" up/down movement is always screen-based, rather than line based (e.g., when
+" wrapping enabled)
+nnoremap j gj
+nnoremap k gk
+nnoremap <Down> gj
+nnoremap <Up> gk
 
 " typing a semi-colon starts command (normal mode)
 nnoremap ; :
@@ -242,6 +245,9 @@ nnoremap Q gwap
 vnoremap Q gq
 
 " Tab toggles hidden characters (normal mode)
+nnoremap <Tab> :let &background = ( &background == "dark"? "light" : "dark" )<CR>
+
+" Tab toggles light/dark background
 nnoremap <Tab> :let &background = ( &background == "dark"? "light" : "dark" )<CR>
 
 " Reloads a file
@@ -273,6 +279,7 @@ nnoremap <Leader>fm :Marks<CR>
 nnoremap <Leader>ff :call fzf#run(fzf#wrap('files', { 'source': 'files', 'down': '40%' }, 1))<CR>
 
 nnoremap gr :Rg <C-R><C-W><CR>
+vnoremap gr y:Rg '<C-R>"'<CR>
 
 " ------------------------------------------------------------------------- }}}
 
