@@ -1,0 +1,2 @@
+# Upgrade all Pip packages
+alias pipupgrade="pip freeze --local | grep -v '^-e' | cut -d = -f 1 | sed '/vboxapi/d' | xargs pip install -U"
