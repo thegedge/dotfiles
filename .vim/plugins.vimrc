@@ -68,6 +68,9 @@ if !exists("vimpager")
   " Text object for function arguments (a, and i,)
   Plug 'PeterRincker/vim-argumentative'
 
+	" Add "end" structures to "start" structures
+	Plug 'tpope/vim-endwise'
+
   " Git support
   Plug 'tpope/vim-fugitive' |
   \ Plug 'tpope/vim-rhubarb'
