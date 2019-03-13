@@ -19,6 +19,11 @@ if [[ -e "$HOME/profile/profile.d" ]]; then
   done
 fi
 
+if command -v direnv >/dev/null; then
+  eval "$(direnv hook zsh)"
+fi
+
+
 # Clean up PATH
 #  - remove duplicates
 #  - remove trailing separator
