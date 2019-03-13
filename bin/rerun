@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# reruns `$1 $2...` on changes to $1
+
+function kill_and_wait {
+  if [[ -n "$1" ]]; then
+    kill "$1"
+    wait "$1" 2>/dev/null
+  fi
+}
+
+function main {
+  local cmd=$1; shift
+
+  fswatch -0 "$cmd" | (
+    $cmd "$@" &
+    cmd_pid=$!
+
+    trap 'kill "${cmd_pid}"' INT TERM
+
+    while read -rd ""; do
+      kill_and_wait "${cmd_pid}"
+
+      $cmd "$@" &
+      cmd_pid=$!
+    done
+  )
+}
+
+main "$@"
