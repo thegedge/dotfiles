@@ -16,16 +16,11 @@ endfunction
 
 call VimDirSource("plugins.vimrc")
 
-" Enable filetype-specific indenting and plugins
 filetype plugin on
 
 " ------------------------------------------------------------------------- }}}
 
 " Neovim config {{{
-
-if filereadable($PYENV_ROOT . '/versions/neovim2/bin/python')
-  let g:python_host_prog = $PYENV_ROOT . '/versions/neovim2/bin/python'
-end
 
 if filereadable($PYENV_ROOT . '/versions/neovim3/bin/python')
   let g:python3_host_prog = $PYENV_ROOT . '/versions/neovim3/bin/python'
@@ -83,6 +78,7 @@ set norelativenumber      " relative line number offsets in the gutter
 
 " Don't show a preview of the doc information
 set completeopt-=preview
+set complete=.,w,b,i,t
 
 " Autocompletion when typing commands shows options above instead of inline
 set wildmenu
@@ -121,7 +117,6 @@ let &fillchars="vert:\uFF5C,fold:\u254C"
 
 " Dictionary for CTRL+P and CTRL+N auto-completion
 set dictionary=~/.ispell_english,/usr/share/dict/words
-set complete=.,w,b,k,t
 set keywordprg=dict
 
 " So :find looks in the current directory tree
@@ -144,6 +139,7 @@ endif
 
 " Status line
 call VimDirSource("statusline.vimrc")
+
 " ------------------------------------------------------------------------- }}}
 
 " Search {{{
@@ -159,6 +155,7 @@ nmap <silent> <Leader>/ :nohlsearch<CR>
 " n/N will move to the next/previous result and center line on screen
 nnoremap n nzz
 nnoremap N Nzz
+
 " ------------------------------------------------------------------------- }}}
 
 " Folds {{{
@@ -168,17 +165,24 @@ set foldlevel=100         " 'disable' folding at first
 nnoremap <silent> <Leader><Space> @=(foldlevel('.') ? 'za' : "\<Space>")<CR>
 nnoremap + zr    " + reduces fold level across buffer
 nnoremap - zm    " - increases fold level across buffer
+
 " ------------------------------------------------------------------------- }}}
 
 " Views {{{
 set viewdir=~/.vim/view
-set viewoptions-=curdir
-autocmd BufWinLeave * if expand("%") != "" | silent! mkview | endif
-autocmd BufWinEnter * if expand("%") != "" | silent! loadview | endif
+set viewoptions=folds,cursor
+
+augroup Views
+  au!
+  autocmd BufWinLeave * if expand("%") != "" | silent! mkview | endif
+  autocmd BufWinEnter * if expand("%") != "" | silent! loadview | endif
+augroup END
+
 " ------------------------------------------------------------------------- }}}
 
 " ctags {{{
 " autocmd BufWritePost * call jobstart(['ctags', '-R'])
+
 " ------------------------------------------------------------------------- }}}
 
 " Filetype specifics {{{
@@ -190,6 +194,7 @@ if has("autocmd")
     au filetype man hi clear ExtraWhitespace
   augroup END
 endif
+
 " ------------------------------------------------------------------------- }}}
 
 " Windows and tabs {{{
@@ -210,6 +215,13 @@ nmap <Leader>+       :tabnew<CR>
 nmap <Leader>-       :tabc<CR>
 nmap <Leader>>       :tabn<CR>
 nmap <Leader><       :tabp<CR>
+
+" Close location list if there's nothing in there
+augroup LocationList
+  au!
+  autocmd BufWritePost * if get(getloclist(0, {"size": 0}), "size") == 0 | silent! lcl | endif
+augroup END
+
 " ------------------------------------------------------------------------- }}}
 
 " Miscellanous key mappings and such {{{
@@ -288,17 +300,26 @@ vnoremap gr y:Rg '<C-R>"'<CR>
 " vim-fugitive
 noremap gb :Gbrowse!<CR>gv:Gbrowse<CR>
 
+" Not a fan of rustfmt defaults. Need to figure out a configuration that I do like.
+let g:rustfmt_autosave = 0
+
 " vim-markdown
 let g:markdown_syntax_conceal = 0
 let g:markdown_fenced_languages = ['html', 'python', 'ruby', 'sh', 'vim']
 
 " netrw preview in vertical splits, equal size, wide list style
-let g:netrw_preview = 1
+let g:netrw_preview = 0
 let g:netrw_winsize = 0
 let g:netrw_liststyle = 3
 
 " Syntastic defaults to passive mode
 let g:syntastic_mode_map = {'mode': 'passive'}
+
+" vim-go use goimports by default
+let g:go_fmt_command = 'goimports'
+
+" vim-diminactive should turn off syntax on inactive buffers
+let g:diminactive_use_syntax = 1
 
 " Indent guides
 let g:indentLine_char = '┆'
@@ -306,17 +327,24 @@ let g:indentLine_first_char = '┆'
 let g:indentLine_showFirstIndentLevel = 1
 let g:indentLine_fileTypeExclude = ['help', 'man']
 
-" Deoplete configuration
+" Deoplete config
 let g:deoplete#enable_at_startup = 1
-
 let g:deoplete#sources#rust#racer_binary = $HOME . '/.cargo/bin/racer'
 let g:deoplete#sources#rust#rust_source_path = $CODE_DIR . '/github.com/rust-lang/rust/src'
+
+" Rust racer completion
+let g:racer_cmd = $HOME . '/.cargo/bin/racer'
+let g:racer_experimental_completer = 1
+let g:racer_insert_paren = 1
 
 " Don't have a passthrough for vimpager
 let g:vimpager_passthrough = 0
 
 " Ale (asynchronous linting engine)
 let g:ale_completion_enabled = 1
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 1
+let g:ale_rust_cargo_default_feature_behavior = 'all'
 
 " Don't require different indent levels in between lines when jumping between equal indents
 let g:indentwise_equal_indent_skips_contiguous = 0
