@@ -53,3 +53,7 @@ Repo
 # Ruby things
 .byebug_history
 .pry_history
+.bundle
+
+# direnv
+.envrc

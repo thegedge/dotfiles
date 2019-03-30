@@ -70,8 +70,6 @@
   co = checkout
   eb = enhanced-blame
   head = rev-parse HEAD
-  thisweek = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' @{1.week.ago}..
-  prune = remote prune origin
   subup = submodule update --init --recursive
   fpush = push --force-with-lease
   reword = commit --amend
@@ -81,9 +79,16 @@
   aliases = !git config --get-regex 'alias.*' | gawk 'match($0, /alias.(\\w+)\\s+(.*)/, m) { printf \"%-15s %s\\n\", m[1], m[2] }' | grep '^\\w\\+'
   conflicts = !git ls-files -u | cut -f 2 | sort -u
   remotes = remote
-  stat = diff --stat
   submodules = submodule
   tags = tag --list
+
+  # Easy stats and diffs
+  stat = show --stat
+  dstat = diff --stat
+  staged = diff --staged
+
+  # Output what has been committed this week
+  thisweek = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' @{1.week.ago}..
 
   # Make branch selection great again
   branches = !"__f() { git for-each-ref --format='%(refname:strip=2)' '*/*/*' '*/*/*/*' | fzf | xargs git checkout; }; __f"
