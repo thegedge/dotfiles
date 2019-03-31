@@ -29,6 +29,12 @@ end
 " ------------------------------------------------------------------------- }}}
 
 " Syntax coloring {{{
+
+" Manually set true color
+if $COLORTERM == "truecolor"
+  set termguicolors
+endif
+
 colorscheme desert
 if &t_Co >= 256 || has("gui_running")
   let g:gruvbox_italic = 0
@@ -320,6 +326,7 @@ let g:go_fmt_command = 'goimports'
 
 " vim-diminactive should turn off syntax on inactive buffers
 let g:diminactive_use_syntax = 1
+let g:diminactive_enable_focus = 1
 
 " Indent guides
 let g:indentLine_char = '┆'
@@ -341,10 +348,16 @@ let g:racer_insert_paren = 1
 let g:vimpager_passthrough = 0
 
 " Ale (asynchronous linting engine)
-let g:ale_completion_enabled = 1
+let g:ale_completion_enabled = 0
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_enter = 1
+
 let g:ale_rust_cargo_default_feature_behavior = 'all'
+
+" TODO these are good for dark mode, maybe not for light mode
+hi ALEError cterm=none gui=none ctermbg=124 guibg=#792022
+hi ALEWarning cterm=none gui=none ctermbg=136 guibg=#593c03
 
 " Don't require different indent levels in between lines when jumping between equal indents
 let g:indentwise_equal_indent_skips_contiguous = 0
