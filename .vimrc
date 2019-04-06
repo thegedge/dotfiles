@@ -166,6 +166,7 @@ nnoremap N Nzz
 
 " Folds {{{
 set foldlevel=100         " 'disable' folding at first
+set foldopen-=block       " don't open folds for things like {
 
 " Space increases fold level, if possible, otherwise behaves as normal
 nnoremap <silent> <Leader><Space> @=(foldlevel('.') ? 'za' : "\<Space>")<CR>
@@ -283,21 +284,12 @@ nnoremap <Leader>ep :exec 'edit' $HOME . "/.vim/plugins.vimrc"<CR>
 
 " FZF {{{
 
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --vimgrep --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
-
-nnoremap <Leader>ft :Tags!<CR>
 nnoremap <Leader>fb :Buffers<CR>
-nnoremap <Leader>fg :Rg!<CR>
-nnoremap <Leader>fm :Marks<CR>
 nnoremap <Leader>ff :call fzf#run(fzf#wrap('files', { 'source': 'files', 'down': '40%' }, 1))<CR>
-
-nnoremap gr :Rg <C-R><C-W><CR>
-vnoremap gr y:Rg '<C-R>"'<CR>
+nnoremap <Leader>fg :Rg <C-R><C-W><CR>
+vnoremap <Leader>fg y:Rg <C-R>"<CR>
+nnoremap <Leader>fm :Marks<CR>
+nnoremap <Leader>ft :Tags!<CR>
 
 " ------------------------------------------------------------------------- }}}
 
@@ -305,6 +297,17 @@ vnoremap gr y:Rg '<C-R>"'<CR>
 
 " vim-fugitive
 noremap gb :Gbrowse!<CR>gv:Gbrowse<CR>
+
+" Language servers for various languages
+let g:LanguageClient_serverCommands = {
+\ 'python': ['/usr/local/bin/pyls'],
+\ 'ruby': ['solargraph', 'stdio'],
+\ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+\ }
+
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
 " Not a fan of rustfmt defaults. Need to figure out a configuration that I do like.
 let g:rustfmt_autosave = 0
@@ -326,7 +329,7 @@ let g:go_fmt_command = 'goimports'
 
 " vim-diminactive should turn off syntax on inactive buffers
 let g:diminactive_use_syntax = 1
-let g:diminactive_enable_focus = 1
+let g:diminactive_enable_focus = 0
 
 " Indent guides
 let g:indentLine_char = '┆'
@@ -336,13 +339,11 @@ let g:indentLine_fileTypeExclude = ['help', 'man']
 
 " Deoplete config
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources#rust#racer_binary = $HOME . '/.cargo/bin/racer'
-let g:deoplete#sources#rust#rust_source_path = $CODE_DIR . '/github.com/rust-lang/rust/src'
 
-" Rust racer completion
-let g:racer_cmd = $HOME . '/.cargo/bin/racer'
-let g:racer_experimental_completer = 1
-let g:racer_insert_paren = 1
+if !exists("vimpager")
+  call deoplete#custom#option('ignore_sources', {'_': ['dictionary']})
+  call deoplete#custom#source('_',  'max_menu_width', 0)
+end
 
 " Don't have a passthrough for vimpager
 let g:vimpager_passthrough = 0

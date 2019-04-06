@@ -13,9 +13,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox'
 Plug 'Yggdroot/indentLine'
 
-" Plugins for syntax and completion
+" Plugins for syntax
 Plug 'cakebaker/scss-syntax.vim',        { 'for': 'scss' }
-Plug 'ebfe/vim-racer',                   { 'for': 'rust' }
 Plug 'rust-lang/rust.vim',               { 'for': 'rust' }
 Plug 'fatih/vim-go',                     { 'for': 'go', 'do': ':GoInstallBinaries' }
 Plug 'peterhoeg/vim-qml',                { 'for': 'qml' }
@@ -34,11 +33,15 @@ Plug 'chrisbra/csv.vim',                 { 'for': 'csv' }
 Plug 'cespare/vim-toml',                 { 'for': 'toml' }
 Plug 'jparise/vim-graphql',              { 'for': 'graphql' }
 Plug 'nelstrom/vim-textobj-rubyblock',   { 'for': 'ruby' }
+Plug 'mustache/vim-mustache-handlebars', { 'for': ['html.mustache', 'html.handlebars'] }
 
 Plug 'kana/vim-textobj-user'
 Plug 'powerman/vim-plugin-AnsiEsc',      { 'on': 'AnsiEsc' }
 
 if !exists("vimpager")
+  " Language server support
+  Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+
 	" Additional character info (e.g., html entity, unicode name)
 	Plug 'tpope/vim-characterize'
 
@@ -83,17 +86,14 @@ if !exists("vimpager")
   Plug 'tpope/vim-surround'
 
   " Fuzzy matching and searching for all the things
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
 
   " Async linting
-  Plug 'w0rp/ale'
+  "Plug 'w0rp/ale'
 
   " Autocomplete on type
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'racer-rust/vim-racer'
-  Plug 'zchee/deoplete-go'
-  Plug 'zchee/deoplete-jedi'
 
   " Show function signature and inline doc.
   Plug 'Shougo/echodoc.vim'
