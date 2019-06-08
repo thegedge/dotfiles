@@ -79,8 +79,15 @@ set splitright            " vertical splits on the right
 set autoindent            " automatic indentation
 set background=dark
 set synmaxcol=500         " max cols to search for syntax highlighting
-set number                " Show line numbers in the gutter
+set number                " show line numbers in the gutter
 set norelativenumber      " relative line number offsets in the gutter
+
+" always show sign column for one thing
+if has('nvim')
+  set signcolumn=yes:1
+elseif !exists("vimpager")
+  set signcolumn=yes
+endif
 
 " Don't show a preview of the doc information
 set completeopt-=preview
@@ -242,9 +249,13 @@ let columns = '81,101,'.join(range(121, 500), ',')
 let &colorcolumn = columns
 
 " Improve source code indenting
-"   (0 - with unclosed parentheses, line up in front of open paren
 " TODO: tweak me for various formats
-set cino='(0'
+set cinoptions=(0,l1,g0,U1,Ws,m1
+
+" Remap a lot of movement commands to not add to the jump list
+" TODO find a way to maybe keep them, but compact similar commands into one
+nnoremap { :keepj normal! {<CR>
+nnoremap } :keepj normal! }<CR>
 
 " up/down movement is always screen-based, rather than line based (e.g., when
 " wrapping enabled)
@@ -263,14 +274,11 @@ nnoremap ' `
 nnoremap Q gwap
 vnoremap Q gq
 
-" Tab toggles hidden characters (normal mode)
-nnoremap <Tab> :let &background = ( &background == "dark"? "light" : "dark" )<CR>
-
-" Tab toggles light/dark background
-nnoremap <Tab> :let &background = ( &background == "dark"? "light" : "dark" )<CR>
-
 " Reloads a file
 nnoremap <C-E> :edit<CR>
+
+" Toggle background between dark/light
+nnoremap <F5> :let &background = ( &background == "dark"? "light" : "dark" )<CR>
 
 " Remapping for next/previous file (normal mode)
 nnoremap <C-N> :next<CR>
@@ -289,6 +297,7 @@ nnoremap <Leader>ff :call fzf#run(fzf#wrap('files', { 'source': 'files', 'down':
 nnoremap <Leader>fg :Rg <C-R><C-W><CR>
 vnoremap <Leader>fg y:Rg <C-R>"<CR>
 nnoremap <Leader>fm :Marks<CR>
+nnoremap <Leader>fq :call fzf_quickfix#run()<CR>
 nnoremap <Leader>ft :Tags!<CR>
 
 " ------------------------------------------------------------------------- }}}
@@ -298,16 +307,40 @@ nnoremap <Leader>ft :Tags!<CR>
 " vim-fugitive
 noremap gb :Gbrowse!<CR>gv:Gbrowse<CR>
 
+" git-gutter
+autocmd BufWritePost * GitGutter
+
 " Language servers for various languages
 let g:LanguageClient_serverCommands = {
 \ 'python': ['/usr/local/bin/pyls'],
 \ 'ruby': ['solargraph', 'stdio'],
 \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+\ 'sh': ['bash-language-server', 'start'],
 \ }
 
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+let g:LanguageClient_hoverPreview = 'Always'
+let g:LanguageClient_diagnosticsEnable = 1
+let g:LanguageClient_useVirtualText = 0
+
+augroup LanguageClient_config
+  au!
+
+  autocmd User LanguageClientStarted nnoremap set formatexpr=LanguageClient#textDocument_rangeFormatting_sync()
+  autocmd User LanguageClientStarted nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+  autocmd User LanguageClientStarted nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+  autocmd User LanguageClientStarted nnoremap <silent> <C-]> :call LanguageClient#textDocument_definition()<CR>
+  autocmd User LanguageClientStarted nnoremap <silent> <Leader>R :call LanguageClient#textDocument_rename()<CR>
+  autocmd User LanguageClientStarted nnoremap <silent> <Leader>gc :call LanguageClient#contextMenu()<CR>
+  autocmd User LanguageClientStarted nnoremap <silent> <Leader>gQ :call LanguageClient#textDocument_formatting()<CR>
+
+  autocmd User LanguageClientStopped set formatexpr=
+  autocmd User LanguageClientStopped nunmap K
+  autocmd User LanguageClientStopped nunmap gd
+  autocmd User LanguageClientStopped nunmap <C-]>
+  autocmd User LanguageClientStopped nunmap <Leader>R
+  autocmd User LanguageClientStopped nunmap <Leader>gc
+  autocmd User LanguageClientStopped nunmap <Leader>gQ
+augroup END
 
 " Not a fan of rustfmt defaults. Need to figure out a configuration that I do like.
 let g:rustfmt_autosave = 0
@@ -332,9 +365,9 @@ let g:diminactive_use_syntax = 1
 let g:diminactive_enable_focus = 0
 
 " Indent guides
-let g:indentLine_char = '┆'
-let g:indentLine_first_char = '┆'
+let g:indentLine_first_char = '.'
 let g:indentLine_showFirstIndentLevel = 1
+let g:indentLine_char_list = ['|', '.', '¦', '.', '┆', '.', '┊', '.']
 let g:indentLine_fileTypeExclude = ['help', 'man']
 
 " Deoplete config
@@ -353,7 +386,6 @@ let g:ale_completion_enabled = 0
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 1
 let g:ale_lint_on_enter = 1
-
 let g:ale_rust_cargo_default_feature_behavior = 'all'
 
 " TODO these are good for dark mode, maybe not for light mode

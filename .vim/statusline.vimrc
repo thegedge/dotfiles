@@ -43,6 +43,7 @@ let &statusline.="%="                                        " left/right separa
 let &statusline.="%{CharDescription()}\ "                    " char under cursor
 let &statusline.="%4*\ l\ %1*%5l/%-5L\ "                     " cursor line/total lines
 let &statusline.="%5*\ c\ %2*%3c-%-3v\ "                     " cursor column/virtual column
+let &statusline.="\ o\ %o"                                   " byte offset
 let &statusline.="%3*\ \ %P\ \ "                             " percent through file
 
 hi User1 term=bold,reverse cterm=bold,reverse ctermfg=235 ctermbg=253

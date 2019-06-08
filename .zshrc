@@ -29,26 +29,6 @@ fi
 export WORDCHARS=''
 
 #----------------------------------------------------------------------
-: Source my own stuff now
-#----------------------------------------------------------------------
-
-if [[ -e "$HOME/.profile" ]]; then
-  source "$HOME/.profile"
-fi
-
-if [[ -e "$HOME/zsh/key-bindings.zsh" ]]; then
-  source "$HOME/zsh/key-bindings.zsh"
-fi
-
-if [[ -e "$HOME/.fzf.zsh" ]]; then
-  source "$HOME/.fzf.zsh"
-fi
-
-# Change to a code directory
-function _code_cd() { cd "$(code-dirs ${1%.code})" }
-alias -s code=_code_cd
-
-#----------------------------------------------------------------------
 : Prezto-y things
 #----------------------------------------------------------------------
 #
@@ -201,6 +181,26 @@ zstyle ':completion:*:(ssh|scp|rsync):*:hosts-ipaddr' ignored-patterns '^(<->.<-
 fpath+=($HOME/zsh/completions/src)
 
 autoload -Uz compinit && compinit -d
+
+#----------------------------------------------------------------------
+: Source my own stuff now
+#----------------------------------------------------------------------
+
+if [[ -e "$HOME/.profile" ]]; then
+  source "$HOME/.profile"
+fi
+
+if [[ -e "$HOME/zsh/key-bindings.zsh" ]]; then
+  source "$HOME/zsh/key-bindings.zsh"
+fi
+
+if [[ -e "$HOME/.fzf.zsh" ]]; then
+  source "$HOME/.fzf.zsh"
+fi
+
+# Change to a code directory
+function _code_cd() { cd "$(code-dirs ${1%.code})" }
+alias -s code=_code_cd
 
 #----------------------------------------------------------------------
 # Include any local configuration

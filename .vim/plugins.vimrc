@@ -86,11 +86,14 @@ if !exists("vimpager")
   Plug 'tpope/vim-surround'
 
   " Fuzzy matching and searching for all the things
-	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all --no-update-rc' }
   Plug 'junegunn/fzf.vim'
 
   " Async linting
   "Plug 'w0rp/ale'
+
+  " Function to put quickfix list in fzf
+	Plug 'fszymanski/fzf-quickfix'
 
   " Autocomplete on type
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
