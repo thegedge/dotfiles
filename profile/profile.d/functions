@@ -4,17 +4,13 @@
 FUNCTIONS_DIR="$HOME/profile/profile.d/functions.d"
 case "${MYSHELL}" in
   zsh)
-    fpath+=( "${FUNCTIONS_DIR}" )
-	for file in $(source_files "${FUNCTIONS_DIR}"); do
-      autoload "${file##*/}"
+    for file in $(source_files "${FUNCTIONS_DIR}"); do
+      autoload -Uz "${file##*/}"
     done
-
-    # Since we changed the fpath, reload completions
-    autoload -Uz compinit && compinit -i
     ;;
   bash)
-	for file in $(source_files "${FUNCTIONS_DIR}"); do
-      eval "function ${file##*/} { unisource \"${file}\" \"\$@\"; }"
+    for file in $(source_files "${FUNCTIONS_DIR}"); do
+      eval "function ${file##*/} { source \"${file}\" \"\$@\"; }"
       export -f "${file##*/}"
     done
     ;;

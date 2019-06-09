@@ -1,8 +1,7 @@
 #!/bin/bash
 
-# I know, I know... But there's unlikely to be anything zsh-ish in there!
-if [[ -e "$HOME/.zshenv" ]]; then
-  source "$HOME/.zshenv"
+if [[ -e "$HOME/.bashenv" ]]; then
+  source "$HOME/.bashenv"
 fi
 
 if [[ -e "$HOME/.profile" ]]; then

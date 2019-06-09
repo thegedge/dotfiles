@@ -47,6 +47,7 @@
 .wine
 .yarn-cache
 .zcomp*
+.zsh-update
 
 .vim/autoload/plug.vim*
 .vim/backups/*~

@@ -15,7 +15,7 @@ fi
 
 if [[ -e "$HOME/profile/profile.d" ]]; then
   for file in $(find "$HOME/profile/profile.d" -mindepth 1 -maxdepth 1 -type f -not -name '*.zwc' | sort); do
-    unisource "${file}"
+    source "${file}"
   done
 fi
 

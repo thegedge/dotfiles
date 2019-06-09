@@ -1,27 +1,4 @@
 #----------------------------------------------------------------------
-# Setting TRACING=1 will enable some tracing statements which help you
-# profile slow parts of your zshrc.
-#----------------------------------------------------------------------
-if [[ -n "${TRACING}" ]]; then
-  zmodload zsh/datetime
-  setopt promptsubst
-  PROFILE_START_TIME="${EPOCHREALTIME}"
-
-  # Set the trace prompt to include seconds, nanoseconds, script name and
-  # line number This is GNU date syntax; by default Macs ship with the BSD
-  # date program, which isn't compatible
-  PS4='$(( 1000*(EPOCHREALTIME - PROFILE_START_TIME) )) %N:%i> '
-
-  # Save file stderr to file descriptor 3 and redirect stderr (including
-  # trace output) to a file with the script's PID as an extension.
-  exec 3>&2 2>/tmp/startlog.$$
-
-  # Set options to turn on tracing/expansion of commands contained in the
-  # prompt.
-  setopt xtrace prompt_subst
-fi
-
-#----------------------------------------------------------------------
 : zsh options
 #----------------------------------------------------------------------
 
@@ -29,19 +6,14 @@ fi
 export WORDCHARS=''
 
 #----------------------------------------------------------------------
-: Prezto-y things
+: Misc config
 #----------------------------------------------------------------------
-#
-fpath+=($HOME/zsh/functions)
-
-autoload -Uz git-info
-autoload -Uz git-dir
-autoload -Uz promptinit && promptinit
-prompt "myparadox"
-
-# Smart URL quoting
-autoload -Uz url-quote-magic
-zle -N self-insert url-quote-magic
+fpath+=(
+  /usr/local/share/zsh/functions
+  ${HOME}/zsh/functions
+  ${HOME}/zsh/completions/src
+  ${HOME}/profile/profile.d/functions.d
+)
 
 # Allows 'foo''s bar' instead of 'foo'\''s bar'
 setopt RC_QUOTES
@@ -56,10 +28,21 @@ setopt EXTENDED_GLOB
 setopt LONG_LIST_JOBS     # List jobs in the long format by default.
 setopt AUTO_RESUME        # Attempt to resume existing job before creating a new process.
 setopt NOTIFY             # Report status of background jobs immediately.
-unsetopt BG_NICE          # Don't run all background jobs at a lower priority.
-unsetopt HUP              # Don't kill jobs on shell exit.
-unsetopt CHECK_JOBS       # Don't report on jobs when shell exit.
+unsetopt BG_NICE          # Do not run all background jobs at a lower priority.
+unsetopt HUP              # Do not kill jobs on shell exit.
+unsetopt CHECK_JOBS       # Do not report on jobs when shell exit.
 
+#----------------------------------------------------------------------
+: prompt stuff
+#----------------------------------------------------------------------
+autoload -Uz git-info
+autoload -Uz git-dir
+autoload -Uz promptinit && promptinit
+prompt "myparadox"
+
+# Smart URL quoting
+autoload -Uz url-quote-magic
+zle -N self-insert url-quote-magic
 
 #----------------------------------------------------------------------
 : History config
@@ -80,6 +63,31 @@ setopt HIST_IGNORE_SPACE         # Do not record an event starting with a space.
 setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file.
 setopt HIST_VERIFY               # Do not execute immediately upon history expansion.
 setopt HIST_BEEP                 # Beep when accessing non-existent history.
+
+#----------------------------------------------------------------------
+: Source my own stuff now
+#----------------------------------------------------------------------
+
+if [[ -e "$HOME/.profile" ]]; then
+  source "$HOME/.profile"
+fi
+
+if [[ -e "$HOME/zsh/key-bindings.zsh" ]]; then
+  source "$HOME/zsh/key-bindings.zsh"
+fi
+
+if [[ -e "$HOME/.fzf.zsh" ]]; then
+  source "$HOME/.fzf.zsh"
+fi
+
+# Change to a code directory
+function _code_cd() { cd "$(code-dirs ${1%.code})" }
+alias -s code=_code_cd
+
+#----------------------------------------------------------------------
+: Include any local configuration
+#----------------------------------------------------------------------
+[[ -e "${HOME}/.zshrc.local" ]] && . "${HOME}/.zshrc.local"
 
 #----------------------------------------------------------------------
 : Completion config
@@ -178,67 +186,17 @@ zstyle ':completion:*:(ssh|scp|rsync):*:hosts-host' ignored-patterns '*(.|:)*' l
 zstyle ':completion:*:(ssh|scp|rsync):*:hosts-domain' ignored-patterns '<->.<->.<->.<->' '^[-[:alnum:]]##(.[-[:alnum:]]##)##' '*@*'
 zstyle ':completion:*:(ssh|scp|rsync):*:hosts-ipaddr' ignored-patterns '^(<->.<->.<->.<->|(|::)([[:xdigit:].]##:(#c,2))##(|%*))' '127.0.0.<->' '255.255.255.255' '::1' 'fe80::*'
 
-fpath+=($HOME/zsh/completions/src)
-
-autoload -Uz compinit && compinit -d
-
-#----------------------------------------------------------------------
-: Source my own stuff now
-#----------------------------------------------------------------------
-
-if [[ -e "$HOME/.profile" ]]; then
-  source "$HOME/.profile"
+autoload -Uz compinit
+if [[ $(date +'%j') != $(/usr/bin/stat -f '%Sm' -t '%j' ${ZDOTDIR:-$HOME}/.zcompdump) ]]; then
+  compinit
+else
+  compinit -C
 fi
 
-if [[ -e "$HOME/zsh/key-bindings.zsh" ]]; then
-  source "$HOME/zsh/key-bindings.zsh"
-fi
-
-if [[ -e "$HOME/.fzf.zsh" ]]; then
-  source "$HOME/.fzf.zsh"
-fi
-
-# Change to a code directory
-function _code_cd() { cd "$(code-dirs ${1%.code})" }
-alias -s code=_code_cd
-
 #----------------------------------------------------------------------
-# Include any local configuration
-#----------------------------------------------------------------------
-[[ -e "${HOME}/.zshrc.local" ]] && . "${HOME}/.zshrc.local"
-
-#----------------------------------------------------------------------
-# Disable tracing
+: Disable tracing
 #----------------------------------------------------------------------
 if [[ -n "${TRACING}" ]]; then
-  # Turn off tracing.
-  unsetopt xtrace
-
-  # Restore stderr to the value saved in FD 3.
-  exec 2>&3 3>&-
-
-  # Convert to CSV
-  ruby --disable-all -rcsv <<EOS
-  lines = File.readlines("/tmp/startlog.$$")
-  lines.map! { |l| l.chomp.match(/^(\\d+\\.\\d*) ([^:]+):(\\d+)> (.*)$/).captures }
-  lines.map! { |a, b, c, d| [a.to_f, b, c.to_i, d] }
-
-  headers = ["time taken (ms)", "sourced file", "line number", "line"]
-  data = lines.each_cons(2).map do |(prev_time, _, _, _), (time, fname, line_num, line)|
-    [time - prev_time, fname, line_num, line]
-  end
-
-  #headers = ["file", "sourcing time (ms)"]
-  #data = lines.chunk { |x| x[1] }
-  #data = data.map { |fname, times| [fname, times[-1][0] - times[0][0]] }
-
-  CSV.open("/tmp/startlog.$$", "wb") do |csv|
-    csv << headers
-    data.each { |d| csv << d }
-  end
-EOS
-
-  # Check out the startup log
-  vim +'set ft=csv' /tmp/startlog.$$
-  rm /tmp/startlog.$$
+  zprof
+  zmodload -u zsh/zprof
 fi

@@ -5,18 +5,25 @@
 # conditionally check for, and if that command exists on the system,
 # the script will be sourced.
 #-----------------------------------------------------------------------------
-for file in $(source_files "$HOME/profile/profile.d/if_command.d"); do
-  local base=$(basename "${file}")
-  case "${base:0:1}" in
-  !)
-      if ! command -v "${base##\!}" &>/dev/null; then
-        unisource "${file}"
-      fi
-      ;;
-  *)
-      if command -v "${base}" &>/dev/null; then
-        unisource "${file}"
-      fi
-      ;;
-  esac
-done
+function main {
+  for file in $(source_files "$HOME/profile/profile.d/if_command.d"); do
+    #zmodload zsh/datetime
+    #local start="${EPOCHREALTIME}"
+    local base="${file##*/}"
+    case "${base:0:1}" in
+    !)
+        if ! command -v "${base##\!}" &>/dev/null; then
+          source "${file}"
+        fi
+        ;;
+    *)
+        if command -v "${base}" &>/dev/null; then
+          source "${file}"
+        fi
+        ;;
+    esac
+    #echo "${file} : $(( EPOCHREALTIME - start ))"
+  done
+}
+
+main
