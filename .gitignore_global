@@ -62,3 +62,7 @@ Repo
 
 # zsh compiled files
 *.zwc
+
+# Other things
+.ignore
+.rgignore

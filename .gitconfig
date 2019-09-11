@@ -29,6 +29,7 @@
   editor = nvim
   excludesfile = ~/.gitignore_global
   autocrlf = false
+  commitGraph = true
 
 [diff]
   renames = copies
@@ -44,10 +45,19 @@
 [fetch]
   prune = true
 
+[gc]
+	writeCommitGraph = true
+
 [log]
   date = local
   decorate = true
   topo-order = true
+
+[merge]
+  conflictstyle = diff3
+
+[protocol]
+  version = 2
 
 [push]
   default = simple
@@ -57,12 +67,6 @@
 
 #[transfer]
 #	fsckobjects = true
-
-[merge]
-  conflictstyle = diff3
-
-[protocol]
-  version = 2
 
 [alias]
   # Short command names

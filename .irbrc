@@ -8,6 +8,14 @@ def silent_require_relative(name)
 rescue LoadError
 end
 
+def im(thing)
+  thing.public_instance_methods(false) + thing.private_instance_methods(false) + thing.protected_instance_methods(false)
+end
+
+def m(thing)
+  thing.public_methods(false) + thing.private_methods(false) + thing.protected_methods(false)
+end
+
 silent_require 'bigdecimal'
 silent_require 'bigdecimal/util'
 silent_require 'forwardable'

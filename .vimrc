@@ -81,6 +81,7 @@ set background=dark
 set synmaxcol=500         " max cols to search for syntax highlighting
 set number                " show line numbers in the gutter
 set norelativenumber      " relative line number offsets in the gutter
+set nospell               " default to no spell checking
 
 " always show sign column for one thing
 if has('nvim')

@@ -19,3 +19,6 @@ alias dotfiles="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
 # Update my dotfiles
 alias updot="dotfiles --no-pager incoming && dotfiles rebase origin/master && dotfiles subup"
+
+# Use a global ignore file
+alias ctags="ctags --exclude=\"@${HOME}/.ctagsignore\""

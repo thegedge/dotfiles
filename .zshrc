@@ -9,10 +9,10 @@ export WORDCHARS=''
 : Misc config
 #----------------------------------------------------------------------
 fpath+=(
-  /usr/local/share/zsh/functions
-  ${HOME}/zsh/functions
-  ${HOME}/zsh/completions/src
-  ${HOME}/profile/profile.d/functions.d
+  "/usr/local/share/zsh/functions"
+  "${HOME}/zsh/functions"
+  "${HOME}/zsh/completions/src"
+  "${HOME}/profile/profile.d/functions.d"
 )
 
 # Allows 'foo''s bar' instead of 'foo'\''s bar'
@@ -68,16 +68,20 @@ setopt HIST_BEEP                 # Beep when accessing non-existent history.
 : Source my own stuff now
 #----------------------------------------------------------------------
 
-if [[ -e "$HOME/.profile" ]]; then
-  source "$HOME/.profile"
+if [[ -e "${HOME}/.profile" ]]; then
+  source "${HOME}/.profile"
 fi
 
-if [[ -e "$HOME/zsh/key-bindings.zsh" ]]; then
-  source "$HOME/zsh/key-bindings.zsh"
+if [[ -e "${HOME}/zsh/key-bindings.zsh" ]]; then
+  source "${HOME}/zsh/key-bindings.zsh"
 fi
 
-if [[ -e "$HOME/.fzf.zsh" ]]; then
-  source "$HOME/.fzf.zsh"
+if [[ -e "${HOME}/.fzf.zsh" ]]; then
+  source "${HOME}/.fzf.zsh"
+fi
+
+if [[ -f "${HOME}/zsh/iterm2_shell_integration.zsh" ]]; then
+  source "${HOME}/zsh/iterm2_shell_integration.zsh"
 fi
 
 # Change to a code directory

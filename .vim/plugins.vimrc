@@ -34,6 +34,7 @@ Plug 'cespare/vim-toml',                 { 'for': 'toml' }
 Plug 'jparise/vim-graphql',              { 'for': 'graphql' }
 Plug 'nelstrom/vim-textobj-rubyblock',   { 'for': 'ruby' }
 Plug 'mustache/vim-mustache-handlebars', { 'for': ['html.mustache', 'html.handlebars'] }
+Plug 'pest-parser/pest.vim',             { 'for': 'pest' }
 
 Plug 'kana/vim-textobj-user'
 Plug 'powerman/vim-plugin-AnsiEsc',      { 'on': 'AnsiEsc' }
@@ -100,6 +101,9 @@ if !exists("vimpager")
 
   " Show function signature and inline doc.
   Plug 'Shougo/echodoc.vim'
+
+  " Update environment when switching to a shadowenv directory
+  Plug 'Shopify/shadowenv.vim'
 endif
 
 call plug#end()
