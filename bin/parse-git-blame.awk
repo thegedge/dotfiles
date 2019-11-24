@@ -1,4 +1,10 @@
 #!/usr/bin/env awk -f
+# Parses `git blame -p` to produce a Github-like blame view, where consecutive lines affected
+# by the same commit are collapsed.
+#
+# Doesn't work with OSX awk if there are accents and other interesting UTF-8 characters.
+# Recommend using GNU awk.
+
 BEGIN {
   # ensure lines is an array
   lines[0] = "test";
