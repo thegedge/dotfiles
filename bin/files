@@ -20,7 +20,7 @@ main() {
     find "${CWD}" -type d -name '.*' -prune \
       -or -not -name '.*' -type f -maxdepth "${MAX_DEPTH}" -print
   fi \
-    | egrep -v '^/?(\.git|\.hg|\.svn|.*\.app|Godeps|target|_site|tmp|vendor)' \
+    | egrep -v '^/?(\.git|\.hg|\.svn|.*\.app|Godeps|target|_site|tmp|vendor)|\.rbi$' \
     | head -n "${MAX_FILES}"
     # TODO perhaps look for .ignore files
 }
