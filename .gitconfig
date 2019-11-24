@@ -42,8 +42,12 @@
 [enhancedblame]
   columnsize = 50
 
+[feature]
+  manyFiles = true
+
 [fetch]
   prune = true
+	writeCommitGraph = true
 
 [gc]
 	writeCommitGraph = true

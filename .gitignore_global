@@ -49,6 +49,9 @@ Repo
 *.pro.user*
 *.pri.user*
 *.qbs.user*
+.qmake.stash
+*-Desktop-Debug
+*-Desktop-Release
 
 # Ruby things
 .byebug*
