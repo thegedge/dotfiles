@@ -82,6 +82,7 @@ set synmaxcol=500         " max cols to search for syntax highlighting
 set number                " show line numbers in the gutter
 set norelativenumber      " relative line number offsets in the gutter
 set nospell               " default to no spell checking
+set concealcursor=""      " show concealed characters on the cursor line
 
 " always show sign column for one thing
 if has('nvim')
@@ -332,6 +333,7 @@ augroup LanguageClient_config
   autocmd User LanguageClientStarted nnoremap <silent> <C-]> :call LanguageClient#textDocument_definition()<CR>
   autocmd User LanguageClientStarted nnoremap <silent> <Leader>R :call LanguageClient#textDocument_rename()<CR>
   autocmd User LanguageClientStarted nnoremap <silent> <Leader>gc :call LanguageClient#contextMenu()<CR>
+  autocmd User LanguageClientStarted nnoremap <silent> <Leader>gr :call LanguageClient#textDocument_references()<CR>
   autocmd User LanguageClientStarted nnoremap <silent> <Leader>gQ :call LanguageClient#textDocument_formatting()<CR>
 
   autocmd User LanguageClientStopped set formatexpr=
@@ -340,6 +342,7 @@ augroup LanguageClient_config
   autocmd User LanguageClientStopped nunmap <C-]>
   autocmd User LanguageClientStopped nunmap <Leader>R
   autocmd User LanguageClientStopped nunmap <Leader>gc
+  autocmd User LanguageClientStopped nunmap <Leader>gr
   autocmd User LanguageClientStopped nunmap <Leader>gQ
 augroup END
 
