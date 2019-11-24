@@ -33,12 +33,15 @@
 .m2
 .minikube
 .mono
+.mx
 .node-gyp
 .npm
 .nuget
 .nvm
 .pyenv
+.rubies
 .rustup
+.solargraph
 .ssh
 .templateengine
 .tor
