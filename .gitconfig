@@ -105,10 +105,10 @@
   rename = !"__f() { git branch -m $(git symbolic-ref --short HEAD) $1; }; __f"
 
   # Fetch lastest and checkout origin/master
-  om = !git fetch && git checkout origin/master
+  om = !git fetch origin && git checkout origin/master
 
   # Fetch lastest and rebase current branch on origin/master
-  rom = !git fetch && git rebase "$@" origin/master
+  rom = !git fetch origin && git rebase "$@" origin/master
 
   # Amend + force push
   apush = !git amend && git push --force-with-lease

@@ -57,7 +57,6 @@ Repo
 .byebug*
 .pry_history
 .bundle
-.rubocop-*
 .yardoc
 
 # direnv
