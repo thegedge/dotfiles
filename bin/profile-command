@@ -6,27 +6,33 @@ profile-command() {
   local awk_script="$1"; shift
 
   local num_iters=50
-  local num_warmups=5
-  local -a times
+  local num_warmups=1
 
   for x in $(seq 1 "${num_warmups}"); do
     eval "$@" >/dev/null 2>&1
   done
 
+  local -a times
   for x in $(seq 1 "${num_iters}"); do
+    if [[ $(($x % 10)) == 0 ]]; then
+      echo $x
+    fi
+
     local timing="$(eval "$@" | awk "${awk_script}")"
     if [[ -z "${timing}" ]]; then
-      echo "Timing was empty. Exiting..." >&2
-      exit 1
+      echo "Timing was empty..." >&2
+    else
+      times+=("${timing}")
     fi
-    times+=()
   done
 
   ruby -- - "${times[@]}" <<-EOS
     values = ARGV.map(&:to_f)
     μ = values.reduce(:+) / values.length
     σ = (values.map{ |x| (x - μ)**2  }.reduce(:+) / values.length) ** 0.5
-    puts "μ = %.4f, σ = %.4f" % [μ, σ]
+    puts "n = #{values.length}"
+    puts "μ = %.4f" % μ
+    puts "σ = %.4f" % σ
 EOS
 }
 
