@@ -1,3 +1,7 @@
+**I've moved to nix for dotfiles management, so I'm no longer using or update these**
+
+---
+
 My personal dotfiles. Comes with:
 - a personal shell configuration, centered around __[Zsh](http://www.zsh.org)__,
 - __[vim-plug](//github.com/junegunn/vim-plug)__ (plugin manager for Vim),
